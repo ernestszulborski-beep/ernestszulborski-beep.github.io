@@ -1,66 +1,380 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Daniela – Linki</title>
+  <meta charset="UTF-8" />
+  <title>Daniela – Link Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --green-dark: #064e3b;
+      --green: #16a34a;
+      --green-light: #bbf7d0;
+      --bg: #022c22;
+      --card-bg: #ffffff;
+      --text-main: #022c22;
+      --text-soft: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at top, #16a34a 0, #022c22 45%, #020617 100%);
+      color: var(--text-main);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: linear-gradient(135deg, #ecfdf3, #ffffff);
+      border-radius: 24px;
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(22, 163, 74, 0.15);
+      padding: 26px 22px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.18), transparent 60%);
+      top: -120px;
+      right: -90px;
+      pointer-events: none;
+    }
+
+    .header {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 74px;
+      height: 74px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #22c55e, #bbf7d0, #22c55e);
+      padding: 3px;
+      margin: 0 auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ecfdf3;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .name {
       text-align: center;
-      background: #f5f5f5;
-      padding: 40px 10px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--green-dark);
     }
-    h1 {
-      margin-bottom: 30px;
+
+    .tagline {
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--text-soft);
+      margin-top: 4px;
     }
-    .btn {
+
+    .tagline span {
       display: block;
-      width: 280px;
-      max-width: 90%;
-      margin: 10px auto;
-      padding: 15px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.08);
+      color: var(--green-dark);
+      font-size: 11px;
+      margin: 10px auto 0;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+    }
+
+    .links {
+      position: relative;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      background: #ffffff;
       text-decoration: none;
-      font-size: 18px;
-      color: black;
-      transition: 0.2s;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow:
+        0 10px 22px rgba(15, 23, 42, 0.08),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+      transition:
+        transform 0.16s ease-out,
+        box-shadow 0.16s ease-out,
+        border-color 0.16s ease-out,
+        background 0.16s ease-out;
     }
+
     .btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transform: translateY(-1px) scale(1.01);
+      box-shadow:
+        0 18px 32px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(22, 163, 74, 0.35);
+      border-color: rgba(22, 163, 74, 0.7);
+      background: #f0fdf4;
     }
-    .donate {
-      margin-top: 40px;
-      font-size: 16px;
+
+    .btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .donate .box {
-      display: inline-block;
-      padding: 10px 20px;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      background: rgba(22, 163, 74, 0.1);
+    }
+
+    .btn-label-main {
+      display: block;
+    }
+
+    .btn-label-sub {
+      display: block;
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .arrow {
       font-size: 18px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      opacity: 0.7;
+    }
+
+    .donate-block {
+      margin-top: 18px;
+      padding: 14px 13px 12px;
+      border-radius: 18px;
+      background: rgba(22, 163, 74, 0.06);
+      border: 1px dashed rgba(22, 163, 74, 0.55);
+      backdrop-filter: blur(6px);
+    }
+
+    .donate-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green-dark);
+    }
+
+    .donate-text {
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .donate-account {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+      font-size: 11px;
       word-break: break-all;
+      text-align: left;
+    }
+
+    .donate-label {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(15, 23, 42, 0.6);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 22px 18px 24px;
+        border-radius: 20px;
+      }
+      .avatar {
+        width: 68px;
+        height: 68px;
+      }
+      .name {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <main class="card">
+    <header class="header">
+      <div class="avatar">
+        <div class="avatar-inner">D</div>
+      </div>
+      <div class="name">Daniela</div>
+      <div class="tagline">
+        <span>Link Hub · Creator · Live</span>
+        <span>Mis redes · My social links</span>
+      </div>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>Online · Live &amp; vibes</span>
+      </div>
+    </header>
 
-  <h1>Daniela – Social Media</h1>
+    <section class="links">
+      <!-- TikTok -->
+      <a
+        class="btn"
+        href="https://tiktok.com/@YOUR_TIKTOK"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon">🎵</div>
+          <div>
+            <span class="btn-label-main">TikTok</span>
+            <span class="btn-label-sub">
+              EN: Short videos &amp; lives · ES: Vídeos cortos y directos
+            </span>
+          </div>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
 
-  <a class="btn" href="https://tiktok.com/@TWOJ_TIKTOK" target="_blank">TikTok</a>
-  <a class="btn" href="https://instagram.com/TWOJ_INSTAGRAM" target="_blank">Instagram</a>
-  <a class="btn" href="https://www.live.me/TWOJ_LIVE" target="_blank">Live.me</a>
-  <a class="btn" href="https://twitter.com/TWOJ_TWITTER" target="_blank">Twitter</a>
+      <!-- Instagram -->
+      <a
+        class="btn"
+        href="https://instagram.com/YOUR_INSTAGRAM"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon">📸</div>
+          <div>
+            <span class="btn-label-main">Instagram</span>
+            <span class="btn-label-sub">
+              EN: Photos &amp; stories · ES: Fotos y historias
+            </span>
+          </div>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
 
-  <div class="donate">
-    <p>💖 Wspieraj mnie (donate):</p>
-    <div class="box">
-      Numer konta: <br><b>TUTAJ_WPISZ_NUMER</b>
-    </div>
-  </div>
+      <!-- Live.me -->
+      <a
+        class="btn"
+        href="https://www.live.me/YOUR_LIVEME"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon">🔴</div>
+          <div>
+            <span class="btn-label-main">Live.me</span>
+            <span class="btn-label-sub">
+              EN: Live streaming · ES: Directos en vivo
+            </span>
+          </div>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
 
+      <!-- Optional: Twitter / X (jeśli używasz) -->
+      <a
+        class="btn"
+        href="https://twitter.com/YOUR_TWITTER"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon">💬</div>
+          <div>
+            <span class="btn-label-main">X / Twitter</span>
+            <span class="btn-label-sub">
+              EN: Quick updates · ES: Mensajes y novedades
+            </span>
+          </div>
+        </div>
+        <span class="arrow">➜</span>
+      </a>
+    </section>
+
+    <section class="donate-block">
+      <div class="donate-title">
+        <span>💚 Donate / Apoyo</span>
+      </div>
+      <p class="donate-text">
+        EN: If you want to support me, you can send a tip / donation here.<br />
+        ES: Si quieres apoyarme, puedes enviar tu donación aquí.
+      </p>
+      <div class="donate-account">
+        <div class="donate-label">Account / Cuenta:</div>
+        <!-- 👉 TUTAJ PODMIEŃ NA SWÓJ NUMER / LINK -->
+        <div>YOUR_BANK_ACCOUNT_OR_PAYMENT_LINK</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      EN: Thank you for your support · ES: Gracias por tu apoyo 💚
+    </footer>
+  </main>
 </body>
 </html>
