@@ -240,4 +240,399 @@
       justify-content: space-between;
       padding: 13px 14px;
       border-radius: 16px;
-      background:
+      background: #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 14px;
+      box-shadow:
+        0 10px 22px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.35);
+      transition:
+        transform 0.15s ease-out,
+        box-shadow 0.15s ease-out,
+        border-color 0.15s ease-out,
+        background 0.15s ease-out;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      border-color: rgba(34, 197, 94, 0.85);
+      background: #f0fdf4;
+      box-shadow:
+        0 18px 34px rgba(15, 23, 42, 0.32),
+        0 0 0 1px rgba(34, 197, 94, 0.5);
+    }
+
+    .btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Proste, markowe kolory ikon */
+    .icon-tiktok {
+      background: radial-gradient(circle at 30% 20%, #22c55e, #000000);
+      color: #ecfdf5;
+      font-size: 18px;
+    }
+
+    .icon-ig {
+      background: radial-gradient(circle at 30% 20%, #f97316, #ec4899, #a855f7);
+      color: #fff7ed;
+      font-size: 18px;
+    }
+
+    .icon-live {
+      background: radial-gradient(circle at 30% 20%, #22c55e, #0f766e);
+      color: #ecfdf5;
+      font-size: 18px;
+    }
+
+    .icon-kick {
+      background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
+      color: #022c22;
+      font-size: 18px;
+    }
+
+    .icon-yt {
+      background: radial-gradient(circle at 30% 20%, #ef4444, #b91c1c);
+      color: #fef2f2;
+      font-size: 18px;
+    }
+
+    .icon-discord {
+      background: radial-gradient(circle at 30% 20%, #5865f2, #3b4ad9);
+      color: #eef0ff;
+      font-size: 18px;
+    }
+
+    .btn-text-main {
+      font-weight: 600;
+      display: block;
+    }
+
+    .btn-text-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .btn-arrow {
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    /* --- DONATE --- */
+
+    .donate {
+      margin-top: 18px;
+      padding: 14px 13px 12px;
+      border-radius: 18px;
+      background: rgba(240, 253, 244, 0.96);
+      border: 1px dashed rgba(34, 197, 94, 0.8);
+    }
+
+    .donate-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .donate-text {
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .donate-box {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+    }
+
+    .donate-account {
+      flex: 1;
+      font-size: 11px;
+      background: #ffffff;
+      padding: 8px 9px;
+      border-radius: 10px;
+      box-shadow: 0 5px 14px rgba(15, 23, 42, 0.16);
+      word-break: break-all;
+    }
+
+    .donate-label {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .donate-copy-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #ecfdf5;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.6);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+    }
+
+    .donate-copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(22, 163, 74, 0.7);
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+    }
+
+    .donate-copy-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(22, 163, 74, 0.55);
+    }
+
+    /* --- STOPKA --- */
+
+    .footer {
+      margin-top: 10px;
+      font-size: 10px;
+      text-align: center;
+      color: rgba(15, 23, 42, 0.7);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 24px 0;
+      }
+      .card {
+        margin: 0 16px;
+        padding: 22px 18px 22px;
+        border-radius: 22px;
+      }
+      .avatar-ring { width: 104px; height: 104px; }
+      .name { font-size: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Tło: kwiaty / płatki -->
+  <div class="bg-layer">
+    <div class="flower-blob f1"></div>
+    <div class="flower-blob f2"></div>
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+  </div>
+
+  <!-- Główna karta -->
+  <main class="card">
+    <header class="header">
+      <div class="avatar-ring">
+        <!-- 👇 nazwa pliku musi być taka, jak w repo: profile.jpg / profile.png itd. -->
+        <img class="avatar-img" src="profile.jpg" alt="Daniela profile photo" />
+      </div>
+
+      <div class="name">DANIELA</div>
+
+      <div class="tagline">
+        <span>EN: Creator · Live · Vibes</span>
+        <span>ES: Creadora · Directos · Buenas vibras</span>
+      </div>
+
+      <div class="chip">
+        <span class="chip-dot"></span>
+        <span>Online · TikTok · Live.me · Kick · YouTube · Discord</span>
+      </div>
+    </header>
+
+    <!-- Linki -->
+    <section class="links">
+      <!-- TikTok -->
+      <a
+        class="btn"
+        href="https://tiktok.com/@YOUR_TIKTOK"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-tiktok">♪</div>
+          <div>
+            <span class="btn-text-main">TikTok</span>
+            <span class="btn-text-sub">
+              ES: Directos y vídeos · EN: Lives & short videos
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+
+      <!-- Instagram -->
+      <a
+        class="btn"
+        href="https://instagram.com/YOUR_INSTAGRAM"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-ig">📸</div>
+          <div>
+            <span class="btn-text-main">Instagram</span>
+            <span class="btn-text-sub">
+              ES: Fotos y historias · EN: Photos & stories
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+
+      <!-- Live.me -->
+      <a
+        class="btn"
+        href="https://www.live.me/YOUR_LIVEME"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-live">🔴</div>
+          <div>
+            <span class="btn-text-main">Live.me</span>
+            <span class="btn-text-sub">
+              ES: En vivo · EN: Live streaming
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+
+      <!-- Kick -->
+      <a
+        class="btn"
+        href="https://kick.com/YOUR_KICK"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-kick">K</div>
+          <div>
+            <span class="btn-text-main">Kick</span>
+            <span class="btn-text-sub">
+              ES: Streams y chat · EN: Streams & chat
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+
+      <!-- YouTube -->
+      <a
+        class="btn"
+        href="https://youtube.com/@YOUR_YOUTUBE"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-yt">▶</div>
+          <div>
+            <span class="btn-text-main">YouTube</span>
+            <span class="btn-text-sub">
+              ES: Clips y shows · EN: Videos & lives
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+
+      <!-- Discord -->
+      <a
+        class="btn"
+        href="https://discord.gg/YOUR_DISCORD"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="btn-left">
+          <div class="icon-circle icon-discord">💬</div>
+          <div>
+            <span class="btn-text-main">Discord</span>
+            <span class="btn-text-sub">
+              ES: Comunidad · EN: Community server
+            </span>
+          </div>
+        </div>
+        <span class="btn-arrow">➜</span>
+      </a>
+    </section>
+
+    <!-- Donate -->
+    <section class="donate">
+      <div class="donate-title">
+        💚 Donate / Apoyo
+      </div>
+      <p class="donate-text">
+        EN: If you want to support me, you can send a tip / donation here.<br />
+        ES: Si quieres apoyarme, puedes enviar tu donación aquí.
+      </p>
+
+      <div class="donate-box">
+        <div class="donate-account" id="donateAccount">
+          <div class="donate-label">Account / Cuenta:</div>
+          <!-- 👇 PODMIEŃ TO NA SWÓJ NUMER KONTA LUB LINK (Revolut / PayPal itd.) -->
+          <div data-account="YOUR_PAYMENT_INFO">
+            YOUR_PAYMENT_INFO
+          </div>
+        </div>
+
+        <button class="donate-copy-btn" id="copyDonate">
+          Copy
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      EN: Thank you for your support · ES: Gracias por tu apoyo 🌸
+    </footer>
+  </main>
+
+  <!-- Kopiowanie numeru / linku donate -->
+  <script>
+    (function () {
+      const btn = document.getElementById("copyDonate");
+      const container = document.getElementById("donateAccount");
+      if (!btn || !container) return;
+
+      const dataNode = container.querySelector("[data-account]");
+      const accountText = dataNode ? dataNode.getAttribute("data-account") : "";
+
+      btn.addEventListener("click", async () => {
+        if (!accountText) return;
+        try {
+          await navigator.clipboard.writeText(accountText);
+          const old = btn.textContent;
+          btn.textContent = "Copied!";
+          setTimeout(() => (btn.textContent = old), 1500);
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
