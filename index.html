@@ -1,101 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>11</title>
 
 <style>
 :root{
   --bg1:#050816;
   --bg2:#0b1630;
-  --card:rgba(255,255,255,0.10);
-  --stroke:rgba(255,255,255,0.18);
-  --text:#f8fafc;
-  --muted:rgba(248,250,252,0.75);
+  --glass: rgba(255,255,255,0.10);
+  --stroke: rgba(255,255,255,0.18);
+  --text: #f8fafc;
+  --muted: rgba(248,250,252,0.75);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
   --mint:#6ee7b7;
-  --gold:#fde68a;
 
-  --shadow:0 40px 120px rgba(0,0,0,0.7);
+  --shadow: 0 40px 120px rgba(0,0,0,0.65);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 
 body{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 20% 10%, #c084fc33, transparent 45%),
-    radial-gradient(circle at 80% 20%, #67e8f933, transparent 50%),
-    radial-gradient(circle at 30% 90%, #f9a8d433, transparent 50%),
+    radial-gradient(circle at 15% 10%, #c084fc33, transparent 45%),
+    radial-gradient(circle at 85% 20%, #67e8f933, transparent 50%),
+    radial-gradient(circle at 30% 90%, #f9a8d433, transparent 55%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
 
-/* ====== GLOBAL ====== */
-.wrap{
+/* ===== LAYOUT ===== */
+.wrapper{
   min-height:100vh;
   display:flex;
   justify-content:center;
-  padding:60px 0 120px;
+  padding:70px 0 120px;
 }
-.container{
+
+.page{
   width:100%;
-  max-width: 900px; /* 🔥 SZERSZA STRONA */
+  max-width:900px;
   margin:0 20px;
   display:flex;
   flex-direction:column;
-  gap:60px;
+  gap:80px;
 }
 
-/* ====== BRAND ====== */
+/* ===== BRAND ===== */
 .brand{
   text-align:center;
 }
 .brand .logo{
-  font-size:64px;
+  font-size:72px;
   font-weight:900;
-  letter-spacing:0.4em;
+  letter-spacing:0.45em;
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation: glow 2.8s ease-in-out infinite alternate;
+  animation: glow 3s ease-in-out infinite alternate;
 }
 @keyframes glow{
-  from{ text-shadow:0 0 20px var(--pink); }
-  to{ text-shadow:0 0 60px var(--violet),0 0 90px var(--cyan); }
+  from{ text-shadow:0 0 25px var(--pink); }
+  to{ text-shadow:0 0 70px var(--violet),0 0 110px var(--cyan); }
 }
 .brand p{
-  margin-top:14px;
+  margin-top:20px;
   font-size:18px;
+  line-height:1.6;
   color:var(--muted);
 }
 
-/* ====== HERO ====== */
+/* ===== HERO ===== */
 .hero{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:40px;
+  gap:50px;
   align-items:center;
 }
 
-.avatarWrap{
+.avatarZone{
   display:flex;
   justify-content:center;
 }
 .avatarRing{
-  width:300px;   /* 🔥 DUŻE PROFILOWE */
-  height:300px;
+  width:320px;
+  height:320px;
   border-radius:50%;
   padding:6px;
   background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 80px var(--violet);
+  box-shadow:0 0 90px var(--violet);
 }
 .avatarRing img{
   width:100%;
@@ -105,68 +106,70 @@ body{
 }
 
 .heroText h1{
-  font-size:42px;
+  font-size:44px;
   font-weight:900;
 }
 .heroText p{
-  margin-top:20px;
+  margin-top:24px;
   font-size:18px;
-  line-height:1.6;
+  line-height:1.65;
   color:var(--muted);
 }
 
-/* ====== UNICORN ====== */
+/* ===== UNICORN ===== */
 .unicorn{
-  width:220px; /* 🔥 WIĘKSZY */
-  animation: float 4.5s ease-in-out infinite;
-  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6));
+  width:240px;
+  margin-top:30px;
+  animation: float 4.8s ease-in-out infinite;
+  filter: drop-shadow(0 35px 45px rgba(0,0,0,0.6));
 }
 @keyframes float{
-  50%{ transform: translateY(-18px); }
+  50%{ transform: translateY(-20px); }
 }
 
-/* ====== LINKS ====== */
+/* ===== LINKS ===== */
 .links{
   display:flex;
   flex-direction:column;
-  gap:26px;
+  gap:28px;
 }
 
 .link{
   display:flex;
-  gap:26px;
-  padding:26px;
-  border-radius:30px;
-  background:var(--card);
+  gap:28px;
+  padding:30px;
+  border-radius:34px;
+  background:var(--glass);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
   text-decoration:none;
   color:var(--text);
-  transition:.25s ease;
+  transition:.3s ease;
 }
 .link:hover{
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-6px);
 }
 
 .icon{
-  font-size:42px;
+  font-size:44px;
 }
 
 .linkText h3{
-  font-size:22px;
+  font-size:24px;
   font-weight:900;
 }
 .linkText p{
-  margin-top:10px;
-  font-size:15px;
-  line-height:1.6;
+  margin-top:14px;
+  font-size:16px;
+  line-height:1.65;
   color:var(--muted);
 }
 
-/* ====== FOOTER ====== */
+/* ===== FOOTER ===== */
 .footer{
   text-align:center;
-  font-size:15px;
+  font-size:16px;
+  line-height:1.6;
   color:var(--muted);
 }
 
@@ -177,10 +180,12 @@ body{
     text-align:center;
   }
   .avatarRing{
-    width:240px;height:240px;
+    width:250px;
+    height:250px;
   }
   .unicorn{
-    margin:0 auto;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 </style>
@@ -188,22 +193,24 @@ body{
 
 <body>
 
-<div class="wrap">
-<div class="container">
+<div class="wrapper">
+<div class="page">
 
 <!-- BRAND -->
-<div class="brand">
+<section class="brand">
   <div class="logo">11</div>
   <p>
-    EN: Welcome to my official space. Everything starts here.  
-    <br>
-    ES: Bienvenido a mi espacio oficial. Todo empieza aquí.
+    EN: This is my only official page.  
+    Everything I share starts here and flows to the platforms below.  
+    <br><br>
+    ES: Esta es mi única página oficial.  
+    Todo lo que comparto empieza aquí y continúa en las plataformas de abajo.
   </p>
-</div>
+</section>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="avatarWrap">
+<section class="hero">
+  <div class="avatarZone">
     <div class="avatarRing">
       <img src="profile.jpg" alt="Profile">
     </div>
@@ -212,31 +219,34 @@ body{
   <div class="heroText">
     <h1>Daniela</h1>
     <p>
-      EN: This is where you really get to know me — my lives, my energy,
-      my daily moments and the community we build together.  
-      If you’re here, you’re already part of it.
+      EN: I share moments, conversations and energy in real time.  
+      Some days are calm, some days are intense, but everything here is genuine.  
+      If you enjoy being close, following the process and feeling part of something personal, you are in the right place.
       <br><br>
-      ES: Aquí es donde de verdad puedes conocerme — mis directos,
-      mi energía, mis momentos diarios y la comunidad que creamos juntos.
-      Si estás aquí, ya eres parte.
+      ES: Comparto momentos, conversaciones y energía en tiempo real.  
+      Hay días tranquilos y días intensos, pero todo aquí es auténtico.  
+      Si te gusta estar cerca, seguir el proceso y sentirte parte de algo personal, este es tu lugar.
     </p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg" class="unicorn" alt="">
+
+    <img class="unicorn"
+      src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg"
+      alt="">
   </div>
-</div>
+</section>
 
 <!-- LINKS -->
-<div class="links">
+<section class="links">
 
 <a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
   <div class="icon">🎵</div>
   <div class="linkText">
     <h3>TikTok</h3>
     <p>
-      EN: Short videos, trends, spontaneous lives and moments you don’t see anywhere else.
-      This is where everything moves fast and real.
-      <br>
-      ES: Vídeos cortos, tendencias, directos espontáneos y momentos que no verás en ningún otro lugar.
-      Aquí todo es rápido y real.
+      EN: Short videos, spontaneous lives and moments that appear without planning.  
+      This is where things feel fast, natural and unfiltered.
+      <br><br>
+      ES: Vídeos cortos, directos espontáneos y momentos que surgen sin planear.  
+      Aquí todo se siente rápido, natural y sin filtros.
     </p>
   </div>
 </a>
@@ -246,11 +256,11 @@ body{
   <div class="linkText">
     <h3>Instagram</h3>
     <p>
-      EN: Daily stories, photos, mood and aesthetic.
-      If you want to stay close and see my day-to-day, this is the place.
-      <br>
-      ES: Historias diarias, fotos, estado de ánimo y estética.
-      Si quieres estar cerca y ver mi día a día, este es el lugar.
+      EN: Stories, photos and small details from everyday life.  
+      A quieter space to stay connected and see what happens between lives.
+      <br><br>
+      ES: Historias, fotos y pequeños detalles del día a día.  
+      Un espacio más tranquilo para mantenernos conectados entre directos.
     </p>
   </div>
 </a>
@@ -260,11 +270,11 @@ body{
   <div class="linkText">
     <h3>Live.me</h3>
     <p>
-      EN: My main live space.
-      Real conversations, long streams and direct connection with the community.
-      <br>
-      ES: Mi espacio principal de directos.
-      Conversaciones reales, streams largos y conexión directa con la comunidad.
+      EN: This is where I spend the most time live.  
+      Long conversations, real interaction and a slower rhythm where we actually talk.
+      <br><br>
+      ES: Aquí paso más tiempo en directo.  
+      Conversaciones largas, interacción real y un ritmo más pausado donde hablamos de verdad.
     </p>
   </div>
 </a>
@@ -274,22 +284,23 @@ body{
   <div class="linkText">
     <h3>Discord</h3>
     <p>
-      EN: Join the inner circle.
-      Talk with me, meet the community, get updates first and be part of something closer.
-      <br>
-      ES: Únete al círculo interno.
-      Habla conmigo, conoce a la comunidad, recibe novedades antes y sé parte de algo más cercano.
+      EN: A private space for people who want to stay closer.  
+      Announcements, conversations and community moments outside the live streams.
+      <br><br>
+      ES: Un espacio privado para quienes quieren estar más cerca.  
+      Avisos, conversaciones y momentos de comunidad fuera de los directos.
     </p>
   </div>
 </a>
 
-</div>
+</section>
 
-<div class="footer">
-  EN: Save this page — this is the only official one.  
+<!-- FOOTER -->
+<section class="footer">
+  EN: Save this page and come back whenever you want to find me live.  
   <br>
-  ES: Guarda esta página — es la única oficial.
-</div>
+  ES: Guarda esta página y vuelve cuando quieras encontrarme en directo.
+</section>
 
 </div>
 </div>
