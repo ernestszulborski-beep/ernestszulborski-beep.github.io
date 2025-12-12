@@ -3,39 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>✨ ROYALE 11 ✨</title>
+<title>11</title>
 
 <style>
 :root{
-  /* Light */
-  --bgA:#f8fafc;
-  --bgB:#e2e8f0;
-  --card:rgba(255,255,255,0.84);
-  --stroke:rgba(2,6,23,0.12);
-  --text:#0b1220;
-  --muted:rgba(15,23,42,0.72);
+  --bg1:#050816;
+  --bg2:#0b1630;
+  --card:rgba(255,255,255,0.10);
+  --stroke:rgba(255,255,255,0.18);
+  --text:#f8fafc;
+  --muted:rgba(248,250,252,0.75);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
-  --green:#22c55e;
   --mint:#6ee7b7;
   --gold:#fde68a;
 
-  --glass: blur(18px);
-  --shadow: 0 30px 90px rgba(2,6,23,0.18);
-  --shadowStrong: 0 34px 110px rgba(2,6,23,0.25);
-}
-
-[data-theme="dark"]{
-  --bgA:#050816;
-  --bgB:#0b1630;
-  --card:rgba(255,255,255,0.11);
-  --stroke:rgba(255,255,255,0.18);
-  --text:#f8fafc;
-  --muted:rgba(248,250,252,0.76);
-  --shadow: 0 40px 120px rgba(0,0,0,0.62);
-  --shadowStrong: 0 46px 140px rgba(0,0,0,0.72);
+  --shadow:0 40px 120px rgba(0,0,0,0.7);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -43,803 +28,271 @@ html,body{height:100%}
 
 body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text);
+  color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--violet) 32%,transparent) 0,transparent 46%),
-    radial-gradient(circle at 85% 15%, color-mix(in srgb,var(--cyan) 28%,transparent) 0,transparent 50%),
-    radial-gradient(circle at 26% 86%, color-mix(in srgb,var(--pink) 26%,transparent) 0,transparent 52%),
-    radial-gradient(circle at 85% 80%, color-mix(in srgb,var(--mint) 18%,transparent) 0,transparent 55%),
-    linear-gradient(180deg,var(--bgA),var(--bgB));
+    radial-gradient(circle at 20% 10%, #c084fc33, transparent 45%),
+    radial-gradient(circle at 80% 20%, #67e8f933, transparent 50%),
+    radial-gradient(circle at 30% 90%, #f9a8d433, transparent 50%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
   overflow-y:auto;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 }
 
-/* ===== BACKGROUND: stars + parallax leaves ===== */
-.scene{
-  position:fixed; inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:0;
-}
-
-.star{
-  position:absolute;
-  width:2px;height:2px;border-radius:50%;
-  background: rgba(255,255,255,0.85);
-  opacity: .6;
-  animation: twinkle 6.2s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.35));
-}
-@keyframes twinkle{0%,100%{opacity:.18}50%{opacity:1}}
-
-.leaf{
-  position:absolute;
-  width: 240px;
-  opacity: .50;
-  will-change: transform;
-  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.18));
-}
-[data-theme="dark"] .leaf{ opacity:.34; }
-
-/* ===== LAYOUT ===== */
+/* ====== GLOBAL ====== */
 .wrap{
-  position:relative;
-  z-index:1;
   min-height:100vh;
   display:flex;
   justify-content:center;
-  padding: 36px 0 70px;
+  padding:60px 0 120px;
 }
-.stack{
+.container{
   width:100%;
-  max-width: 520px;
-  margin: 0 16px;
+  max-width: 900px; /* 🔥 SZERSZA STRONA */
+  margin:0 20px;
   display:flex;
   flex-direction:column;
-  gap: 14px;
+  gap:60px;
 }
 
-/* ===== TOP BAR ===== */
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 22px;
-  background: var(--card);
-  backdrop-filter: var(--glass);
-  border: 1px solid var(--stroke);
-  box-shadow: var(--shadow);
-}
-
+/* ====== BRAND ====== */
 .brand{
-  display:flex;
-  flex-direction:column;
-  gap: 2px;
-  min-width:0;
+  text-align:center;
 }
-.logo{
-  font-weight: 950;
-  letter-spacing: .14em;
-  font-size: 18px;
-  background: linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: glow 2.4s ease-in-out infinite alternate;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.brand .logo{
+  font-size:64px;
+  font-weight:900;
+  letter-spacing:0.4em;
+  background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: glow 2.8s ease-in-out infinite alternate;
 }
 @keyframes glow{
-  from{ text-shadow: 0 0 8px color-mix(in srgb,var(--pink) 45%, transparent); }
-  to  { text-shadow: 0 0 18px color-mix(in srgb,var(--violet) 60%, transparent),
-                 0 0 28px color-mix(in srgb,var(--cyan) 55%, transparent); }
+  from{ text-shadow:0 0 20px var(--pink); }
+  to{ text-shadow:0 0 60px var(--violet),0 0 90px var(--cyan); }
 }
-.tag{
-  color: var(--muted);
-  font-size: 11px;
-  line-height:1.2;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.brand p{
+  margin-top:14px;
+  font-size:18px;
+  color:var(--muted);
 }
 
-.controls{display:flex; gap:8px; align-items:center;}
-.ctrl{
-  display:inline-flex;
-  align-items:center;
-  gap: 8px;
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  background: rgba(0,0,0,0.04);
-  cursor:pointer;
-  font-weight: 900;
-  font-size: 12px;
-  color: var(--text);
-  transition: transform .15s ease, background .15s ease;
-  user-select:none;
-}
-[data-theme="dark"] .ctrl{ background: rgba(255,255,255,0.06); }
-.ctrl:hover{ transform: translateY(-1px); }
-.ctrl small{ font-weight: 800; opacity:.8; }
-
-/* ===== MAIN CARD ===== */
-.card{
-  border-radius: 30px;
-  background: var(--card);
-  backdrop-filter: var(--glass);
-  border: 1px solid var(--stroke);
-  box-shadow: var(--shadowStrong);
-  overflow:hidden;
-}
-
-/* ===== HERO ===== */
+/* ====== HERO ====== */
 .hero{
-  padding: 18px 16px 12px;
-  position:relative;
-}
-.hero::before{
-  content:"";
-  position:absolute; inset:-60px;
-  background:
-    radial-gradient(circle at 15% 15%, color-mix(in srgb,var(--violet) 24%, transparent) 0, transparent 55%),
-    radial-gradient(circle at 90% 25%, color-mix(in srgb,var(--cyan) 18%, transparent) 0, transparent 60%),
-    radial-gradient(circle at 35% 90%, color-mix(in srgb,var(--pink) 18%, transparent) 0, transparent 64%);
-  opacity:.95;
-  pointer-events:none;
-}
-
-.heroRow{
-  position:relative;
-  display:flex;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:40px;
   align-items:center;
-  gap: 14px;
 }
 
 .avatarWrap{
-  width: 124px; height: 124px;
-  border-radius: 999px;
-  padding: 4px;
-  background: conic-gradient(from 0deg,var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow: 0 0 42px color-mix(in srgb,var(--violet) 55%, transparent);
-  flex: 0 0 auto;
-}
-.avatar{
-  width:100%; height:100%;
-  border-radius: inherit;
-  object-fit: cover;
-  background: radial-gradient(circle at 30% 20%, var(--mint), var(--green));
-  display:block;
-}
-.avatarFallback{
-  display:none;
-  width:100%; height:100%;
-  border-radius: inherit;
-  place-items:center;
-  font-weight: 950;
-  letter-spacing:.12em;
-  background: radial-gradient(circle at 30% 20%, var(--mint), var(--green));
-  color: rgba(255,255,255,0.95);
-}
-
-.heroText{ flex: 1 1 auto; min-width: 0; }
-.name{
-  font-size: 20px;
-  font-weight: 950;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.bio{
-  margin-top: 8px;
-  font-size: 12.5px;
-  line-height: 1.35;
-  color: var(--muted);
-}
-
-/* ===== Better unicorn (animated) ===== */
-.unicornWrap{
-  width: 108px; height: 108px;
-  display:grid; place-items:center;
-  flex: 0 0 auto;
-  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.22));
-}
-.unicorn{
-  width: 104px; height: 104px;
-  animation: uFloat 4.8s ease-in-out infinite;
-}
-@keyframes uFloat{
-  0%,100%{ transform: translateY(0) rotate(-1deg); }
-  50%{ transform: translateY(-9px) rotate(1deg); }
-}
-.uTail{ transform-origin: 62px 58px; animation: uSwish 1.7s ease-in-out infinite; }
-@keyframes uSwish{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
-.uSpark{ animation: uSpark 1.7s ease-in-out infinite; }
-@keyframes uSpark{0%,100%{opacity:.35}50%{opacity:1}}
-
-/* ===== CTA badges ===== */
-.badges{
-  margin-top: 12px;
   display:flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  justify-content:center;
 }
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap: 6px;
-  padding: 7px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  background: rgba(255,255,255,0.55);
-  font-size: 11px;
-  font-weight: 900;
-  color: var(--text);
+.avatarRing{
+  width:300px;   /* 🔥 DUŻE PROFILOWE */
+  height:300px;
+  border-radius:50%;
+  padding:6px;
+  background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
+  box-shadow:0 0 80px var(--violet);
 }
-[data-theme="dark"] .badge{ background: rgba(255,255,255,0.08); }
+.avatarRing img{
+  width:100%;
+  height:100%;
+  border-radius:inherit;
+  object-fit:cover;
+}
 
-/* ===== LINKS ===== */
+.heroText h1{
+  font-size:42px;
+  font-weight:900;
+}
+.heroText p{
+  margin-top:20px;
+  font-size:18px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+/* ====== UNICORN ====== */
+.unicorn{
+  width:220px; /* 🔥 WIĘKSZY */
+  animation: float 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6));
+}
+@keyframes float{
+  50%{ transform: translateY(-18px); }
+}
+
+/* ====== LINKS ====== */
 .links{
-  padding: 12px 12px 14px;
   display:flex;
   flex-direction:column;
-  gap: 10px;
+  gap:26px;
 }
+
 .link{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-  padding: 12px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--stroke);
-  background: rgba(255,255,255,0.60);
+  gap:26px;
+  padding:26px;
+  border-radius:30px;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadow);
   text-decoration:none;
-  color: var(--text);
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  color:var(--text);
+  transition:.25s ease;
 }
-[data-theme="dark"] .link{ background: rgba(255,255,255,0.08); }
 .link:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(2,6,23,0.14);
-  border-color: color-mix(in srgb,var(--violet) 28%, var(--stroke));
+  transform: translateY(-4px) scale(1.01);
 }
 
-.left{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  min-width:0;
-}
-.ico{
-  width: 44px; height: 44px;
-  border-radius: 16px;
-  display:grid;
-  place-items:center;
-  border: 1px solid color-mix(in srgb,var(--stroke) 60%, transparent);
-  background: linear-gradient(135deg,
-    color-mix(in srgb,var(--violet) 24%, transparent),
-    color-mix(in srgb,var(--cyan) 16%, transparent)
-  );
-}
-[data-theme="dark"] .ico{
-  background: linear-gradient(135deg,
-    color-mix(in srgb,var(--violet) 18%, transparent),
-    color-mix(in srgb,var(--cyan) 12%, transparent)
-  );
-}
-.ico svg{ width: 24px; height: 24px; fill:none; stroke: currentColor; stroke-width:2; }
-.ico .fill{ fill: currentColor; stroke: none; }
-
-.label{ min-width:0; }
-.label strong{
-  display:block;
-  font-size: 14px;
-  font-weight: 950;
-  letter-spacing: .01em;
-}
-.label span{
-  display:block;
-  margin-top: 2px;
-  font-size: 11px;
-  color: var(--muted);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.icon{
+  font-size:42px;
 }
 
-.go{
-  font-weight: 950;
-  opacity: .75;
-  font-size: 18px;
+.linkText h3{
+  font-size:22px;
+  font-weight:900;
+}
+.linkText p{
+  margin-top:10px;
+  font-size:15px;
+  line-height:1.6;
+  color:var(--muted);
 }
 
-/* ===== WHY FOLLOW / MARKETING ===== */
-.marketing{
-  padding: 14px 14px 6px;
-  border-top: 1px solid var(--stroke);
-}
-.marketing h3{
-  font-size: 13px;
-  font-weight: 950;
-  letter-spacing:.02em;
-}
-.marketing p{
-  margin-top: 6px;
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: var(--muted);
-}
-.grid{
-  margin-top: 10px;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.tile{
-  padding: 12px;
-  border-radius: 18px;
-  border: 1px solid var(--stroke);
-  background: rgba(255,255,255,0.55);
-}
-[data-theme="dark"] .tile{ background: rgba(255,255,255,0.08); }
-.tile b{ display:block; font-size: 12px; }
-.tile small{ display:block; margin-top:4px; color: var(--muted); font-size: 11px; line-height:1.35; }
-
-/* ===== DONATE ===== */
-.donate{
-  padding: 14px;
-  border-top: 1px solid var(--stroke);
-  background:
-    radial-gradient(circle at 10% 0%, color-mix(in srgb,var(--gold) 22%, transparent) 0, transparent 60%),
-    radial-gradient(circle at 90% 10%, color-mix(in srgb,var(--pink) 18%, transparent) 0, transparent 62%);
-}
-.donate h3{ font-size: 13px; font-weight: 950; }
-.donate p{
-  margin-top: 6px;
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: var(--muted);
-}
-.drow{
-  margin-top: 10px;
-  display:flex;
-  gap: 8px;
-  align-items:stretch;
-}
-.dval{
-  flex:1;
-  padding: 10px 10px;
-  border-radius: 16px;
-  border: 1px dashed color-mix(in srgb,var(--violet) 30%, var(--stroke));
-  background: rgba(0,0,0,0.04);
-  font-size: 11px;
-  word-break: break-all;
-}
-[data-theme="dark"] .dval{ background: rgba(255,255,255,0.06); }
-.btn{
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  background: linear-gradient(135deg,var(--gold),var(--pink));
-  color: #111827;
-  font-weight: 950;
-  cursor:pointer;
-  box-shadow: 0 14px 30px rgba(2,6,23,0.14);
-  transition: transform .15s ease;
-  white-space:nowrap;
-}
-.btn:hover{ transform: translateY(-1px); }
-.btn:active{ transform: translateY(0); }
-
-.footerCta{
-  padding: 10px 14px 16px;
+/* ====== FOOTER ====== */
+.footer{
   text-align:center;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.45;
-}
-.footerCta b{ color: var(--text); }
-
-/* Mobile */
-@media (max-width: 480px){
-  .avatarWrap{ width: 118px; height: 118px; }
-  .unicornWrap{ display:none; } /* keeps hero clean on tiny screens */
-  .grid{ grid-template-columns: 1fr; }
+  font-size:15px;
+  color:var(--muted);
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .star, .unicorn, .uTail, .uSpark { animation: none !important; }
+/* MOBILE */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .avatarRing{
+    width:240px;height:240px;
+  }
+  .unicorn{
+    margin:0 auto;
+  }
 }
 </style>
 </head>
 
-<body data-theme="light">
-  <div class="scene" id="scene">
-    <!-- Leaves -->
-    <svg class="leaf" data-depth="0.18" style="left:-70px; top:16%;" viewBox="0 0 220 220" aria-hidden="true">
-      <path d="M116 18C78 35 48 76 44 118c-4 43 18 79 55 86 39 7 80-19 98-54 18-35 18-90-81-132z" fill="rgba(34,197,94,0.35)"/>
-      <path d="M70 155c40-8 78-39 98-83" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
-    </svg>
+<body>
 
-    <svg class="leaf" data-depth="0.30" style="right:-90px; top:6%; width:260px;" viewBox="0 0 220 220" aria-hidden="true">
-      <path d="M190 66c-30-34-86-56-126-30-40 26-55 86-25 124 30 38 94 40 132 10 38-30 49-70 19-104z" fill="rgba(110,231,183,0.28)"/>
-      <path d="M70 170c22-52 62-96 122-108" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
-    </svg>
+<div class="wrap">
+<div class="container">
 
-    <svg class="leaf" data-depth="0.44" style="left:10%; bottom:-110px; width:300px;" viewBox="0 0 220 220" aria-hidden="true">
-      <path d="M52 192c58 12 120-30 136-82 16-52-12-112-68-116C64-10 10 46 16 106c6 60 36 78 36 86z" fill="rgba(192,132,252,0.18)"/>
-      <path d="M44 168c52-22 92-58 118-122" stroke="rgba(2,6,23,0.14)" stroke-width="6" fill="none" stroke-linecap="round"/>
-    </svg>
-  </div>
+<!-- BRAND -->
+<div class="brand">
+  <div class="logo">11</div>
+  <p>
+    EN: Welcome to my official space. Everything starts here.  
+    <br>
+    ES: Bienvenido a mi espacio oficial. Todo empieza aquí.
+  </p>
+</div>
 
-  <div class="wrap">
-    <div class="stack">
-      <div class="topbar">
-        <div class="brand">
-          <div class="logo">✨ ROYALE 11 ✨</div>
-          <div class="tag">EN + ES · Tap a link · Join the vibe</div>
-        </div>
-        <div class="controls">
-          <div class="ctrl" id="themeBtn" role="button" aria-label="Toggle theme">🌗 <small id="themeTxt">Light</small></div>
-          <div class="ctrl" id="musicBtn" role="button" aria-label="Toggle music">🎵 <small id="musicTxt">Off</small></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="hero">
-          <div class="heroRow">
-            <div class="avatarWrap">
-              <img src="profile.jpg" class="avatar" id="avatarImg" alt="Profile photo">
-              <div class="avatarFallback" id="avatarFallback">ROYALE</div>
-            </div>
-
-            <div class="heroText">
-              <div class="name">DANIELA</div>
-              <div class="bio">
-                EN: Welcome 💫 I post <b>real moments</b>, <b>live energy</b> & exclusive updates.
-                Tap your favorite platform — and don’t miss the next live.<br><br>
-                ES: Bienvenid@ 💫 Aquí tienes <b>momentos reales</b>, <b>directos</b> y contenido exclusivo.
-                Elige tu plataforma y acompáñame en el próximo live.
-              </div>
-
-              <div class="badges">
-                <div class="badge">✨ Daily vibes</div>
-                <div class="badge">🦄 Unicorn energy</div>
-                <div class="badge">🌿 Nature glow</div>
-              </div>
-            </div>
-
-            <div class="unicornWrap" aria-hidden="true">
-              <svg class="unicorn" viewBox="0 0 100 100">
-                <defs>
-                  <radialGradient id="uGlow" cx="35%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.90"/>
-                    <stop offset="55%" stop-color="#c084fc" stop-opacity="0.32"/>
-                    <stop offset="100%" stop-color="#f9a8d4" stop-opacity="0"/>
-                  </radialGradient>
-                  <linearGradient id="uMane" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#f9a8d4"/>
-                    <stop offset="50%" stop-color="#c084fc"/>
-                    <stop offset="100%" stop-color="#67e8f9"/>
-                  </linearGradient>
-                  <linearGradient id="uBody" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-                    <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.88"/>
-                  </linearGradient>
-                </defs>
-
-                <circle cx="50" cy="50" r="42" fill="url(#uGlow)" class="uSpark"/>
-                <!-- horn -->
-                <path d="M58 18 L71 30 L57 33 Z" fill="#fde68a" opacity="0.96"/>
-                <path d="M58 18 L64 30" stroke="rgba(2,6,23,0.18)" stroke-width="2" stroke-linecap="round"/>
-                <!-- ear -->
-                <path d="M56 28c4-7 10-10 13-6 2 3-2 10-10 13z"
-                      fill="#ffffff" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
-                <!-- head -->
-                <path d="M28 58c6-18 18-30 36-30 16 0 28 10 30 24 2 14-8 26-24 28-20 2-36-6-42-22z"
-                      fill="url(#uBody)" stroke="rgba(2,6,23,0.14)" stroke-width="2" />
-                <!-- mane / tail -->
-                <path class="uTail" d="M42 32c-10 6-14 16-12 26 2 10 10 18 22 20-14 6-32 0-36-16-4-16 6-30 26-30z"
-                      fill="url(#uMane)" opacity="0.98"/>
-                <!-- eye -->
-                <circle cx="62" cy="54" r="2.2" fill="rgba(2,6,23,0.72)"/>
-                <!-- sparkles -->
-                <path class="uSpark" d="M78 46l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#ffffff" opacity="0.75"/>
-                <path class="uSpark" d="M20 62l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#ffffff" opacity="0.55"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- LINKS (with real SVG icons + marketing text) -->
-        <div class="links">
-          <!-- TikTok -->
-          <a class="link" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7" stroke-linecap="round"/>
-                  <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>TikTok</strong>
-                <span>EN: Lives, trends & behind-the-scenes · ES: Directos, trends y backstage</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-
-          <!-- Instagram -->
-          <a class="link" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <rect x="6" y="6" width="12" height="12" rx="3"/>
-                  <circle cx="12" cy="12" r="3"/>
-                  <circle cx="16.5" cy="7.5" r="1" class="fill"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>Instagram</strong>
-                <span>EN: Stories + daily vibes · ES: Historias + vibra diaria</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-
-          <!-- Live.me -->
-          <a class="link" href="https://www.live.me/YOUR_LIVEME" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="3.5" class="fill"/>
-                  <path d="M4.5 12a7.5 7.5 0 0 1 15 0" stroke-linecap="round"/>
-                  <path d="M6.8 12a5.2 5.2 0 0 1 10.4 0" stroke-linecap="round" opacity="0.85"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>Live.me</strong>
-                <span>EN: Main live room — come say hi · ES: Sala principal — ven a saludar</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-
-          <!-- Kick -->
-          <a class="link" href="https://kick.com/YOUR_KICK" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M7 6v12" stroke-linecap="round"/>
-                  <path d="M17 6l-7 7 7 5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>Kick</strong>
-                <span>EN: Longer streams + chill chat · ES: Streams largos + chat chill</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-
-          <!-- YouTube -->
-          <a class="link" href="https://youtube.com/@YOUR_YOUTUBE" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M10 9.5v5l5-2.5-5-2.5z" class="fill"/>
-                  <rect x="4.5" y="7.2" width="15" height="9.6" rx="3"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>YouTube</strong>
-                <span>EN: Best clips & uploads · ES: Mejores clips y vídeos</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-
-          <!-- Discord -->
-          <a class="link" href="https://discord.gg/YOUR_DISCORD" target="_blank" rel="noopener noreferrer">
-            <div class="left">
-              <div class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M7 18c2.2 1.6 7.8 1.6 10 0 1-3 1.4-5.9 1-9-2-1.5-3.7-2.1-5-2.3l-.8 1.4a10 10 0 0 0-3.4 0L8 6.7C6.7 6.9 5 7.5 3 9c-.4 3.1 0 6 1 9 1 .7 2 .9 3 .9z" stroke-linejoin="round"/>
-                  <circle cx="9.5" cy="12.2" r="1.2" class="fill"/>
-                  <circle cx="14.5" cy="12.2" r="1.2" class="fill"/>
-                </svg>
-              </div>
-              <div class="label">
-                <strong>Discord</strong>
-                <span>EN: Join the community + perks · ES: Únete a la comunidad + ventajas</span>
-              </div>
-            </div>
-            <div class="go">➜</div>
-          </a>
-        </div>
-
-        <!-- Marketing section -->
-        <div class="marketing">
-          <h3>Why follow / Por qué seguir</h3>
-          <p>
-            EN: If you like cozy vibes + real energy, you’re in the right place. New updates every week. <br>
-            ES: Si te gusta la vibra bonita y real, estás en el lugar correcto. Novedades cada semana.
-          </p>
-
-          <div class="grid">
-            <div class="tile">
-              <b>✨ Exclusive updates</b>
-              <small>EN: behind-the-scenes & early info · ES: backstage y primicias</small>
-            </div>
-            <div class="tile">
-              <b>💬 Community first</b>
-              <small>EN: talk, laugh, chill together · ES: charla, risas y buena vibra</small>
-            </div>
-            <div class="tile">
-              <b>🎥 Best moments</b>
-              <small>EN: highlights you don’t want to miss · ES: highlights imperdibles</small>
-            </div>
-            <div class="tile">
-              <b>🌙 Cozy aesthetic</b>
-              <small>EN: soft, magical, safe space · ES: suave, mágico, lugar seguro</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- Donate -->
-        <div class="donate">
-          <h3>💖 Donate / Apoyo</h3>
-          <p>
-            EN: Want to support me? Every donation helps me create more content. Thank you 💚<br>
-            ES: ¿Quieres apoyarme? Cada donación ayuda a crear más contenido. Gracias 💚
-          </p>
-          <div class="drow">
-            <div class="dval" id="donVal">YOUR_PAYMENT_INFO</div>
-            <button class="btn" id="copyBtn">Copy</button>
-          </div>
-        </div>
-
-        <div class="footerCta">
-          <b>✨ Tip:</b> EN: Save this page & come back for the next live. ·
-          ES: Guarda esta página y vuelve para el próximo directo.
-        </div>
-      </div>
-
-      <audio id="ambient" preload="none" loop>
-        <source src="ambient.mp3" type="audio/mpeg">
-      </audio>
+<!-- HERO -->
+<div class="hero">
+  <div class="avatarWrap">
+    <div class="avatarRing">
+      <img src="profile.jpg" alt="Profile">
     </div>
   </div>
 
-<script>
-(() => {
-  // ===== Stars =====
-  const scene = document.getElementById('scene');
-  for (let i = 0; i < 90; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.left = (Math.random() * 100) + '%';
-    s.style.top  = (Math.random() * 100) + '%';
-    s.style.animationDelay = (Math.random() * 6.2) + 's';
-    s.style.opacity = (0.15 + Math.random() * 0.85).toFixed(2);
-    scene.appendChild(s);
-  }
+  <div class="heroText">
+    <h1>Daniela</h1>
+    <p>
+      EN: This is where you really get to know me — my lives, my energy,
+      my daily moments and the community we build together.  
+      If you’re here, you’re already part of it.
+      <br><br>
+      ES: Aquí es donde de verdad puedes conocerme — mis directos,
+      mi energía, mis momentos diarios y la comunidad que creamos juntos.
+      Si estás aquí, ya eres parte.
+    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg" class="unicorn" alt="">
+  </div>
+</div>
 
-  // ===== Parallax Leaves =====
-  const leaves = Array.from(document.querySelectorAll('.leaf'));
-  let px = 0, py = 0, tx = 0, ty = 0;
+<!-- LINKS -->
+<div class="links">
 
-  function onMove(e){
-    const w = window.innerWidth, h = window.innerHeight;
-    px = ((e.clientX / w) - 0.5) * 2;
-    py = ((e.clientY / h) - 0.5) * 2;
-  }
-  window.addEventListener('mousemove', onMove, {passive:true});
-  window.addEventListener('touchmove', (e) => {
-    const t = e.touches && e.touches[0];
-    if (!t) return;
-    onMove({clientX: t.clientX, clientY: t.clientY});
-  }, {passive:true});
+<a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
+  <div class="icon">🎵</div>
+  <div class="linkText">
+    <h3>TikTok</h3>
+    <p>
+      EN: Short videos, trends, spontaneous lives and moments you don’t see anywhere else.
+      This is where everything moves fast and real.
+      <br>
+      ES: Vídeos cortos, tendencias, directos espontáneos y momentos que no verás en ningún otro lugar.
+      Aquí todo es rápido y real.
+    </p>
+  </div>
+</a>
 
-  function raf(){
-    tx += (px - tx) * 0.08;
-    ty += (py - ty) * 0.08;
+<a class="link" href="https://instagram.com/YOUR_INSTAGRAM">
+  <div class="icon">📸</div>
+  <div class="linkText">
+    <h3>Instagram</h3>
+    <p>
+      EN: Daily stories, photos, mood and aesthetic.
+      If you want to stay close and see my day-to-day, this is the place.
+      <br>
+      ES: Historias diarias, fotos, estado de ánimo y estética.
+      Si quieres estar cerca y ver mi día a día, este es el lugar.
+    </p>
+  </div>
+</a>
 
-    const scrollY = window.scrollY || 0;
-    const s = scrollY * 0.06;
+<a class="link" href="https://www.live.me/YOUR_LIVEME">
+  <div class="icon">🔴</div>
+  <div class="linkText">
+    <h3>Live.me</h3>
+    <p>
+      EN: My main live space.
+      Real conversations, long streams and direct connection with the community.
+      <br>
+      ES: Mi espacio principal de directos.
+      Conversaciones reales, streams largos y conexión directa con la comunidad.
+    </p>
+  </div>
+</a>
 
-    leaves.forEach((el, idx) => {
-      const d = parseFloat(el.dataset.depth || '0.2');
-      const x = (tx * 18 * d) + (idx % 2 ? 10 : -10);
-      const y = (ty * 12 * d) - (s * d);
-      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${(tx*5*d)}deg)`;
-    });
+<a class="link" href="https://discord.gg/YOUR_DISCORD">
+  <div class="icon">💬</div>
+  <div class="linkText">
+    <h3>Discord</h3>
+    <p>
+      EN: Join the inner circle.
+      Talk with me, meet the community, get updates first and be part of something closer.
+      <br>
+      ES: Únete al círculo interno.
+      Habla conmigo, conoce a la comunidad, recibe novedades antes y sé parte de algo más cercano.
+    </p>
+  </div>
+</a>
 
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+</div>
 
-  // ===== Avatar fallback if profile.jpg fails =====
-  const img = document.getElementById('avatarImg');
-  const fb  = document.getElementById('avatarFallback');
-  img.addEventListener('error', () => {
-    img.style.display = 'none';
-    fb.style.display = 'grid';
-  });
+<div class="footer">
+  EN: Save this page — this is the only official one.  
+  <br>
+  ES: Guarda esta página — es la única oficial.
+</div>
 
-  // ===== Theme toggle + persist =====
-  const themeBtn = document.getElementById('themeBtn');
-  const themeTxt = document.getElementById('themeTxt');
-  const saved = localStorage.getItem('royaleTheme');
-  if (saved) document.body.setAttribute('data-theme', saved);
+</div>
+</div>
 
-  function syncTheme(){
-    const dark = document.body.getAttribute('data-theme') === 'dark';
-    themeTxt.textContent = dark ? 'Dark' : 'Light';
-  }
-  syncTheme();
-
-  themeBtn.addEventListener('click', () => {
-    const dark = document.body.getAttribute('data-theme') === 'dark';
-    document.body.setAttribute('data-theme', dark ? 'light' : 'dark');
-    localStorage.setItem('royaleTheme', dark ? 'light' : 'dark');
-    syncTheme();
-  });
-
-  // ===== Music toggle =====
-  const audio = document.getElementById('ambient');
-  const musicBtn = document.getElementById('musicBtn');
-  const musicTxt = document.getElementById('musicTxt');
-  let musicOn = false;
-
-  async function toggleMusic(){
-    try{
-      if(!musicOn){
-        audio.volume = 0.55;
-        await audio.play(); // iPhone ok: user tap
-        musicOn = true;
-      }else{
-        audio.pause();
-        musicOn = false;
-      }
-      musicTxt.textContent = musicOn ? 'On' : 'Off';
-    }catch(e){
-      musicOn = false;
-      musicTxt.textContent = 'Off';
-      alert("Music not playing. Make sure 'ambient.mp3' is in the repo root (same place as index.html).");
-    }
-  }
-  musicBtn.addEventListener('click', toggleMusic);
-
-  // ===== Donate copy (with feedback) =====
-  const copyBtn = document.getElementById('copyBtn');
-  const donVal  = document.getElementById('donVal');
-  copyBtn.addEventListener('click', async () => {
-    const txt = (donVal.innerText || '').trim();
-    if(!txt) return;
-    try{
-      await navigator.clipboard.writeText(txt);
-      const old = copyBtn.textContent;
-      copyBtn.textContent = "Copied!";
-      setTimeout(()=>copyBtn.textContent = old, 1200);
-    }catch(e){
-      // fallback
-      const r = document.createRange();
-      r.selectNode(donVal);
-      const sel = window.getSelection();
-      sel.removeAllRanges(); sel.addRange(r);
-      document.execCommand('copy');
-      sel.removeAllRanges();
-    }
-  });
-})();
-</script>
 </body>
 </html>
