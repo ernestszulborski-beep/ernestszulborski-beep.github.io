@@ -1,731 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Daniela 11</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DANIELA 11</title>
 
 <style>
 :root{
   --bg1:#050816;
   --bg2:#0b1630;
-  --bg3:#160b26;
+  --bg3:#1a0f2e;
 
   --card:rgba(255,255,255,0.12);
   --stroke:rgba(255,255,255,0.22);
   --text:#f8fafc;
-  --muted:rgba(248,250,252,0.74);
+  --muted:rgba(248,250,252,0.7);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
-  --mint:#6ee7b7;
   --gold:#fde68a;
 
-  --shadow:0 46px 160px rgba(0,0,0,.72);
-  --shadowSoft:0 26px 70px rgba(0,0,0,.45);
+  --shadow:0 50px 160px rgba(0,0,0,.75);
 }
 
 [data-theme="light"]{
   --bg1:#f8fafc;
   --bg2:#e5e7eb;
   --bg3:#e0f2fe;
-
-  --card:rgba(255,255,255,0.93);
+  --card:rgba(255,255,255,0.95);
   --stroke:rgba(2,6,23,0.12);
   --text:#0b1220;
-  --muted:rgba(15,23,42,0.70);
-
-  --shadow:0 32px 120px rgba(2,6,23,.18);
-  --shadowSoft:0 16px 55px rgba(2,6,23,.12);
+  --muted:rgba(15,23,42,0.65);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
 
 body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 12%, color-mix(in srgb,var(--violet) 40%, transparent) 0, transparent 48%),
-    radial-gradient(circle at 85% 16%, color-mix(in srgb,var(--cyan) 36%, transparent) 0, transparent 52%),
-    radial-gradient(circle at 35% 90%, color-mix(in srgb,var(--pink) 34%, transparent) 0, transparent 54%),
-    radial-gradient(circle at 80% 85%, color-mix(in srgb,var(--mint) 20%, transparent) 0, transparent 58%),
+    radial-gradient(circle at 20% 10%, #c084fc55, transparent 45%),
+    radial-gradient(circle at 80% 20%, #67e8f955, transparent 50%),
+    radial-gradient(circle at 40% 90%, #f9a8d455, transparent 55%),
     linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+  min-height:100vh;
 }
 
-/* ===== BACKGROUND SCENE ===== */
-.scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.star{
-  position:absolute;width:2px;height:2px;border-radius:50%;
-  background:rgba(255,255,255,0.92);
-  opacity:.55;
-  filter: drop-shadow(0 0 7px rgba(255,255,255,0.35));
-  animation:twinkle 6.2s ease-in-out infinite;
-}
-@keyframes twinkle{0%,100%{opacity:.18}50%{opacity:1}}
-
-.bloom{
-  position:absolute; inset:-120px;
-  background:
-    radial-gradient(circle at 18% 18%, color-mix(in srgb,var(--violet) 22%, transparent) 0, transparent 58%),
-    radial-gradient(circle at 88% 22%, color-mix(in srgb,var(--cyan) 18%, transparent) 0, transparent 62%),
-    radial-gradient(circle at 30% 92%, color-mix(in srgb,var(--pink) 18%, transparent) 0, transparent 66%),
-    radial-gradient(circle at 80% 90%, color-mix(in srgb,var(--mint) 12%, transparent) 0, transparent 70%);
-  opacity:.9;
-}
-
-/* ===== LAYOUT ===== */
 .wrapper{
-  position:relative;
-  z-index:1;
-  max-width:980px;
+  max-width:1000px;
   margin:0 auto;
-  padding:84px 18px 160px;
+  padding:80px 20px 160px;
   display:flex;
   flex-direction:column;
-  gap:72px;
+  gap:90px;
 }
 
 /* ===== HERO ===== */
 .hero{
-  border-radius:40px;
-  background:var(--card);
-  border:1px solid var(--stroke);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-  position:relative;
-}
-.hero::before{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(135deg,
-    color-mix(in srgb,var(--violet) 12%, transparent),
-    color-mix(in srgb,var(--cyan) 10%, transparent),
-    color-mix(in srgb,var(--pink) 10%, transparent)
-  );
-  pointer-events:none;
+  text-align:center;
 }
 
-.heroInner{
-  position:relative;
-  padding:28px 22px 22px;
-  display:grid;
-  grid-template-columns: 360px 1fr 260px;
-  gap:22px;
-  align-items:center;
-}
-
+/* PROFILOWE – NAJWAŻNIEJSZE */
 .avatar{
-  width:340px;height:340px;
-  border-radius:50%;
-  padding:8px;
+  width:360px;
+  height:360px;
   margin:0 auto;
+  border-radius:50%;
+  padding:10px;
   background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 140px color-mix(in srgb,var(--violet) 70%, transparent);
+  box-shadow:0 0 180px var(--violet);
 }
 .avatar img{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   border-radius:inherit;
   object-fit:cover;
-  display:block;
-  background: radial-gradient(circle at 30% 20%, var(--mint), #22c55e);
 }
 
-.titleWrap{min-width:0}
-.hName{
-  font-size:64px;
-  font-weight:1000;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+/* DANIELA – DUŻE */
+.name{
+  margin-top:44px;
+  font-size:86px;
+  font-weight:900;
+  letter-spacing:.18em;
 }
-.hNum{
-  margin-top:10px;
+
+/* 11 – MNIEJSZE */
+.num{
+  margin-top:8px;
   font-size:40px;
-  font-weight:1000;
+  font-weight:900;
   letter-spacing:.55em;
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation: numGlow 2.8s ease-in-out infinite alternate;
+  animation:glow 3s ease-in-out infinite alternate;
 }
-@keyframes numGlow{
-  from{ text-shadow: 0 0 14px color-mix(in srgb,var(--pink) 55%, transparent); }
-  to  { text-shadow: 0 0 34px color-mix(in srgb,var(--violet) 70%, transparent),
-                 0 0 54px color-mix(in srgb,var(--cyan) 60%, transparent); }
+@keyframes glow{
+  from{text-shadow:0 0 18px var(--pink)}
+  to{text-shadow:0 0 60px var(--violet),0 0 100px var(--cyan)}
 }
 
-.tagline{
-  margin-top:18px;
-  font-size:18px;
-  line-height:1.55;
+/* OPIS – MNIEJSZA CZCIONKA */
+.desc{
+  margin-top:26px;
+  font-size:16px;
+  line-height:1.6;
   color:var(--muted);
 }
-.tagline .line{display:block; margin-top:8px}
 
-/* ===== Controls (theme + music) ===== */
+/* CONTROLS */
 .controls{
-  margin-top:20px;
+  margin-top:34px;
   display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
 }
 .ctrl{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 18px;
+  padding:12px 20px;
   border-radius:999px;
   border:1px solid var(--stroke);
-  background:rgba(0,0,0,0.04);
-  color:var(--text);
+  background:var(--card);
+  box-shadow:var(--shadow);
+  font-weight:900;
   cursor:pointer;
-  font-weight:950;
-  box-shadow:var(--shadowSoft);
-  user-select:none;
-  transition:transform .15s ease;
 }
-[data-theme="dark"] .ctrl{ background: rgba(255,255,255,0.06); }
-.ctrl:hover{ transform: translateY(-1px); }
-.ctrl small{opacity:.8;font-weight:900}
 
-/* ===== BIG ANIMATED UNICORN ===== */
-.uniWrap{
-  width:260px;height:260px;
-  margin:0 auto;
-  display:grid;place-items:center;
-  filter: drop-shadow(0 34px 52px rgba(0,0,0,0.38));
+/* ===== UNICORN – DUŻY, CENTRALNY ===== */
+.unicorn{
+  width:320px;
+  margin:60px auto 0;
+  animation:float 4.8s ease-in-out infinite;
+  filter:drop-shadow(0 50px 70px rgba(0,0,0,.6));
 }
-.uni{
-  width:250px;height:250px;
-  animation: uFloat 4.9s ease-in-out infinite;
+@keyframes float{
+  50%{transform:translateY(-22px)}
 }
-@keyframes uFloat{
-  0%,100%{ transform: translateY(0) rotate(-1deg); }
-  50%{ transform: translateY(-18px) rotate(1deg); }
-}
-.uTail{ transform-origin: 62px 58px; animation: uSwish 1.6s ease-in-out infinite; }
-@keyframes uSwish{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
-.uSpark{ animation: uSpark 1.6s ease-in-out infinite; }
-@keyframes uSpark{0%,100%{opacity:.35}50%{opacity:1}}
 
-/* ===== SECTION ===== */
-.section{
-  border-radius:34px;
+/* ===== PLATFORMS ===== */
+.platforms{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+.card{
+  display:flex;
+  gap:18px;
+  padding:26px;
+  border-radius:36px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.sectionHead{
-  padding:18px 18px 12px;
-  border-bottom:1px solid var(--stroke);
-}
-.sectionHead h2{
-  font-size:14px;
-  font-weight:1000;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-.sectionHead p{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:12.5px;
-  line-height:1.45;
-}
-
-/* ===== PLATFORM CARDS ===== */
-.grid{
-  padding:16px 16px 18px;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:14px;
-}
-
-.platform{
-  display:flex;
-  gap:14px;
-  padding:18px 16px;
-  border-radius:26px;
-  border:1px solid var(--stroke);
-  background:rgba(255,255,255,0.55);
   text-decoration:none;
   color:var(--text);
-  box-shadow:var(--shadowSoft);
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  min-height:170px;
-  position:relative;
-  overflow:hidden;
-}
-[data-theme="dark"] .platform{ background:rgba(255,255,255,0.08); }
-
-.platform::before{
-  content:"";
-  position:absolute; inset:-1px;
-  background:
-    radial-gradient(circle at 10% 10%, color-mix(in srgb,var(--violet) 18%, transparent) 0, transparent 55%),
-    radial-gradient(circle at 90% 25%, color-mix(in srgb,var(--cyan) 14%, transparent) 0, transparent 58%),
-    radial-gradient(circle at 30% 90%, color-mix(in srgb,var(--pink) 14%, transparent) 0, transparent 60%);
-  opacity:.9;
-  pointer-events:none;
 }
 
-.platform:hover{
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb,var(--violet) 28%, var(--stroke));
-  box-shadow: 0 22px 60px rgba(0,0,0,0.20);
+.icon{
+  font-size:34px;
 }
 
-.pIcon{
-  width:56px;height:56px;
-  border-radius:20px;
-  border:1px solid color-mix(in srgb,var(--stroke) 70%, transparent);
-  background: linear-gradient(135deg,
-    color-mix(in srgb,var(--violet) 18%, transparent),
-    color-mix(in srgb,var(--cyan) 12%, transparent)
-  );
-  display:grid;place-items:center;
-  flex:0 0 auto;
-  position:relative;
-  z-index:1;
+.card h3{
+  font-size:22px;
+  font-weight:900;
 }
-.pIcon svg{
-  width:30px;height:30px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2.2;
-}
-.pIcon .fill{ fill: currentColor; stroke:none; }
-
-.pText{min-width:0; position:relative; z-index:1;}
-.pText h3{font-size:16px;font-weight:1000;letter-spacing:.02em}
-.pText p{
-  margin-top:9px;
-  font-size:12.7px;
+.card p{
+  margin-top:8px;
+  font-size:14px;
   line-height:1.5;
   color:var(--muted);
 }
-.go{
-  margin-left:auto;
-  font-weight:1000;
-  opacity:.75;
-  font-size:18px;
-  position:relative;
-  z-index:1;
-}
-
-/* Icon animations */
-.iconPulse{ animation: iconPulse 1.9s ease-in-out infinite; }
-@keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-
-.iconWiggle{ animation: iconWiggle 2.6s ease-in-out infinite; }
-@keyframes iconWiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-
-.iconFloat{ animation: iconFloat 2.9s ease-in-out infinite; }
-@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
 /* ===== DONATE ===== */
-.donateBody{padding:18px 18px 20px}
-.donateBox{
-  padding:18px;
-  border-radius:26px;
-  border:1px solid var(--stroke);
-  background:rgba(255,255,255,0.55);
-}
-[data-theme="dark"] .donateBox{ background:rgba(255,255,255,0.08); }
-
-.copyRow{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  align-items:stretch;
-}
-.donVal{
-  flex:1;
-  padding:14px 14px;
-  border-radius:18px;
-  border:1px dashed color-mix(in srgb,var(--violet) 32%, var(--stroke));
-  background:rgba(0,0,0,0.04);
-  font-size:13px;
-  word-break:break-all;
-}
-[data-theme="dark"] .donVal{ background:rgba(255,255,255,0.06); }
-.btn{
-  padding:14px 16px;
-  border-radius:999px;
-  border:1px solid var(--stroke);
-  background:linear-gradient(135deg,var(--gold),var(--pink));
-  color:#111827;
-  font-weight:1000;
-  cursor:pointer;
-  transition:transform .15s ease;
-  white-space:nowrap;
-}
-.btn:hover{ transform: translateY(-1px); }
-
-/* ===== ENDING ===== */
-.ending{
-  border-radius:34px;
+.donate{
+  padding:42px;
+  border-radius:42px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.endingInner{
-  padding:20px 18px 24px;
   text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.55;
 }
-.endingInner b{ color:var(--text); }
-.liveBanner{
-  padding:16px 10px 18px;
-  text-align:center;
-  font-weight:1000;
-  letter-spacing:.28em;
-  font-size:74px;
-  background:linear-gradient(90deg,#ff004c,#ff7a18,#ff004c);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: livePulse 1.6s ease-in-out infinite;
+.copy{
+  margin-top:20px;
+  display:flex;
+  gap:12px;
 }
-@keyframes livePulse{
-  0%,100%{opacity:.6; transform:translateY(0)}
-  50%{opacity:1; transform:translateY(-2px)}
+.copy div{
+  flex:1;
+  padding:16px;
+  border-radius:20px;
+  border:1px dashed var(--stroke);
+  font-size:14px;
+}
+.copy button{
+  padding:16px 26px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--gold),var(--pink));
+  font-weight:900;
+  cursor:pointer;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 920px){
-  .heroInner{grid-template-columns: 1fr; text-align:center;}
-  .controls{justify-content:center;}
-  .uniWrap{width:220px;height:220px;}
-  .uni{width:210px;height:210px;}
-  .grid{grid-template-columns:1fr;}
-  .liveBanner{font-size:56px;}
-  .hName{font-size:52px;}
+/* ===== END ===== */
+.end{
+  margin-top:80px;
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  opacity:.8;
 }
-@media (max-width: 520px){
-  .avatar{width:260px;height:260px;}
-  .hName{font-size:44px;}
-  .hNum{font-size:34px;}
+
+@media(max-width:720px){
+  .avatar{width:260px;height:260px}
+  .name{font-size:56px}
+  .num{font-size:30px}
+  .unicorn{width:240px}
 }
 </style>
 </head>
 
 <body data-theme="dark">
 
-<div class="scene" id="scene">
-  <div class="bloom"></div>
-</div>
-
 <div class="wrapper">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="heroInner">
+<!-- HERO -->
+<section class="hero">
+  <div class="avatar">
+    <img src="profile.jpg" alt="DANIELA">
+  </div>
 
-      <div class="avatar">
-        <img src="profile.jpg" alt="Daniela profile">
-      </div>
+  <div class="name">DANIELA</div>
+  <div class="num">11</div>
 
-      <div class="titleWrap">
-        <div class="hName">DANIELA</div>
-        <div class="hNum">11</div>
+  <div class="desc">
+    EN · natural vibes · real energy · live moments<br>
+    ES · vibra natural · energía real · momentos en directo
+  </div>
 
-        <div class="tagline">
-          <span class="line"><b>EN:</b> natural vibes · real energy · live moments. honest presence, close connection.</span>
-          <span class="line"><b>ES:</b> vibra natural · energía real · momentos en directo. presencia real, conexión cercana.</span>
-        </div>
+  <div class="controls">
+    <div class="ctrl" id="themeBtn">🌗 light / dark</div>
+    <div class="ctrl" id="musicBtn">🎵 music</div>
+  </div>
 
-        <div class="controls">
-          <div class="ctrl" id="themeBtn">🌗 <small id="themeTxt">Dark</small></div>
-          <div class="ctrl" id="musicBtn">🎵 <small id="musicTxt">Off</small></div>
-        </div>
-      </div>
+  <!-- DUŻY UNICORN -->
+  <svg class="unicorn" viewBox="0 0 100 100">
+    <defs>
+      <linearGradient id="mane" x1="0" x2="1">
+        <stop offset="0%" stop-color="#f9a8d4"/>
+        <stop offset="50%" stop-color="#c084fc"/>
+        <stop offset="100%" stop-color="#67e8f9"/>
+      </linearGradient>
+    </defs>
+    <path d="M20 60c10-30 40-40 60-20-10 10-10 30-30 30S20 70 20 60z" fill="#fff"/>
+    <path d="M40 30c-20 10-20 40 0 50" fill="url(#mane)"/>
+    <polygon points="60,15 75,30 55,32" fill="#fde68a"/>
+  </svg>
+</section>
 
-      <!-- BIG animated unicorn -->
-      <div class="uniWrap" aria-hidden="true">
-        <svg class="uni" viewBox="0 0 100 100">
-          <defs>
-            <radialGradient id="uGlow" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.92"/>
-              <stop offset="55%" stop-color="#c084fc" stop-opacity="0.32"/>
-              <stop offset="100%" stop-color="#f9a8d4" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="uMane" x1="0" x2="1">
-              <stop offset="0%" stop-color="#f9a8d4"/>
-              <stop offset="50%" stop-color="#c084fc"/>
-              <stop offset="100%" stop-color="#67e8f9"/>
-            </linearGradient>
-            <linearGradient id="uBody" x1="0" x2="1">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-              <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.86"/>
-            </linearGradient>
-          </defs>
+<!-- PLATFORMS -->
+<section class="platforms">
+  <a class="card" href="https://tiktok.com/@YOUR_TIKTOK"><div class="icon">🎵</div><div><h3>TikTok</h3><p>EN short videos & lives · ES vídeos cortos y directos</p></div></a>
+  <a class="card" href="https://instagram.com/YOUR_INSTAGRAM"><div class="icon">📸</div><div><h3>Instagram</h3><p>EN stories & photos · ES historias y fotos</p></div></a>
+  <a class="card" href="https://www.live.me/YOUR_LIVEME"><div class="icon">🔴</div><div><h3>Live.me</h3><p>EN main live space · ES espacio principal en vivo</p></div></a>
+  <a class="card" href="https://kick.com/YOUR_KICK"><div class="icon">💚</div><div><h3>Kick</h3><p>EN chill streams · ES streams tranquilos</p></div></a>
+  <a class="card" href="https://discord.gg/YOUR_DISCORD"><div class="icon">💬</div><div><h3>Discord</h3><p>EN community · ES comunidad</p></div></a>
+</section>
 
-          <circle class="uSpark" cx="50" cy="50" r="44" fill="url(#uGlow)"/>
-          <!-- horn -->
-          <path d="M58 14 L74 30 L56 34 Z" fill="#fde68a" opacity="0.97"/>
-          <path d="M58 14 L66 30" stroke="rgba(2,6,23,0.18)" stroke-width="2" stroke-linecap="round"/>
-          <!-- ear -->
-          <path d="M56 26c4-8 11-11 14-6 2 4-2 12-11 15z" fill="#ffffff" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
-          <!-- head -->
-          <path d="M24 60c6-20 20-33 40-33 18 0 32 12 34 27 2 15-9 28-27 30-22 2-40-7-47-24z"
-                fill="url(#uBody)" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
-          <!-- mane -->
-          <path class="uTail"
-                d="M40 30c-12 7-16 18-14 30 2 12 11 22 25 24-16 7-36 0-41-18-5-18 7-36 30-36z"
-                fill="url(#uMane)" opacity="0.98"/>
-          <!-- eye -->
-          <circle cx="64" cy="54" r="2.4" fill="rgba(2,6,23,0.72)"/>
-          <!-- sparkles -->
-          <path class="uSpark" d="M80 42l2.3 4.6 4.6 2.3-4.6 2.3-2.3 4.6-2.3-4.6-4.6-2.3 4.6-2.3z" fill="#ffffff" opacity="0.78"/>
-          <path class="uSpark" d="M16 64l1.8 3.6 3.6 1.8-3.6 1.8-1.8 3.6-1.8-3.6-3.6-1.8 3.6-1.8z" fill="#ffffff" opacity="0.58"/>
-        </svg>
-      </div>
+<!-- DONATE -->
+<section class="donate">
+  <h3>Donate / Apoyo</h3>
+  <p>EN support the content · ES apoya el contenido</p>
+  <div class="copy">
+    <div id="donVal">YOUR_PAYMENT_INFO</div>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('donVal').innerText)">COPY</button>
+  </div>
+</section>
 
-    </div>
-  </section>
+<div class="end">
+  EN save this page · ES guarda esta página
+</div>
 
-  <!-- PLATFORMS -->
-  <section class="section">
-    <div class="sectionHead">
-      <h2>Platforms</h2>
-      <p>
-        <b>EN:</b> Tap your favorite platform and stay close. Each one has its own vibe. <br>
-        <b>ES:</b> Elige tu plataforma favorita y mantente cerca. Cada una tiene su vibra.
-      </p>
-    </div>
-
-    <div class="grid">
-
-      <!-- TikTok -->
-      <a class="platform" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener noreferrer">
-        <div class="pIcon iconPulse" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7" stroke-linecap="round"/>
-            <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>TikTok</h3>
-          <p>
-            <b>EN:</b> Short clips, trends and spontaneous lives. Fast, real, unfiltered energy.<br>
-            <b>ES:</b> Clips cortos, tendencias y directos espontáneos. Energía real y sin filtros.
-          </p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <!-- Instagram -->
-      <a class="platform" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener noreferrer">
-        <div class="pIcon iconWiggle" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="6" y="6" width="12" height="12" rx="3"/>
-            <circle cx="12" cy="12" r="3"/>
-            <circle cx="16.5" cy="7.5" r="1" class="fill"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Instagram</h3>
-          <p>
-            <b>EN:</b> Daily stories, photos and mood. The closest look at everyday life.<br>
-            <b>ES:</b> Historias diarias, fotos y mood. Lo más cercano al día a día.
-          </p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <!-- Live.me -->
-      <a class="platform" href="https://www.live.me/YOUR_LIVEME" target="_blank" rel="noopener noreferrer">
-        <div class="pIcon iconFloat" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3.5" class="fill"/>
-            <path d="M4.5 12a7.5 7.5 0 0 1 15 0" stroke-linecap="round"/>
-            <path d="M6.8 12a5.2 5.2 0 0 1 10.4 0" stroke-linecap="round" opacity="0.85"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Live.me</h3>
-          <p>
-            <b>EN:</b> Main live room. Longer streams and real conversations.<br>
-            <b>ES:</b> Sala principal de directos. Streams largos y conversación real.
-          </p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <!-- Kick -->
-      <a class="platform" href="https://kick.com/YOUR_KICK" target="_blank" rel="noopener noreferrer">
-        <div class="pIcon iconPulse" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 6v12" stroke-linecap="round"/>
-            <path d="M17 6l-7 7 7 5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Kick</h3>
-          <p>
-            <b>EN:</b> Chill hangouts, longer sessions, good chat energy.<br>
-            <b>ES:</b> Directos tranquilos, sesiones largas y buen chat.
-          </p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <!-- Discord -->
-      <a class="platform" href="https://discord.gg/YOUR_DISCORD" target="_blank" rel="noopener noreferrer">
-        <div class="pIcon iconWiggle" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 18c2.2 1.6 7.8 1.6 10 0 1-3 1.4-5.9 1-9-2-1.5-3.7-2.1-5-2.3l-.8 1.4a10 10 0 0 0-3.4 0L8 6.7C6.7 6.9 5 7.5 3 9c-.4 3.1 0 6 1 9 1 .7 2 .9 3 .9z" stroke-linejoin="round"/>
-            <circle cx="9.5" cy="12.2" r="1.2" class="fill"/>
-            <circle cx="14.5" cy="12.2" r="1.2" class="fill"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Discord</h3>
-          <p>
-            <b>EN:</b> Community space, updates first, closer contact off-stream.<br>
-            <b>ES:</b> Comunidad, avisos primero y contacto más cercano fuera de stream.
-          </p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <!-- You can add more platforms here same style -->
-
-    </div>
-  </section>
-
-  <!-- DONATE -->
-  <section class="section">
-    <div class="sectionHead">
-      <h2>Donate</h2>
-      <p>
-        <b>EN:</b> If you want to support, thank you. Every little thing helps a lot. <br>
-        <b>ES:</b> Si quieres apoyar, gracias. Cualquier ayuda suma muchísimo.
-      </p>
-    </div>
-
-    <div class="donateBody">
-      <div class="donateBox">
-        <div style="font-weight:1000; letter-spacing:.02em;">
-          <span style="opacity:.92;">EN:</span> Copy the info below and paste it in your app.<br>
-          <span style="opacity:.92;">ES:</span> Copia la info y pégala en tu app.
-        </div>
-
-        <div class="copyRow">
-          <div class="donVal" id="donVal">YOUR_PAYMENT_INFO</div>
-          <button class="btn" id="copyBtn">Copy</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENDING -->
-  <section class="ending">
-    <div class="endingInner">
-      <b>EN:</b> Save this page. It’s the only official place with the real links. <br>
-      <b>ES:</b> Guarda esta página. Es el único lugar oficial con enlaces reales.
-    </div>
-    <div class="liveBanner">LIVE</div>
-  </section>
-
-  <audio id="ambient" preload="none" loop>
-    <source src="ambient.mp3" type="audio/mpeg">
-  </audio>
+<audio id="ambient" loop>
+  <source src="ambient.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
 <script>
-(() => {
-  // Stars
-  const scene = document.getElementById('scene');
-  for (let i = 0; i < 95; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.left = (Math.random() * 100) + '%';
-    s.style.top  = (Math.random() * 100) + '%';
-    s.style.animationDelay = (Math.random() * 6.2) + 's';
-    s.style.opacity = (0.15 + Math.random() * 0.85).toFixed(2);
-    scene.appendChild(s);
-  }
-
-  // Theme toggle + persist
-  const themeBtn = document.getElementById('themeBtn');
-  const themeTxt = document.getElementById('themeTxt');
-  const savedTheme = localStorage.getItem('theme11');
-  if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
-
-  function syncTheme(){
-    const light = document.body.getAttribute('data-theme') === 'light';
-    themeTxt.textContent = light ? 'Light' : 'Dark';
-  }
-  syncTheme();
-
-  themeBtn.addEventListener('click', () => {
-    const light = document.body.getAttribute('data-theme') === 'light';
-    document.body.setAttribute('data-theme', light ? 'dark' : 'light');
-    localStorage.setItem('theme11', light ? 'dark' : 'light');
-    syncTheme();
-  });
-
-  // Music toggle (iPhone needs user click)
-  const audio = document.getElementById('ambient');
-  const musicBtn = document.getElementById('musicBtn');
-  const musicTxt = document.getElementById('musicTxt');
-  let on = false;
-
-  async function toggleMusic(){
-    try{
-      if(!on){
-        audio.volume = 0.55;
-        await audio.play();
-        on = true;
-      } else {
-        audio.pause();
-        on = false;
-      }
-      musicTxt.textContent = on ? 'On' : 'Off';
-    } catch(e){
-      on = false;
-      musicTxt.textContent = 'Off';
-      alert("Music not playing. Make sure 'ambient.mp3' is in the same folder as index.html.");
-    }
-  }
-  musicBtn.addEventListener('click', toggleMusic);
-
-  // Donate copy with feedback
-  const copyBtn = document.getElementById('copyBtn');
-  const donVal  = document.getElementById('donVal');
-  copyBtn.addEventListener('click', async () => {
-    const txt = (donVal.innerText || '').trim();
-    if(!txt) return;
-    const old = copyBtn.textContent;
-
-    try{
-      await navigator.clipboard.writeText(txt);
-      copyBtn.textContent = "Copied!";
-      setTimeout(()=>copyBtn.textContent = old, 1200);
-    }catch(e){
-      // fallback
-      const r = document.createRange();
-      r.selectNode(donVal);
-      const sel = window.getSelection();
-      sel.removeAllRanges(); sel.addRange(r);
-      document.execCommand('copy');
-      sel.removeAllRanges();
-      copyBtn.textContent = "Copied!";
-      setTimeout(()=>copyBtn.textContent = old, 1200);
-    }
-  });
-})();
+document.getElementById("themeBtn").onclick=()=>{
+  document.body.dataset.theme =
+    document.body.dataset.theme==="light"?"dark":"light";
+};
+const audio=document.getElementById("ambient");
+let play=false;
+document.getElementById("musicBtn").onclick=()=>{
+  if(!play){audio.volume=.5;audio.play();play=true}
+  else{audio.pause();play=false}
+};
 </script>
 
 </body>
