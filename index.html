@@ -1,309 +1,859 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>11</title>
 
 <style>
-:root{
-  --bg1:#050816;
-  --bg2:#0b1630;
-  --glass: rgba(255,255,255,0.10);
-  --stroke: rgba(255,255,255,0.18);
-  --text: #f8fafc;
-  --muted: rgba(248,250,252,0.75);
+  :root{
+    /* LIGHT */
+    --bgA:#f8fafc;
+    --bgB:#e2e8f0;
+    --card:rgba(255,255,255,0.86);
+    --stroke:rgba(2,6,23,0.12);
+    --text:#0b1220;
+    --muted:rgba(15,23,42,0.72);
 
-  --pink:#f9a8d4;
-  --violet:#c084fc;
-  --cyan:#67e8f9;
-  --mint:#6ee7b7;
+    --pink:#f9a8d4;
+    --violet:#c084fc;
+    --cyan:#67e8f9;
+    --mint:#6ee7b7;
+    --green:#22c55e;
+    --gold:#fde68a;
 
-  --shadow: 0 40px 120px rgba(0,0,0,0.65);
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-
-body{
-  font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 15% 10%, #c084fc33, transparent 45%),
-    radial-gradient(circle at 85% 20%, #67e8f933, transparent 50%),
-    radial-gradient(circle at 30% 90%, #f9a8d433, transparent 55%),
-    linear-gradient(180deg,var(--bg1),var(--bg2));
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-}
-
-/* ===== LAYOUT ===== */
-.wrapper{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  padding:70px 0 120px;
-}
-
-.page{
-  width:100%;
-  max-width:900px;
-  margin:0 20px;
-  display:flex;
-  flex-direction:column;
-  gap:80px;
-}
-
-/* ===== BRAND ===== */
-.brand{
-  text-align:center;
-}
-.brand .logo{
-  font-size:72px;
-  font-weight:900;
-  letter-spacing:0.45em;
-  background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: glow 3s ease-in-out infinite alternate;
-}
-@keyframes glow{
-  from{ text-shadow:0 0 25px var(--pink); }
-  to{ text-shadow:0 0 70px var(--violet),0 0 110px var(--cyan); }
-}
-.brand p{
-  margin-top:20px;
-  font-size:18px;
-  line-height:1.6;
-  color:var(--muted);
-}
-
-/* ===== HERO ===== */
-.hero{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:50px;
-  align-items:center;
-}
-
-.avatarZone{
-  display:flex;
-  justify-content:center;
-}
-.avatarRing{
-  width:320px;
-  height:320px;
-  border-radius:50%;
-  padding:6px;
-  background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 90px var(--violet);
-}
-.avatarRing img{
-  width:100%;
-  height:100%;
-  border-radius:inherit;
-  object-fit:cover;
-}
-
-.heroText h1{
-  font-size:44px;
-  font-weight:900;
-}
-.heroText p{
-  margin-top:24px;
-  font-size:18px;
-  line-height:1.65;
-  color:var(--muted);
-}
-
-/* ===== UNICORN ===== */
-.unicorn{
-  width:240px;
-  margin-top:30px;
-  animation: float 4.8s ease-in-out infinite;
-  filter: drop-shadow(0 35px 45px rgba(0,0,0,0.6));
-}
-@keyframes float{
-  50%{ transform: translateY(-20px); }
-}
-
-/* ===== LINKS ===== */
-.links{
-  display:flex;
-  flex-direction:column;
-  gap:28px;
-}
-
-.link{
-  display:flex;
-  gap:28px;
-  padding:30px;
-  border-radius:34px;
-  background:var(--glass);
-  border:1px solid var(--stroke);
-  box-shadow:var(--shadow);
-  text-decoration:none;
-  color:var(--text);
-  transition:.3s ease;
-}
-.link:hover{
-  transform: translateY(-6px);
-}
-
-.icon{
-  font-size:44px;
-}
-
-.linkText h3{
-  font-size:24px;
-  font-weight:900;
-}
-.linkText p{
-  margin-top:14px;
-  font-size:16px;
-  line-height:1.65;
-  color:var(--muted);
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  text-align:center;
-  font-size:16px;
-  line-height:1.6;
-  color:var(--muted);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
+    --glass: blur(18px);
+    --shadow: 0 28px 90px rgba(2,6,23,0.16);
+    --shadowStrong: 0 38px 120px rgba(2,6,23,0.22);
   }
+
+  [data-theme="dark"]{
+    --bgA:#050816;
+    --bgB:#0b1630;
+    --card:rgba(255,255,255,0.11);
+    --stroke:rgba(255,255,255,0.18);
+    --text:#f8fafc;
+    --muted:rgba(248,250,252,0.78);
+
+    --shadow: 0 40px 120px rgba(0,0,0,0.60);
+    --shadowStrong: 0 52px 160px rgba(0,0,0,0.72);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+
+  body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--violet) 30%,transparent) 0,transparent 46%),
+      radial-gradient(circle at 85% 15%, color-mix(in srgb,var(--cyan) 26%,transparent) 0,transparent 50%),
+      radial-gradient(circle at 28% 86%, color-mix(in srgb,var(--pink) 26%,transparent) 0,transparent 54%),
+      radial-gradient(circle at 85% 80%, color-mix(in srgb,var(--mint) 18%,transparent) 0,transparent 58%),
+      linear-gradient(180deg,var(--bgA),var(--bgB));
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* ===== Background scene: stars + parallax leaves ===== */
+  .scene{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .star{
+    position:absolute;
+    width:2px;height:2px;border-radius:50%;
+    background: rgba(255,255,255,0.9);
+    opacity:.55;
+    animation: twinkle 6.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 7px rgba(255,255,255,0.35));
+  }
+  @keyframes twinkle{0%,100%{opacity:.18}50%{opacity:1}}
+
+  .leaf{
+    position:absolute;
+    width: 260px;
+    opacity:.52;
+    will-change: transform;
+    filter: drop-shadow(0 18px 30px rgba(0,0,0,0.16));
+  }
+  [data-theme="dark"] .leaf{ opacity:.34; }
+
+  /* ===== Layout ===== */
+  .wrap{
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display:flex;
+    justify-content:center;
+    padding: 34px 0 120px;
+  }
+
+  .container{
+    width: 100%;
+    max-width: 980px;      /* ✅ szersze */
+    margin: 0 18px;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
+
+  /* ===== Top bar (brand + toggles) ===== */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 22px;
+    background: var(--card);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+  }
+
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap: 4px;
+    min-width:0;
+  }
+
+  .logo11{
+    font-weight: 1000;
+    font-size: 26px;
+    letter-spacing: .55em;
+    line-height: 1;
+    background: linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: logoGlow 2.6s ease-in-out infinite alternate;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  @keyframes logoGlow{
+    from{ text-shadow: 0 0 10px color-mix(in srgb,var(--pink) 55%, transparent); }
+    to  { text-shadow: 0 0 22px color-mix(in srgb,var(--violet) 68%, transparent),
+                 0 0 34px color-mix(in srgb,var(--cyan) 55%, transparent); }
+  }
+
+  .tagline{
+    font-size: 11px;
+    color: var(--muted);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .controls{
+    display:flex;
+    gap: 8px;
+    align-items:center;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+  }
+
+  .ctrl{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    background: rgba(0,0,0,0.04);
+    cursor:pointer;
+    user-select:none;
+    font-weight: 950;
+    font-size: 12px;
+    color: var(--text);
+    transition: transform .15s ease, background .15s ease;
+  }
+  [data-theme="dark"] .ctrl{ background: rgba(255,255,255,0.06); }
+  .ctrl:hover{ transform: translateY(-1px); }
+  .ctrl small{ opacity:.78; font-weight: 900; }
+
+  /* ===== Big hero card ===== */
+  .heroCard{
+    border-radius: 30px;
+    background: var(--card);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadowStrong);
+    overflow:hidden;
+  }
+
+  .heroTop{
+    position:relative;
+    padding: 18px 16px 8px;
+  }
+
+  .heroTop::before{
+    content:"";
+    position:absolute;
+    inset:-60px;
+    background:
+      radial-gradient(circle at 14% 15%, color-mix(in srgb,var(--violet) 24%, transparent) 0, transparent 58%),
+      radial-gradient(circle at 92% 22%, color-mix(in srgb,var(--cyan) 18%, transparent) 0, transparent 62%),
+      radial-gradient(circle at 30% 90%, color-mix(in srgb,var(--pink) 16%, transparent) 0, transparent 70%),
+      radial-gradient(circle at 85% 88%, color-mix(in srgb,var(--mint) 12%, transparent) 0, transparent 70%);
+    opacity:.95;
+    pointer-events:none;
+  }
+
+  .heroRow{
+    position: relative;
+    display:grid;
+    grid-template-columns: 380px 1fr 210px; /* ✅ mega avatar + text + unicorn */
+    gap: 18px;
+    align-items:center;
+  }
+
   .avatarRing{
-    width:250px;
-    height:250px;
+    width: 360px;
+    height: 360px;
+    border-radius: 999px;
+    padding: 7px;
+    background: conic-gradient(from 0deg, var(--pink), var(--violet), var(--cyan), var(--pink));
+    box-shadow: 0 0 95px color-mix(in srgb,var(--violet) 58%, transparent);
+    margin: 0 auto;
   }
+
+  .avatarRing img{
+    width:100%;
+    height:100%;
+    border-radius: inherit;
+    object-fit: cover;
+    display:block;
+    background: radial-gradient(circle at 30% 20%, var(--mint), var(--green));
+  }
+
+  .heroText{
+    min-width:0;
+    padding: 6px 6px;
+  }
+
+  .name{
+    font-weight: 1000;
+    letter-spacing: .14em;
+    font-size: 26px;
+    text-transform: uppercase;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .bio{
+    margin-top: 10px;
+    font-size: 13.8px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .badges{
+    margin-top: 12px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    background: rgba(255,255,255,0.55);
+    font-size: 11px;
+    font-weight: 950;
+    color: var(--text);
+  }
+  [data-theme="dark"] .badge{ background: rgba(255,255,255,0.08); }
+
+  /* ===== Unicorn (bigger + animated) ===== */
+  .unicornWrap{
+    width: 210px; height: 210px;
+    display:grid; place-items:center;
+    filter: drop-shadow(0 26px 40px rgba(0,0,0,0.26));
+    margin: 0 auto;
+  }
+
   .unicorn{
-    margin-left:auto;
-    margin-right:auto;
+    width: 200px; height: 200px;
+    animation: uFloat 4.8s ease-in-out infinite;
   }
-}
+  @keyframes uFloat{
+    0%,100%{ transform: translateY(0) rotate(-1deg); }
+    50%{ transform: translateY(-16px) rotate(1deg); }
+  }
+  .uTail{ transform-origin: 62px 58px; animation: uSwish 1.7s ease-in-out infinite; }
+  @keyframes uSwish{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
+  .uSpark{ animation: uSpark 1.6s ease-in-out infinite; }
+  @keyframes uSpark{0%,100%{opacity:.35}50%{opacity:1}}
+
+  /* ===== Sections ===== */
+  .section{
+    border-radius: 30px;
+    background: var(--card);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+
+  .sectionHead{
+    padding: 16px 16px 10px;
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .sectionHead h2{
+    font-size: 14px;
+    font-weight: 1000;
+    letter-spacing: .06em;
+  }
+
+  .sectionHead p{
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  /* ===== Link cards with LONG descriptions ===== */
+  .linksGrid{
+    padding: 14px 14px 16px;
+    display:grid;
+    grid-template-columns: 1fr 1fr; /* ✅ więcej na boki */
+    gap: 12px;
+  }
+
+  .linkCard{
+    display:flex;
+    gap: 12px;
+    padding: 16px 14px;
+    border-radius: 24px;
+    text-decoration:none;
+    color: var(--text);
+    border: 1px solid var(--stroke);
+    background: rgba(255,255,255,0.55);
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    min-height: 160px;
+  }
+  [data-theme="dark"] .linkCard{ background: rgba(255,255,255,0.08); }
+  .linkCard:hover{
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb,var(--violet) 26%, var(--stroke));
+    box-shadow: 0 18px 42px rgba(2,6,23,0.14);
+  }
+
+  .iconBox{
+    width: 50px; height: 50px;
+    border-radius: 18px;
+    display:grid; place-items:center;
+    border: 1px solid color-mix(in srgb,var(--stroke) 65%, transparent);
+    background: linear-gradient(135deg,
+      color-mix(in srgb,var(--violet) 22%, transparent),
+      color-mix(in srgb,var(--cyan) 14%, transparent)
+    );
+    flex: 0 0 auto;
+  }
+
+  .iconBox svg{
+    width: 26px; height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+  .iconBox .fill{ fill: currentColor; stroke: none; }
+
+  .linkBody{ min-width:0; }
+  .linkBody h3{
+    font-size: 15px;
+    font-weight: 1000;
+    letter-spacing: .01em;
+  }
+  .linkBody p{
+    margin-top: 8px;
+    font-size: 12.3px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .go{
+    margin-left:auto;
+    font-weight: 1000;
+    opacity: .72;
+    font-size: 18px;
+    align-self:flex-start;
+  }
+
+  /* ===== Donate ===== */
+  .donateBody{
+    padding: 14px 14px 16px;
+  }
+
+  .donateRow{
+    margin-top: 10px;
+    display:flex;
+    gap: 8px;
+    align-items:stretch;
+  }
+
+  .donVal{
+    flex:1;
+    padding: 12px 12px;
+    border-radius: 18px;
+    border: 1px dashed color-mix(in srgb,var(--violet) 30%, var(--stroke));
+    background: rgba(0,0,0,0.04);
+    font-size: 12px;
+    word-break: break-all;
+  }
+  [data-theme="dark"] .donVal{ background: rgba(255,255,255,0.06); }
+
+  .btn{
+    padding: 12px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    background: linear-gradient(135deg,var(--gold),var(--pink));
+    color: #111827;
+    font-weight: 1000;
+    cursor:pointer;
+    transition: transform .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+
+  /* ===== Footer / extra scroll section ===== */
+  .footer{
+    padding: 16px 16px 18px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .footer b{ color: var(--text); }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 1040px){
+    .heroRow{ grid-template-columns: 320px 1fr 190px; }
+    .avatarRing{ width: 310px; height: 310px; }
+    .unicorn{ width: 180px; height: 180px; }
+  }
+
+  @media (max-width: 860px){
+    .heroRow{ grid-template-columns: 1fr; }
+    .avatarRing{ width: 280px; height: 280px; }
+    .unicornWrap{ width: 190px; height: 190px; }
+    .linksGrid{ grid-template-columns: 1fr; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .star, .unicorn, .uTail, .uSpark, .logo11 { animation: none !important; }
+  }
 </style>
 </head>
 
-<body>
+<body data-theme="light">
+  <!-- Scene -->
+  <div class="scene" id="scene">
+    <!-- Leaves -->
+    <svg class="leaf" data-depth="0.18" style="left:-90px; top:16%;" viewBox="0 0 220 220" aria-hidden="true">
+      <path d="M116 18C78 35 48 76 44 118c-4 43 18 79 55 86 39 7 80-19 98-54 18-35 18-90-81-132z" fill="rgba(34,197,94,0.35)"/>
+      <path d="M70 155c40-8 78-39 98-83" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </svg>
 
-<div class="wrapper">
-<div class="page">
+    <svg class="leaf" data-depth="0.30" style="right:-110px; top:6%; width:290px;" viewBox="0 0 220 220" aria-hidden="true">
+      <path d="M190 66c-30-34-86-56-126-30-40 26-55 86-25 124 30 38 94 40 132 10 38-30 49-70 19-104z" fill="rgba(110,231,183,0.28)"/>
+      <path d="M70 170c22-52 62-96 122-108" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </svg>
 
-<!-- BRAND -->
-<section class="brand">
-  <div class="logo">11</div>
-  <p>
-    EN: This is my only official page.  
-    Everything I share starts here and flows to the platforms below.  
-    <br><br>
-    ES: Esta es mi única página oficial.  
-    Todo lo que comparto empieza aquí y continúa en las plataformas de abajo.
-  </p>
-</section>
+    <svg class="leaf" data-depth="0.44" style="left:12%; bottom:-140px; width:330px;" viewBox="0 0 220 220" aria-hidden="true">
+      <path d="M52 192c58 12 120-30 136-82 16-52-12-112-68-116C64-10 10 46 16 106c6 60 36 78 36 86z" fill="rgba(192,132,252,0.18)"/>
+      <path d="M44 168c52-22 92-58 118-122" stroke="rgba(2,6,23,0.14)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="avatarZone">
-    <div class="avatarRing">
-      <img src="profile.jpg" alt="Profile">
+  <div class="wrap">
+    <div class="container">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo11">11</div>
+          <div class="tagline">EN + ES • Music • Dark/Light • Official links</div>
+        </div>
+        <div class="controls">
+          <div class="ctrl" id="themeBtn">🌗 <small id="themeTxt">Light</small></div>
+          <div class="ctrl" id="musicBtn">🎵 <small id="musicTxt">Off</small></div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="heroCard">
+        <div class="heroTop">
+          <div class="heroRow">
+            <div class="avatarRing">
+              <img src="profile.jpg" alt="Profile photo" />
+            </div>
+
+            <div class="heroText">
+              <div class="name">DANIELA</div>
+              <div class="bio">
+                EN: Welcome to my official page. Here you’ll find every platform in one place, plus the best way to stay close.
+                If you enjoy real energy, live moments and a calm but addictive vibe, you’re exactly where you should be.<br><br>
+                ES: Bienvenid@ a mi página oficial. Aquí tienes todas mis plataformas en un solo lugar y la mejor forma de estar cerca.
+                Si te gusta la energía real, los directos y una vibra bonita que engancha, estás en el lugar correcto.
+              </div>
+
+              <div class="badges">
+                <div class="badge">✨ Exclusive updates</div>
+                <div class="badge">🦄 Unicorn vibe</div>
+                <div class="badge">🌿 Nature glow</div>
+                <div class="badge">🔔 Don’t miss lives</div>
+              </div>
+            </div>
+
+            <div class="unicornWrap" aria-hidden="true">
+              <svg class="unicorn" viewBox="0 0 100 100">
+                <defs>
+                  <radialGradient id="uGlow" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.92"/>
+                    <stop offset="55%" stop-color="#c084fc" stop-opacity="0.32"/>
+                    <stop offset="100%" stop-color="#f9a8d4" stop-opacity="0"/>
+                  </radialGradient>
+                  <linearGradient id="uMane" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#f9a8d4"/>
+                    <stop offset="50%" stop-color="#c084fc"/>
+                    <stop offset="100%" stop-color="#67e8f9"/>
+                  </linearGradient>
+                  <linearGradient id="uBody" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+                    <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.86"/>
+                  </linearGradient>
+                </defs>
+
+                <circle class="uSpark" cx="50" cy="50" r="44" fill="url(#uGlow)"/>
+                <!-- horn -->
+                <path d="M58 14 L74 30 L56 34 Z" fill="#fde68a" opacity="0.97"/>
+                <path d="M58 14 L66 30" stroke="rgba(2,6,23,0.18)" stroke-width="2" stroke-linecap="round"/>
+                <!-- ear -->
+                <path d="M56 26c4-8 11-11 14-6 2 4-2 12-11 15z" fill="#ffffff" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
+                <!-- head -->
+                <path d="M24 60c6-20 20-33 40-33 18 0 32 12 34 27 2 15-9 28-27 30-22 2-40-7-47-24z"
+                      fill="url(#uBody)" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
+                <!-- mane -->
+                <path class="uTail"
+                      d="M40 30c-12 7-16 18-14 30 2 12 11 22 25 24-16 7-36 0-41-18-5-18 7-36 30-36z"
+                      fill="url(#uMane)" opacity="0.98"/>
+                <!-- eye -->
+                <circle cx="64" cy="54" r="2.4" fill="rgba(2,6,23,0.72)"/>
+                <!-- sparkles -->
+                <path class="uSpark" d="M80 42l2.3 4.6 4.6 2.3-4.6 2.3-2.3 4.6-2.3-4.6-4.6-2.3 4.6-2.3z" fill="#ffffff" opacity="0.78"/>
+                <path class="uSpark" d="M16 64l1.8 3.6 3.6 1.8-3.6 1.8-1.8 3.6-1.8-3.6-3.6-1.8 3.6-1.8z" fill="#ffffff" opacity="0.58"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="section">
+        <div class="sectionHead">
+          <h2>Links</h2>
+          <p>
+            EN: Choose your favorite platform and stay connected. Each one has a different vibe and different content.
+            ES: Elige tu plataforma favorita y mantente cerca. Cada una tiene una vibra distinta y contenido diferente.
+          </p>
+        </div>
+
+        <div class="linksGrid">
+          <!-- TikTok -->
+          <a class="linkCard" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7" stroke-linecap="round"/>
+                <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>TikTok</h3>
+              <p>
+                EN: Quick hits, viral moments and spontaneous lives. If you want the fastest updates and the most raw energy, start here.
+                You’ll catch the fun before it goes anywhere else.<br><br>
+                ES: Momentos rápidos, tendencias y directos espontáneos. Si quieres lo más inmediato y la energía más real, empieza aquí.
+                Verás lo mejor antes que en cualquier otro sitio.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+
+          <!-- Instagram -->
+          <a class="linkCard" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="3"/>
+                <circle cx="12" cy="12" r="3"/>
+                <circle cx="16.5" cy="7.5" r="1" class="fill"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>Instagram</h3>
+              <p>
+                EN: Daily stories, photos and aesthetic moments. It’s the closest look at the day-to-day, the mood, and what happens between lives.
+                If you like a more personal vibe, this is your place.<br><br>
+                ES: Historias diarias, fotos y momentos estéticos. Es la forma más cercana de ver el día a día, el mood y lo que pasa entre directos.
+                Si te gusta una vibra más personal, aquí es.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+
+          <!-- Live.me -->
+          <a class="linkCard" href="https://www.live.me/YOUR_LIVEME" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3.5" class="fill"/>
+                <path d="M4.5 12a7.5 7.5 0 0 1 15 0" stroke-linecap="round"/>
+                <path d="M6.8 12a5.2 5.2 0 0 1 10.4 0" stroke-linecap="round" opacity="0.85"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>Live.me</h3>
+              <p>
+                EN: The main live room. Longer streams, real conversations, and that relaxed pace where we actually talk.
+                If you want the real connection, this is the one to save.<br><br>
+                ES: La sala principal de directos. Streams más largos, conversaciones reales y un ritmo tranquilo donde de verdad hablamos.
+                Si quieres conexión real, guarda esta.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+
+          <!-- Kick -->
+          <a class="linkCard" href="https://kick.com/YOUR_KICK" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 6v12" stroke-linecap="round"/>
+                <path d="M17 6l-7 7 7 5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>Kick</h3>
+              <p>
+                EN: Chill streams and longer sessions with chat. Perfect when you want to hang out and stay in the moment.
+                If you like a steady vibe, you’ll love this.<br><br>
+                ES: Streams tranquilos y sesiones largas con chat. Perfecto para quedarte y vivir el momento.
+                Si te gusta una vibra constante, te va a encantar.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+
+          <!-- YouTube -->
+          <a class="linkCard" href="https://youtube.com/@YOUR_YOUTUBE" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M10 9.5v5l5-2.5-5-2.5z" class="fill"/>
+                <rect x="4.5" y="7.2" width="15" height="9.6" rx="3"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>YouTube</h3>
+              <p>
+                EN: Best highlights and uploads. If you missed a live, this is where the best moments live forever.
+                Subscribe so you don’t lose the good stuff.<br><br>
+                ES: Los mejores highlights y vídeos. Si te perdiste un directo, aquí se guardan los momentos top.
+                Suscríbete para no perderte lo bueno.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+
+          <!-- Discord -->
+          <a class="linkCard" href="https://discord.gg/YOUR_DISCORD" target="_blank" rel="noopener noreferrer">
+            <div class="iconBox" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 18c2.2 1.6 7.8 1.6 10 0 1-3 1.4-5.9 1-9-2-1.5-3.7-2.1-5-2.3l-.8 1.4a10 10 0 0 0-3.4 0L8 6.7C6.7 6.9 5 7.5 3 9c-.4 3.1 0 6 1 9 1 .7 2 .9 3 .9z" stroke-linejoin="round"/>
+                <circle cx="9.5" cy="12.2" r="1.2" class="fill"/>
+                <circle cx="14.5" cy="12.2" r="1.2" class="fill"/>
+              </svg>
+            </div>
+            <div class="linkBody">
+              <h3>Discord</h3>
+              <p>
+                EN: The inner circle. Updates first, chat with the community, and a closer vibe outside the streams.
+                If you want to feel part of something, join us here.<br><br>
+                ES: El círculo interno. Avisos primero, chat con la comunidad y una vibra más cercana fuera de los directos.
+                Si quieres sentirte parte, entra aquí.
+              </p>
+            </div>
+            <div class="go">➜</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- DONATE -->
+      <div class="section">
+        <div class="sectionHead">
+          <h2>Donate / Apoyo</h2>
+          <p>
+            EN: If you want to support the content, thank you. It genuinely helps with consistency and upgrades.
+            ES: Si quieres apoyar el contenido, gracias. De verdad ayuda a mejorar y mantener constancia.
+          </p>
+        </div>
+        <div class="donateBody">
+          <div class="donateRow">
+            <div class="donVal" id="donVal">YOUR_PAYMENT_INFO</div>
+            <button class="btn" id="copyBtn">Copy</button>
+          </div>
+          <div class="footer">
+            <b>EN:</b> Tap “Copy”, paste into your banking/app and you’re done. <b>ES:</b> Toca “Copy”, pega en tu app y listo.
+          </div>
+        </div>
+      </div>
+
+      <!-- EXTRA SCROLL / CTA -->
+      <div class="section">
+        <div class="sectionHead">
+          <h2>Stay close</h2>
+          <p>
+            EN: Save this page so you always find the real links. New lives and updates appear on different platforms depending on the day.
+            ES: Guarda esta página para tener siempre los links reales. Los directos y novedades cambian según el día.
+          </p>
+        </div>
+        <div class="footer">
+          <b>EN:</b> If you’re new, start with Instagram for the daily vibe, then jump into Live.me for real talk.  
+          <b>ES:</b> Si eres nuevo, empieza por Instagram para la vibra diaria y luego entra en Live.me para hablar de verdad.
+        </div>
+      </div>
+
+      <!-- AUDIO -->
+      <audio id="ambient" preload="none" loop>
+        <source src="ambient.mp3" type="audio/mpeg">
+      </audio>
     </div>
   </div>
 
-  <div class="heroText">
-    <h1>Daniela</h1>
-    <p>
-      EN: I share moments, conversations and energy in real time.  
-      Some days are calm, some days are intense, but everything here is genuine.  
-      If you enjoy being close, following the process and feeling part of something personal, you are in the right place.
-      <br><br>
-      ES: Comparto momentos, conversaciones y energía en tiempo real.  
-      Hay días tranquilos y días intensos, pero todo aquí es auténtico.  
-      Si te gusta estar cerca, seguir el proceso y sentirte parte de algo personal, este es tu lugar.
-    </p>
+<script>
+(() => {
+  // ===== Stars =====
+  const scene = document.getElementById('scene');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.top  = (Math.random() * 100) + '%';
+    s.style.animationDelay = (Math.random() * 6.4) + 's';
+    s.style.opacity = (0.15 + Math.random() * 0.85).toFixed(2);
+    scene.appendChild(s);
+  }
 
-    <img class="unicorn"
-      src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg"
-      alt="">
-  </div>
-</section>
+  // ===== Parallax Leaves =====
+  const leaves = Array.from(document.querySelectorAll('.leaf'));
+  let px = 0, py = 0, tx = 0, ty = 0;
 
-<!-- LINKS -->
-<section class="links">
+  function onMove(e){
+    const w = window.innerWidth, h = window.innerHeight;
+    px = ((e.clientX / w) - 0.5) * 2;
+    py = ((e.clientY / h) - 0.5) * 2;
+  }
+  window.addEventListener('mousemove', onMove, {passive:true});
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    onMove({clientX: t.clientX, clientY: t.clientY});
+  }, {passive:true});
 
-<a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
-  <div class="icon">🎵</div>
-  <div class="linkText">
-    <h3>TikTok</h3>
-    <p>
-      EN: Short videos, spontaneous lives and moments that appear without planning.  
-      This is where things feel fast, natural and unfiltered.
-      <br><br>
-      ES: Vídeos cortos, directos espontáneos y momentos que surgen sin planear.  
-      Aquí todo se siente rápido, natural y sin filtros.
-    </p>
-  </div>
-</a>
+  function raf(){
+    tx += (px - tx) * 0.08;
+    ty += (py - ty) * 0.08;
 
-<a class="link" href="https://instagram.com/YOUR_INSTAGRAM">
-  <div class="icon">📸</div>
-  <div class="linkText">
-    <h3>Instagram</h3>
-    <p>
-      EN: Stories, photos and small details from everyday life.  
-      A quieter space to stay connected and see what happens between lives.
-      <br><br>
-      ES: Historias, fotos y pequeños detalles del día a día.  
-      Un espacio más tranquilo para mantenernos conectados entre directos.
-    </p>
-  </div>
-</a>
+    const scrollY = window.scrollY || 0;
+    const s = scrollY * 0.06;
 
-<a class="link" href="https://www.live.me/YOUR_LIVEME">
-  <div class="icon">🔴</div>
-  <div class="linkText">
-    <h3>Live.me</h3>
-    <p>
-      EN: This is where I spend the most time live.  
-      Long conversations, real interaction and a slower rhythm where we actually talk.
-      <br><br>
-      ES: Aquí paso más tiempo en directo.  
-      Conversaciones largas, interacción real y un ritmo más pausado donde hablamos de verdad.
-    </p>
-  </div>
-</a>
+    leaves.forEach((el, idx) => {
+      const d = parseFloat(el.dataset.depth || '0.2');
+      const x = (tx * 20 * d) + (idx % 2 ? 12 : -12);
+      const y = (ty * 14 * d) - (s * d);
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${(tx*6*d)}deg)`;
+    });
 
-<a class="link" href="https://discord.gg/YOUR_DISCORD">
-  <div class="icon">💬</div>
-  <div class="linkText">
-    <h3>Discord</h3>
-    <p>
-      EN: A private space for people who want to stay closer.  
-      Announcements, conversations and community moments outside the live streams.
-      <br><br>
-      ES: Un espacio privado para quienes quieren estar más cerca.  
-      Avisos, conversaciones y momentos de comunidad fuera de los directos.
-    </p>
-  </div>
-</a>
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
-</section>
+  // ===== Theme toggle + persist =====
+  const themeBtn = document.getElementById('themeBtn');
+  const themeTxt = document.getElementById('themeTxt');
+  const saved = localStorage.getItem('theme11');
+  if (saved) document.body.setAttribute('data-theme', saved);
 
-<!-- FOOTER -->
-<section class="footer">
-  EN: Save this page and come back whenever you want to find me live.  
-  <br>
-  ES: Guarda esta página y vuelve cuando quieras encontrarme en directo.
-</section>
+  function syncTheme(){
+    const dark = document.body.getAttribute('data-theme') === 'dark';
+    themeTxt.textContent = dark ? 'Dark' : 'Light';
+  }
+  syncTheme();
 
-</div>
-</div>
+  themeBtn.addEventListener('click', () => {
+    const dark = document.body.getAttribute('data-theme') === 'dark';
+    document.body.setAttribute('data-theme', dark ? 'light' : 'dark');
+    localStorage.setItem('theme11', dark ? 'light' : 'dark');
+    syncTheme();
+  });
+
+  // ===== Music toggle (iPhone needs user click) =====
+  const audio = document.getElementById('ambient');
+  const musicBtn = document.getElementById('musicBtn');
+  const musicTxt = document.getElementById('musicTxt');
+  let musicOn = false;
+
+  async function toggleMusic(){
+    try{
+      if(!musicOn){
+        audio.volume = 0.55;
+        await audio.play();
+        musicOn = true;
+      }else{
+        audio.pause();
+        musicOn = false;
+      }
+      musicTxt.textContent = musicOn ? 'On' : 'Off';
+    }catch(e){
+      musicOn = false;
+      musicTxt.textContent = 'Off';
+      alert("Music not playing. Make sure 'ambient.mp3' is in the repo root (same folder as index.html).");
+    }
+  }
+  musicBtn.addEventListener('click', toggleMusic);
+
+  // ===== Donate copy =====
+  const copyBtn = document.getElementById('copyBtn');
+  const donVal  = document.getElementById('donVal');
+  copyBtn.addEventListener('click', async () => {
+    const txt = (donVal.innerText || '').trim();
+    if(!txt) return;
+    try{
+      await navigator.clipboard.writeText(txt);
+      const old = copyBtn.textContent;
+      copyBtn.textContent = "Copied!";
+      setTimeout(()=>copyBtn.textContent = old, 1200);
+    }catch(e){
+      const r = document.createRange();
+      r.selectNode(donVal);
+      const sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(r);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
