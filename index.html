@@ -1,100 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Daniela ✦ Magic Links</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 :root {
-  --bg1: #0f1020;
-  --bg2: #1b1d3a;
-  --mint: #6ee7b7;
-  --pink: #f9a8d4;
-  --violet: #c084fc;
-  --cyan: #67e8f9;
-  --gold: #fde68a;
-  --text-main: #f8fafc;
-  --text-soft: #c7d2fe;
-  --card-bg: rgba(255,255,255,0.10);
+  --white: #f8fafc;
+  --soft: #c7d2fe;
+  --dark: #0f172a;
+
+  /* UNICORN */
+  --u-pink: #f9a8d4;
+  --u-purple: #c084fc;
+  --u-cyan: #67e8f9;
+
+  /* NATURE */
+  --n-green: #22c55e;
+  --n-mint: #6ee7b7;
+  --n-leaf: #15803d;
+
   --glass: blur(18px);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body { height: 100%; }
-
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  min-height: 100vh;
+  background: #020617;
+  color: var(--white);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+/* ===== SHARED ===== */
+
+.section {
+  min-height: 100vh;
+  padding: 60px 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px 0;
-  background:
-    radial-gradient(circle at 10% 10%, #c084fc33, transparent 40%),
-    radial-gradient(circle at 90% 20%, #67e8f933, transparent 45%),
-    radial-gradient(circle at 30% 80%, #f9a8d433, transparent 45%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
-  color: var(--text-main);
 }
-
-/* ✨ MAGIC BACKGROUND */
-
-.magic-bg {
-  position: fixed;
-  inset: -100px;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  opacity: 0.8;
-  animation: twinkle 6s infinite ease-in-out;
-}
-
-@keyframes twinkle {
-  0%,100% { opacity: 0.2; }
-  50% { opacity: 1; }
-}
-
-/* 🦄 MAIN CARD */
 
 .card {
-  position: relative;
-  z-index: 1;
   width: 100%;
   max-width: 440px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
-  backdrop-filter: var(--glass);
-  border-radius: 28px;
+  margin: 0 16px;
   padding: 28px 22px 26px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: var(--glass);
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.6),
-    inset 0 0 0 1px rgba(255,255,255,0.18);
+    0 30px 90px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.2);
 }
-
-/* 🌈 HEADER */
 
 .header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
-.avatar-wrap {
-  width: 124px;
-  height: 124px;
-  margin: 0 auto 10px;
-  border-radius: 999px;
+.avatar-ring {
+  width: 126px;
+  height: 126px;
+  margin: 0 auto 12px;
   padding: 4px;
-  background: conic-gradient(from 0deg, var(--pink), var(--violet), var(--cyan), var(--pink));
-  box-shadow: 0 0 40px #c084fc88;
+  border-radius: 999px;
 }
 
 .avatar {
@@ -102,7 +75,7 @@ body {
   height: 100%;
   border-radius: inherit;
   object-fit: cover;
-  background: #111;
+  background: #000;
 }
 
 .name {
@@ -113,18 +86,16 @@ body {
 
 .subtitle {
   font-size: 13px;
-  margin-top: 6px;
-  color: var(--text-soft);
   line-height: 1.4;
+  color: var(--soft);
+  margin-top: 6px;
 }
-
-/* 🔮 LINKS */
 
 .links {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 .link {
@@ -134,35 +105,24 @@ body {
   padding: 14px 16px;
   border-radius: 18px;
   text-decoration: none;
-  color: white;
-  background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.4);
-  transition: 0.25s ease;
+  color: var(--white);
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: .25s ease;
 }
 
 .link:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.6);
 }
 
-/* ICON */
-
 .icon {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  background: linear-gradient(135deg, var(--violet), var(--cyan));
-  box-shadow: 0 0 20px #c084fc88;
-}
-
-.text {
-  flex: 1;
 }
 
 .text strong {
@@ -172,35 +132,77 @@ body {
 
 .text span {
   font-size: 11px;
-  color: var(--text-soft);
+  opacity: .85;
 }
 
-/* 💸 DONATE */
+/* ===== UNICORN MAGIC ===== */
+
+.unicorn {
+  background:
+    radial-gradient(circle at 20% 10%, #c084fc55, transparent 45%),
+    radial-gradient(circle at 80% 20%, #67e8f955, transparent 45%),
+    radial-gradient(circle at 30% 80%, #f9a8d455, transparent 45%),
+    linear-gradient(180deg, #0f1020, #1b1d3a);
+}
+
+.unicorn .avatar-ring {
+  background: conic-gradient(
+    from 0deg,
+    var(--u-pink),
+    var(--u-purple),
+    var(--u-cyan),
+    var(--u-pink)
+  );
+  box-shadow: 0 0 45px #c084fcaa;
+}
+
+.unicorn .icon {
+  background: linear-gradient(135deg, var(--u-purple), var(--u-cyan));
+}
+
+/* ===== NATURE MAGIC ===== */
+
+.nature {
+  background:
+    radial-gradient(circle at 20% 20%, #22c55e55, transparent 45%),
+    radial-gradient(circle at 80% 30%, #6ee7b755, transparent 45%),
+    linear-gradient(180deg, #052e16, #022c22);
+}
+
+.nature .avatar-ring {
+  background: conic-gradient(
+    from 0deg,
+    var(--n-mint),
+    var(--n-green),
+    var(--n-leaf),
+    var(--n-mint)
+  );
+  box-shadow: 0 0 40px #22c55eaa;
+}
+
+.nature .icon {
+  background: linear-gradient(135deg, var(--n-mint), var(--n-green));
+}
+
+/* ===== DONATE ===== */
 
 .donate {
-  margin-top: 22px;
+  margin-top: 24px;
   padding: 16px;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(253,230,138,0.22), rgba(192,132,252,0.18));
-  border: 1px dashed var(--gold);
-}
-
-.donate-title {
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 6px;
+  background: rgba(0,0,0,0.35);
 }
 
 .donate-box {
   display: flex;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .donate-box div {
   flex: 1;
   padding: 8px 10px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.4);
   border-radius: 12px;
   font-size: 11px;
   word-break: break-all;
@@ -211,15 +213,13 @@ button {
   border-radius: 999px;
   padding: 8px 12px;
   font-size: 12px;
-  background: linear-gradient(135deg, var(--gold), var(--pink));
-  cursor: pointer;
   font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #fde68a, #f9a8d4);
 }
 
-/* 📱 MOBILE */
-
+/* MOBILE */
 @media (max-width: 480px) {
-  .card { margin: 0 16px; }
   .name { font-size: 22px; }
 }
 </style>
@@ -227,80 +227,57 @@ button {
 
 <body>
 
-<!-- ✨ STARS -->
-<div class="magic-bg" id="stars"></div>
-
-<main class="card">
-  <header class="header">
-    <div class="avatar-wrap">
-      <img src="profile.jpg" alt="Profile" class="avatar">
+<!-- 🦄 UNICORN MAGIC -->
+<section class="section unicorn">
+  <div class="card">
+    <div class="header">
+      <div class="avatar-ring">
+        <img src="profile.jpg" class="avatar" alt="Profile">
+      </div>
+      <div class="name">DANIELA</div>
+      <div class="subtitle">
+        EN: Unicorn vibes · Creator · Magic<br>
+        ES: Energía unicornio · Creadora
+      </div>
     </div>
-    <div class="name">DANIELA</div>
-    <div class="subtitle">
-      EN: Creator · Magic vibes · Live<br>
-      ES: Creadora · Unicorn vibes · Directos
+
+    <div class="links">
+      <a class="link" href="https://tiktok.com/@YOUR_TIKTOK"><div class="icon">🎵</div><div class="text"><strong>TikTok</strong><span>EN: Videos · ES: Directos</span></div></a>
+      <a class="link" href="https://instagram.com/YOUR_INSTAGRAM"><div class="icon">📸</div><div class="text"><strong>Instagram</strong><span>EN: Stories · ES: Fotos</span></div></a>
+      <a class="link" href="https://discord.gg/YOUR_DISCORD"><div class="icon">💬</div><div class="text"><strong>Discord</strong><span>EN: Community · ES: Comunidad</span></div></a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section class="links">
-    <a class="link" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank">
-      <div class="icon">🎵</div>
-      <div class="text"><strong>TikTok</strong><span>EN: Videos · ES: Directos</span></div>
-    </a>
-
-    <a class="link" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank">
-      <div class="icon">📸</div>
-      <div class="text"><strong>Instagram</strong><span>EN: Stories · ES: Fotos</span></div>
-    </a>
-
-    <a class="link" href="https://www.live.me/YOUR_LIVEME" target="_blank">
-      <div class="icon">🔴</div>
-      <div class="text"><strong>Live.me</strong><span>EN: Streaming · ES: En vivo</span></div>
-    </a>
-
-    <a class="link" href="https://kick.com/YOUR_KICK" target="_blank">
-      <div class="icon">🎮</div>
-      <div class="text"><strong>Kick</strong><span>EN: Streams · ES: Chat</span></div>
-    </a>
-
-    <a class="link" href="https://youtube.com/@YOUR_YOUTUBE" target="_blank">
-      <div class="icon">▶</div>
-      <div class="text"><strong>YouTube</strong><span>EN: Videos · ES: Clips</span></div>
-    </a>
-
-    <a class="link" href="https://discord.gg/YOUR_DISCORD" target="_blank">
-      <div class="icon">💬</div>
-      <div class="text"><strong>Discord</strong><span>EN: Community · ES: Comunidad</span></div>
-    </a>
-  </section>
-
-  <section class="donate">
-    <div class="donate-title">💖 Donate / Apoyo</div>
-    <div class="donate-box">
-      <div id="donateText">YOUR_PAYMENT_INFO</div>
-      <button onclick="copyDonate()">Copy</button>
+<!-- 🌿 NATURE MAGIC -->
+<section class="section nature">
+  <div class="card">
+    <div class="header">
+      <div class="avatar-ring">
+        <img src="profile.jpg" class="avatar" alt="Profile">
+      </div>
+      <div class="name">DANIELA</div>
+      <div class="subtitle">
+        EN: Nature · Calm · Live<br>
+        ES: Naturaleza · Paz · Directos
+      </div>
     </div>
-  </section>
-</main>
 
-<script>
-/* ✨ stars generator */
-const stars = document.getElementById("stars");
-for (let i = 0; i < 80; i++) {
-  const s = document.createElement("div");
-  s.className = "star";
-  s.style.left = Math.random() * 100 + "%";
-  s.style.top = Math.random() * 100 + "%";
-  s.style.animationDelay = Math.random() * 6 + "s";
-  stars.appendChild(s);
-}
+    <div class="links">
+      <a class="link" href="https://www.live.me/YOUR_LIVEME"><div class="icon">🔴</div><div class="text"><strong>Live.me</strong><span>EN: Streaming · ES: En vivo</span></div></a>
+      <a class="link" href="https://kick.com/YOUR_KICK"><div class="icon">🎮</div><div class="text"><strong>Kick</strong><span>EN: Streams · ES: Chat</span></div></a>
+      <a class="link" href="https://youtube.com/@YOUR_YOUTUBE"><div class="icon">▶</div><div class="text"><strong>YouTube</strong><span>EN: Videos · ES: Clips</span></div></a>
+    </div>
 
-/* 💸 copy donate */
-function copyDonate() {
-  const t = document.getElementById("donateText").innerText;
-  navigator.clipboard.writeText(t);
-}
-</script>
+    <div class="donate">
+      💚 Donate / Apoyo
+      <div class="donate-box">
+        <div id="donateText">YOUR_PAYMENT_INFO</div>
+        <button onclick="navigator.clipboard.writeText(document.getElementById('donateText').innerText)">Copy</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
