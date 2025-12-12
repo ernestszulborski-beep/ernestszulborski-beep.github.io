@@ -1,638 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Daniela – Link Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>Daniela ✦ Magic Links</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    :root {
-      --green-dark: #064e3b;
-      --green: #22c55e;
-      --bg-deep: #022c22;
-      --card-bg: rgba(255, 255, 255, 0.96);
-      --text-main: #022c22;
-      --text-soft: #4b5563;
-      --accent-pink: #fb7185;
-      --accent-purple: #a855f7;
-      --accent-yellow: #facc15;
-    }
+<style>
+:root {
+  --bg1: #0f1020;
+  --bg2: #1b1d3a;
+  --mint: #6ee7b7;
+  --pink: #f9a8d4;
+  --violet: #c084fc;
+  --cyan: #67e8f9;
+  --gold: #fde68a;
+  --text-main: #f8fafc;
+  --text-soft: #c7d2fe;
+  --card-bg: rgba(255,255,255,0.10);
+  --glass: blur(18px);
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      height: 100%;
-    }
+html, body { height: 100%; }
 
-    body {
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 40px 0;
-      background:
-        radial-gradient(circle at top left, #16a34a 0, transparent 55%),
-        radial-gradient(circle at bottom right, #22c55e 0, transparent 60%),
-        radial-gradient(circle at top right, #a855f7 0, transparent 55%),
-        #022c22;
-      color: var(--text-main);
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+  background:
+    radial-gradient(circle at 10% 10%, #c084fc33, transparent 40%),
+    radial-gradient(circle at 90% 20%, #67e8f933, transparent 45%),
+    radial-gradient(circle at 30% 80%, #f9a8d433, transparent 45%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  color: var(--text-main);
+}
 
-      /* 🔥 ważne dla iPhone – umożliwia przewijanie */
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+/* ✨ MAGIC BACKGROUND */
 
-    /* --- TŁO: kwiaty / płatki --- */
+.magic-bg {
+  position: fixed;
+  inset: -100px;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    .bg-layer {
-      position: absolute;
-      inset: -80px;
-      pointer-events: none;
-      z-index: 0;
-    }
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  animation: twinkle 6s infinite ease-in-out;
+}
 
-    .flower-blob {
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      opacity: 0.32;
-      mix-blend-mode: screen;
-      background:
-        radial-gradient(circle at 30% 30%, #fef9c3 0, transparent 40%),
-        radial-gradient(circle at 60% 60%, #f9a8d4 0, transparent 50%),
-        radial-gradient(circle at 30% 80%, #a5b4fc 0, transparent 55%);
-    }
+@keyframes twinkle {
+  0%,100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
 
-    .flower-blob.f1 {
-      top: 5%;
-      left: 6%;
-    }
+/* 🦄 MAIN CARD */
 
-    .flower-blob.f2 {
-      bottom: -4%;
-      right: 0%;
-      transform: scale(1.1);
-    }
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  backdrop-filter: var(--glass);
+  border-radius: 28px;
+  padding: 28px 22px 26px;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.18);
+}
 
-    .petal {
-      position: absolute;
-      width: 70px;
-      height: 26px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f97316, #facc15);
-      opacity: 0.35;
-      transform-origin: center;
-      animation: floatPetal 16s linear infinite;
-      mix-blend-mode: screen;
-    }
+/* 🌈 HEADER */
 
-    .petal.p1 { top: 18%; left: 60%; transform: rotate(18deg); }
-    .petal.p2 { top: 60%; left: 18%; transform: rotate(-24deg); animation-delay: -4s; }
-    .petal.p3 { top: 72%; left: 70%; transform: rotate(32deg); animation-delay: -8s; }
-    .petal.p4 { top: 32%; left: 82%; transform: rotate(-16deg); animation-delay: -12s; }
+.header {
+  text-align: center;
+  margin-bottom: 18px;
+}
 
-    @keyframes floatPetal {
-      0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.10; }
-      25%  { transform: translate3d(18px, -14px, 0) rotate(10deg); opacity: 0.32; }
-      50%  { transform: translate3d(-6px, -26px, 0) rotate(-6deg); opacity: 0.2; }
-      75%  { transform: translate3d(10px, -40px, 0) rotate(4deg); opacity: 0.3; }
-      100% { transform: translate3d(0, -70px, 0) rotate(0deg); opacity: 0.05; }
-    }
+.avatar-wrap {
+  width: 124px;
+  height: 124px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  padding: 4px;
+  background: conic-gradient(from 0deg, var(--pink), var(--violet), var(--cyan), var(--pink));
+  box-shadow: 0 0 40px #c084fc88;
+}
 
-    /* --- GŁÓWNA KARTA --- */
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  background: #111;
+}
 
-    .card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 440px;
-      padding: 26px 22px 26px;
-      border-radius: 26px;
-      background: var(--card-bg);
-      box-shadow:
-        0 24px 60px rgba(0, 0, 0, 0.45),
-        0 0 0 1px rgba(148, 163, 184, 0.4);
-      backdrop-filter: blur(14px);
-      margin: auto;
-    }
+.name {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg,
-        rgba(34, 197, 94, 0.8),
-        rgba(248, 113, 113, 0.7),
-        rgba(129, 140, 248, 0.7)
-      );
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.7;
-      pointer-events: none;
-    }
+.subtitle {
+  font-size: 13px;
+  margin-top: 6px;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
 
-    /* --- HEADER --- */
+/* 🔮 LINKS */
 
-    .header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
 
-    .avatar-ring {
-      position: relative;
-      width: 118px;
-      height: 118px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        conic-gradient(from 210deg, #22c55e, #f97316, #a855f7, #22c55e);
-      padding: 3px;
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.42),
-        0 0 0 6px rgba(34, 197, 94, 0.18);
-    }
+.link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+  transition: 0.25s ease;
+}
 
-    .avatar-ring::after {
-      content: "🌸";
-      position: absolute;
-      right: -6px;
-      bottom: 2px;
-      font-size: 22px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-    }
+.link:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.6);
+}
 
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      object-fit: cover;
-    }
+/* ICON */
 
-    .name {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--green-dark);
-      text-align: center;
-    }
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  box-shadow: 0 0 20px #c084fc88;
+}
 
-    .tagline {
-      font-size: 13px;
-      text-align: center;
-      color: var(--text-soft);
-      line-height: 1.4;
-    }
+.text {
+  flex: 1;
+}
 
-    .tagline span {
-      display: block;
-    }
+.text strong {
+  display: block;
+  font-size: 15px;
+}
 
-    .chip {
-      margin-top: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(22, 163, 74, 0.08);
-      color: var(--green-dark);
-      font-size: 11px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+.text span {
+  font-size: 11px;
+  color: var(--text-soft);
+}
 
-    .chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--green);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
-    }
+/* 💸 DONATE */
 
-    /* --- LINKI --- */
+.donate {
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(253,230,138,0.22), rgba(192,132,252,0.18));
+  border: 1px dashed var(--gold);
+}
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 14px;
-    }
+.donate-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
 
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 13px 14px;
-      border-radius: 16px;
-      background: #ffffff;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 14px;
-      box-shadow:
-        0 10px 22px rgba(15, 23, 42, 0.18),
-        0 0 0 1px rgba(148, 163, 184, 0.35);
-      transition:
-        transform 0.15s ease-out,
-        box-shadow 0.15s ease-out,
-        border-color 0.15s ease-out,
-        background 0.15s ease-out;
-    }
+.donate-box {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
 
-    .btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      border-color: rgba(34, 197, 94, 0.85);
-      background: #f0fdf4;
-      box-shadow:
-        0 18px 34px rgba(15, 23, 42, 0.32),
-        0 0 0 1px rgba(34, 197, 94, 0.5);
-    }
+.donate-box div {
+  flex: 1;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 12px;
+  font-size: 11px;
+  word-break: break-all;
+}
 
-    .btn-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--pink));
+  cursor: pointer;
+  font-weight: 700;
+}
 
-    .icon-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* 📱 MOBILE */
 
-    /* Proste, markowe kolory ikon */
-    .icon-tiktok {
-      background: radial-gradient(circle at 30% 20%, #22c55e, #000000);
-      color: #ecfdf5;
-      font-size: 18px;
-    }
-
-    .icon-ig {
-      background: radial-gradient(circle at 30% 20%, #f97316, #ec4899, #a855f7);
-      color: #fff7ed;
-      font-size: 18px;
-    }
-
-    .icon-live {
-      background: radial-gradient(circle at 30% 20%, #22c55e, #0f766e);
-      color: #ecfdf5;
-      font-size: 18px;
-    }
-
-    .icon-kick {
-      background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
-      color: #022c22;
-      font-size: 18px;
-    }
-
-    .icon-yt {
-      background: radial-gradient(circle at 30% 20%, #ef4444, #b91c1c);
-      color: #fef2f2;
-      font-size: 18px;
-    }
-
-    .icon-discord {
-      background: radial-gradient(circle at 30% 20%, #5865f2, #3b4ad9);
-      color: #eef0ff;
-      font-size: 18px;
-    }
-
-    .btn-text-main {
-      font-weight: 600;
-      display: block;
-    }
-
-    .btn-text-sub {
-      font-size: 11px;
-      color: var(--text-soft);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .btn-arrow {
-      font-size: 18px;
-      opacity: 0.8;
-    }
-
-    /* --- DONATE --- */
-
-    .donate {
-      margin-top: 18px;
-      padding: 14px 13px 12px;
-      border-radius: 18px;
-      background: rgba(240, 253, 244, 0.96);
-      border: 1px dashed rgba(34, 197, 94, 0.8);
-    }
-
-    .donate-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--green-dark);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .donate-text {
-      font-size: 11px;
-      color: var(--text-soft);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-
-    .donate-box {
-      display: flex;
-      align-items: stretch;
-      gap: 6px;
-    }
-
-    .donate-account {
-      flex: 1;
-      font-size: 11px;
-      background: #ffffff;
-      padding: 8px 9px;
-      border-radius: 10px;
-      box-shadow: 0 5px 14px rgba(15, 23, 42, 0.16);
-      word-break: break-all;
-    }
-
-    .donate-label {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .donate-copy-btn {
-      padding: 6px 10px;
-      font-size: 11px;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #ecfdf5;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.6);
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
-    }
-
-    .donate-copy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(22, 163, 74, 0.7);
-      background: linear-gradient(135deg, #16a34a, #22c55e);
-    }
-
-    .donate-copy-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 10px rgba(22, 163, 74, 0.55);
-    }
-
-    /* --- STOPKA --- */
-
-    .footer {
-      margin-top: 10px;
-      font-size: 10px;
-      text-align: center;
-      color: rgba(15, 23, 42, 0.7);
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 24px 0;
-      }
-      .card {
-        margin: 0 16px;
-        padding: 22px 18px 22px;
-        border-radius: 22px;
-      }
-      .avatar-ring { width: 104px; height: 104px; }
-      .name { font-size: 20px; }
-    }
-  </style>
+@media (max-width: 480px) {
+  .card { margin: 0 16px; }
+  .name { font-size: 22px; }
+}
+</style>
 </head>
 
 <body>
-  <!-- Tło: kwiaty / płatki -->
-  <div class="bg-layer">
-    <div class="flower-blob f1"></div>
-    <div class="flower-blob f2"></div>
-    <div class="petal p1"></div>
-    <div class="petal p2"></div>
-    <div class="petal p3"></div>
-    <div class="petal p4"></div>
-  </div>
 
-  <!-- Główna karta -->
-  <main class="card">
-    <header class="header">
-      <div class="avatar-ring">
-        <!-- 👇 nazwa pliku musi być taka, jak w repo: profile.jpg / profile.png itd. -->
-        <img class="avatar-img" src="profile.jpg" alt="Daniela profile photo" />
-      </div>
+<!-- ✨ STARS -->
+<div class="magic-bg" id="stars"></div>
 
-      <div class="name">DANIELA</div>
+<main class="card">
+  <header class="header">
+    <div class="avatar-wrap">
+      <img src="profile.jpg" alt="Profile" class="avatar">
+    </div>
+    <div class="name">DANIELA</div>
+    <div class="subtitle">
+      EN: Creator · Magic vibes · Live<br>
+      ES: Creadora · Unicorn vibes · Directos
+    </div>
+  </header>
 
-      <div class="tagline">
-        <span>EN: Creator · Live · Vibes</span>
-        <span>ES: Creadora · Directos · Buenas vibras</span>
-      </div>
+  <section class="links">
+    <a class="link" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank">
+      <div class="icon">🎵</div>
+      <div class="text"><strong>TikTok</strong><span>EN: Videos · ES: Directos</span></div>
+    </a>
 
-      <div class="chip">
-        <span class="chip-dot"></span>
-        <span>Online · TikTok · Live.me · Kick · YouTube · Discord</span>
-      </div>
-    </header>
+    <a class="link" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank">
+      <div class="icon">📸</div>
+      <div class="text"><strong>Instagram</strong><span>EN: Stories · ES: Fotos</span></div>
+    </a>
 
-    <!-- Linki -->
-    <section class="links">
-      <!-- TikTok -->
-      <a
-        class="btn"
-        href="https://tiktok.com/@YOUR_TIKTOK"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-tiktok">♪</div>
-          <div>
-            <span class="btn-text-main">TikTok</span>
-            <span class="btn-text-sub">
-              ES: Directos y vídeos · EN: Lives & short videos
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
+    <a class="link" href="https://www.live.me/YOUR_LIVEME" target="_blank">
+      <div class="icon">🔴</div>
+      <div class="text"><strong>Live.me</strong><span>EN: Streaming · ES: En vivo</span></div>
+    </a>
 
-      <!-- Instagram -->
-      <a
-        class="btn"
-        href="https://instagram.com/YOUR_INSTAGRAM"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-ig">📸</div>
-          <div>
-            <span class="btn-text-main">Instagram</span>
-            <span class="btn-text-sub">
-              ES: Fotos y historias · EN: Photos & stories
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
+    <a class="link" href="https://kick.com/YOUR_KICK" target="_blank">
+      <div class="icon">🎮</div>
+      <div class="text"><strong>Kick</strong><span>EN: Streams · ES: Chat</span></div>
+    </a>
 
-      <!-- Live.me -->
-      <a
-        class="btn"
-        href="https://www.live.me/YOUR_LIVEME"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-live">🔴</div>
-          <div>
-            <span class="btn-text-main">Live.me</span>
-            <span class="btn-text-sub">
-              ES: En vivo · EN: Live streaming
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
+    <a class="link" href="https://youtube.com/@YOUR_YOUTUBE" target="_blank">
+      <div class="icon">▶</div>
+      <div class="text"><strong>YouTube</strong><span>EN: Videos · ES: Clips</span></div>
+    </a>
 
-      <!-- Kick -->
-      <a
-        class="btn"
-        href="https://kick.com/YOUR_KICK"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-kick">K</div>
-          <div>
-            <span class="btn-text-main">Kick</span>
-            <span class="btn-text-sub">
-              ES: Streams y chat · EN: Streams & chat
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
+    <a class="link" href="https://discord.gg/YOUR_DISCORD" target="_blank">
+      <div class="icon">💬</div>
+      <div class="text"><strong>Discord</strong><span>EN: Community · ES: Comunidad</span></div>
+    </a>
+  </section>
 
-      <!-- YouTube -->
-      <a
-        class="btn"
-        href="https://youtube.com/@YOUR_YOUTUBE"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-yt">▶</div>
-          <div>
-            <span class="btn-text-main">YouTube</span>
-            <span class="btn-text-sub">
-              ES: Clips y shows · EN: Videos & lives
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
+  <section class="donate">
+    <div class="donate-title">💖 Donate / Apoyo</div>
+    <div class="donate-box">
+      <div id="donateText">YOUR_PAYMENT_INFO</div>
+      <button onclick="copyDonate()">Copy</button>
+    </div>
+  </section>
+</main>
 
-      <!-- Discord -->
-      <a
-        class="btn"
-        href="https://discord.gg/YOUR_DISCORD"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="btn-left">
-          <div class="icon-circle icon-discord">💬</div>
-          <div>
-            <span class="btn-text-main">Discord</span>
-            <span class="btn-text-sub">
-              ES: Comunidad · EN: Community server
-            </span>
-          </div>
-        </div>
-        <span class="btn-arrow">➜</span>
-      </a>
-    </section>
+<script>
+/* ✨ stars generator */
+const stars = document.getElementById("stars");
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement("div");
+  s.className = "star";
+  s.style.left = Math.random() * 100 + "%";
+  s.style.top = Math.random() * 100 + "%";
+  s.style.animationDelay = Math.random() * 6 + "s";
+  stars.appendChild(s);
+}
 
-    <!-- Donate -->
-    <section class="donate">
-      <div class="donate-title">
-        💚 Donate / Apoyo
-      </div>
-      <p class="donate-text">
-        EN: If you want to support me, you can send a tip / donation here.<br />
-        ES: Si quieres apoyarme, puedes enviar tu donación aquí.
-      </p>
+/* 💸 copy donate */
+function copyDonate() {
+  const t = document.getElementById("donateText").innerText;
+  navigator.clipboard.writeText(t);
+}
+</script>
 
-      <div class="donate-box">
-        <div class="donate-account" id="donateAccount">
-          <div class="donate-label">Account / Cuenta:</div>
-          <!-- 👇 PODMIEŃ TO NA SWÓJ NUMER KONTA LUB LINK (Revolut / PayPal itd.) -->
-          <div data-account="YOUR_PAYMENT_INFO">
-            YOUR_PAYMENT_INFO
-          </div>
-        </div>
-
-        <button class="donate-copy-btn" id="copyDonate">
-          Copy
-        </button>
-      </div>
-    </section>
-
-    <footer class="footer">
-      EN: Thank you for your support · ES: Gracias por tu apoyo 🌸
-    </footer>
-  </main>
-
-  <!-- Kopiowanie numeru / linku donate -->
-  <script>
-    (function () {
-      const btn = document.getElementById("copyDonate");
-      const container = document.getElementById("donateAccount");
-      if (!btn || !container) return;
-
-      const dataNode = container.querySelector("[data-account]");
-      const accountText = dataNode ? dataNode.getAttribute("data-account") : "";
-
-      btn.addEventListener("click", async () => {
-        if (!accountText) return;
-        try {
-          await navigator.clipboard.writeText(accountText);
-          const old = btn.textContent;
-          btn.textContent = "Copied!";
-          setTimeout(() => (btn.textContent = old), 1500);
-        } catch (e) {
-          console.error(e);
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
