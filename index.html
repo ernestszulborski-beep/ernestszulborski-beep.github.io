@@ -1,109 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>daniela#11</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>11</title>
 
 <style>
 :root{
-  --bg1:#050816;
-  --bg2:#0b1630;
-  --card:rgba(255,255,255,0.11);
-  --stroke:rgba(255,255,255,0.18);
-  --text:#f8fafc;
-  --muted:rgba(248,250,252,0.75);
+  --bgA:#f8fafc;
+  --bgB:#e2e8f0;
+  --card:rgba(255,255,255,0.82);
+  --stroke:rgba(2,6,23,0.12);
+  --text:#0b1220;
+  --muted:rgba(15,23,42,0.72);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
   --mint:#6ee7b7;
-  --gold:#fde68a;
 
-  --shadow:0 40px 120px rgba(0,0,0,0.65);
+  --glass:blur(18px);
+  --shadow:0 30px 90px rgba(2,6,23,0.18);
+  --shadowStrong:0 40px 120px rgba(2,6,23,0.24);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+[data-theme="dark"]{
+  --bgA:#050816;
+  --bgB:#0b1630;
+  --card:rgba(255,255,255,0.11);
+  --stroke:rgba(255,255,255,0.18);
+  --text:#f8fafc;
+  --muted:rgba(248,250,252,0.75);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 
 body{
   font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%, #c084fc33, transparent 45%),
-    radial-gradient(circle at 85% 20%, #67e8f933, transparent 50%),
-    radial-gradient(circle at 30% 90%, #f9a8d433, transparent 55%),
-    linear-gradient(180deg,var(--bg1),var(--bg2));
+    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--violet) 30%,transparent) 0,transparent 45%),
+    radial-gradient(circle at 85% 15%, color-mix(in srgb,var(--cyan) 25%,transparent) 0,transparent 50%),
+    radial-gradient(circle at 30% 90%, color-mix(in srgb,var(--pink) 25%,transparent) 0,transparent 55%),
+    linear-gradient(180deg,var(--bgA),var(--bgB));
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
 
-/* ===== BACKGROUND STARS ===== */
+/* ===== SCENE ===== */
 .scene{position:fixed;inset:0;pointer-events:none;z-index:0}
 .star{
   position:absolute;width:2px;height:2px;border-radius:50%;
-  background:white;opacity:.6;
-  animation:twinkle 6s infinite;
+  background:white;opacity:.6;animation:twinkle 6s infinite;
 }
 @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
 
-/* ===== LAYOUT ===== */
-.wrap{
-  position:relative;
-  z-index:1;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  padding:80px 0 160px;
-}
-.container{
-  width:100%;
-  max-width:960px;
-  margin:0 20px;
-  display:flex;
-  flex-direction:column;
-  gap:90px;
+.wrap{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:40px 0}
+.container{width:100%;max-width:900px;margin:0 16px;display:flex;flex-direction:column;gap:18px}
+
+/* ===== HERO (POŁĄCZONY) ===== */
+.hero{
+  border-radius:30px;
+  background:var(--card);
+  backdrop-filter:var(--glass);
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadowStrong);
+  padding:20px;
 }
 
-/* ===== BRAND ===== */
-.brand{
-  text-align:center;
+.heroTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
-.brand h1{
-  font-size:78px;
-  font-weight:900;
-  letter-spacing:.32em;
+
+.logo11{
+  font-size:28px;
+  font-weight:1000;
+  letter-spacing:.35em;
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:glow 3s ease-in-out infinite alternate;
+  animation:glow 2.6s ease-in-out infinite alternate;
 }
 @keyframes glow{
-  from{text-shadow:0 0 30px var(--pink)}
-  to{text-shadow:0 0 90px var(--violet),0 0 140px var(--cyan)}
-}
-.brand p{
-  margin-top:26px;
-  font-size:20px;
-  line-height:1.6;
-  color:var(--muted);
+  from{text-shadow:0 0 8px var(--pink)}
+  to{text-shadow:0 0 20px var(--violet),0 0 30px var(--cyan)}
 }
 
-/* ===== HERO ===== */
-.hero{
+.controls{display:flex;gap:8px}
+.ctrl{
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:rgba(0,0,0,.04);
+  font-weight:900;
+  cursor:pointer;
+}
+
+.heroMain{
+  margin-top:16px;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
+  grid-template-columns:280px 1fr 160px;
+  gap:18px;
   align-items:center;
 }
 
 .avatarRing{
-  width:360px;height:360px;
+  width:260px;height:260px;
   border-radius:50%;
-  padding:7px;
-  margin:0 auto;
+  padding:5px;
   background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 110px var(--violet);
+  box-shadow:0 0 70px var(--violet);
 }
 .avatarRing img{
   width:100%;height:100%;
@@ -112,196 +122,121 @@ body{
 }
 
 .heroText h2{
-  font-size:46px;
+  font-size:22px;
   font-weight:900;
 }
 .heroText p{
-  margin-top:24px;
-  font-size:20px;
-  line-height:1.6;
+  margin-top:8px;
+  font-size:13.5px;
+  line-height:1.5;
   color:var(--muted);
 }
 
+/* ===== UNICORN ===== */
+.unicorn{
+  width:150px;
+  animation:float 4.5s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-12px)}}
+
 /* ===== LINKS ===== */
 .links{
-  display:flex;
-  flex-direction:column;
-  gap:34px;
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 .link{
-  display:flex;
-  gap:30px;
-  padding:34px;
-  border-radius:36px;
+  padding:16px;
+  border-radius:22px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
   text-decoration:none;
   color:var(--text);
-  transition:.3s ease;
+  transition:.2s ease;
 }
-.link:hover{transform:translateY(-6px)}
+.link:hover{transform:translateY(-2px)}
 
-.icon{font-size:48px}
-.linkText h3{
-  font-size:26px;
-  font-weight:900;
-}
-.linkText p{
-  margin-top:14px;
-  font-size:17px;
-  line-height:1.6;
+.link h3{font-size:15px;font-weight:900}
+.link p{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.45}
+
+/* ===== FOOTER ===== */
+.footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:12px;
   color:var(--muted);
 }
 
-/* ===== CONTROLS ===== */
-.controls{
-  display:flex;
-  justify-content:center;
-  gap:16px;
-}
-.ctrl{
-  padding:14px 22px;
-  border-radius:999px;
-  border:1px solid var(--stroke);
-  background:var(--card);
-  cursor:pointer;
-  font-weight:900;
-  box-shadow:var(--shadow);
-}
-
-/* ===== UNICORN ===== */
-.unicorn{
-  width:260px;
-  margin:0 auto;
-  display:block;
-  animation:float 4.8s ease-in-out infinite;
-  filter:drop-shadow(0 40px 50px rgba(0,0,0,.6));
-}
-@keyframes float{50%{transform:translateY(-22px)}}
-
-/* ===== LIVE STRIP ===== */
-.live{
-  margin-top:120px;
-  width:100%;
-  text-align:center;
-  font-size:110px;
-  font-weight:900;
-  letter-spacing:.25em;
-  background:linear-gradient(90deg,#ff004c,#ff7a18,#ff004c);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:livePulse 1.6s ease-in-out infinite;
-}
-@keyframes livePulse{
-  0%,100%{opacity:.6}
-  50%{opacity:1}
-}
-
 /* MOBILE */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;text-align:center}
-  .avatarRing{width:260px;height:260px}
-  .brand h1{font-size:58px}
-  .live{font-size:72px}
+@media(max-width:860px){
+  .heroMain{grid-template-columns:1fr;text-align:center}
+  .avatarRing{margin:0 auto}
+  .links{grid-template-columns:1fr}
 }
 </style>
 </head>
 
-<body>
+<body data-theme="light">
 
 <div class="scene" id="scene"></div>
 
 <div class="wrap">
 <div class="container">
 
-<!-- BRAND -->
-<section class="brand">
-  <h1>daniela#11</h1>
-  <p>
-    natural vibes · real energy · live moments  
-    a space where everything feels honest, close and unfiltered
-  </p>
-</section>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="avatarRing">
-    <img src="profile.jpg" alt="profile">
+  <div class="heroTop">
+    <div class="logo11">11</div>
+    <div class="controls">
+      <div class="ctrl" id="themeBtn">🌗</div>
+      <div class="ctrl" id="musicBtn">🎵</div>
+    </div>
   </div>
 
-  <div class="heroText">
-    <h2>Daniela</h2>
-    <p>
-      live streams, daily moments and real conversations  
-      no characters, no acting, just presence and connection  
-      if you enjoy authenticity, you’re already in the right place
-    </p>
+  <div class="heroMain">
+    <div class="avatarRing">
+      <img src="profile.jpg" alt="profile">
+    </div>
+
+    <div class="heroText">
+      <h2>Daniela</h2>
+      <p>
+        natural vibes · real energy · live moments  
+        simple presence, honest connection and everyday life as it happens
+      </p>
+    </div>
+
+    <img class="unicorn"
+      src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg"
+      alt="">
+  </div>
+
+  <div class="links">
+    <a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
+      <h3>TikTok</h3>
+      <p>short videos, spontaneous lives and raw moments that start everything</p>
+    </a>
+    <a class="link" href="https://instagram.com/YOUR_INSTAGRAM">
+      <h3>Instagram</h3>
+      <p>stories, photos and daily atmosphere between the lives</p>
+    </a>
+    <a class="link" href="https://www.live.me/YOUR_LIVEME">
+      <h3>Live.me</h3>
+      <p>longer streams, calm pace and real conversations</p>
+    </a>
+    <a class="link" href="https://discord.gg/YOUR_DISCORD">
+      <h3>Discord</h3>
+      <p>community space, updates and closer moments off stream</p>
+    </a>
   </div>
 </section>
 
-<!-- LINKS -->
-<section class="links">
-
-<a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
-  <div class="icon">🎵</div>
-  <div class="linkText">
-    <h3>TikTok</h3>
-    <p>
-      short videos, spontaneous lives and moments that happen naturally  
-      this is where energy moves fast and everything starts
-    </p>
-  </div>
-</a>
-
-<a class="link" href="https://instagram.com/YOUR_INSTAGRAM">
-  <div class="icon">📸</div>
-  <div class="linkText">
-    <h3>Instagram</h3>
-    <p>
-      stories, photos and the quiet in between  
-      a closer look at daily mood and atmosphere
-    </p>
-  </div>
-</a>
-
-<a class="link" href="https://www.live.me/YOUR_LIVEME">
-  <div class="icon">🔴</div>
-  <div class="linkText">
-    <h3>Live.me</h3>
-    <p>
-      longer live sessions and real conversations  
-      a slower space where we actually talk and stay present
-    </p>
-  </div>
-</a>
-
-<a class="link" href="https://discord.gg/YOUR_DISCORD">
-  <div class="icon">💬</div>
-  <div class="linkText">
-    <h3>Discord</h3>
-    <p>
-      the inner circle  
-      community, updates and moments that don’t happen on stream
-    </p>
-  </div>
-</a>
-
-</section>
-
-<!-- CONTROLS -->
-<section class="controls">
-  <button class="ctrl" id="themeBtn">🌗 light / dark</button>
-  <button class="ctrl" id="musicBtn">🎵 music</button>
-</section>
-
-<img class="unicorn"
-src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg"
-alt="unicorn">
-
-<!-- LIVE -->
-<div class="live">LIVE</div>
+<div class="footer">
+  save this page · official links only
+</div>
 
 <audio id="ambient" loop>
   <source src="ambient.mp3" type="audio/mpeg">
@@ -313,7 +248,7 @@ alt="unicorn">
 <script>
 /* stars */
 const scene=document.getElementById("scene");
-for(let i=0;i<80;i++){
+for(let i=0;i<70;i++){
   const s=document.createElement("div");
   s.className="star";
   s.style.left=Math.random()*100+"%";
@@ -323,10 +258,9 @@ for(let i=0;i<80;i++){
 }
 
 /* theme */
-let dark=true;
 document.getElementById("themeBtn").onclick=()=>{
-  dark=!dark;
-  document.body.style.filter = dark ? "none" : "invert(1) hue-rotate(180deg)";
+  document.body.dataset.theme =
+    document.body.dataset.theme==="dark"?"light":"dark";
 };
 
 /* music */
