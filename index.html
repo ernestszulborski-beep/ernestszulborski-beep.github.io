@@ -1,266 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>11</title>
 
 <style>
 :root{
-  --bgA:#f8fafc;
-  --bgB:#e2e8f0;
-  --card:rgba(255,255,255,0.82);
-  --stroke:rgba(2,6,23,0.12);
-  --text:#0b1220;
-  --muted:rgba(15,23,42,0.72);
+  --bg1:#060818;
+  --bg2:#0b1630;
+  --card:rgba(255,255,255,0.10);
+  --stroke:rgba(255,255,255,0.18);
+  --text:#f8fafc;
+  --muted:rgba(248,250,252,0.72);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
-  --mint:#6ee7b7;
 
-  --glass:blur(18px);
-  --shadow:0 30px 90px rgba(2,6,23,0.18);
-  --shadowStrong:0 40px 120px rgba(2,6,23,0.24);
+  --shadow:0 40px 120px rgba(0,0,0,0.6);
 }
 
-[data-theme="dark"]{
-  --bgA:#050816;
-  --bgB:#0b1630;
-  --card:rgba(255,255,255,0.11);
-  --stroke:rgba(255,255,255,0.18);
-  --text:#f8fafc;
-  --muted:rgba(248,250,252,0.75);
+[data-theme="light"]{
+  --bg1:#f8fafc;
+  --bg2:#e5e7eb;
+  --card:rgba(255,255,255,0.85);
+  --stroke:rgba(2,6,23,0.12);
+  --text:#0b1220;
+  --muted:rgba(15,23,42,0.72);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--violet) 30%,transparent) 0,transparent 45%),
-    radial-gradient(circle at 85% 15%, color-mix(in srgb,var(--cyan) 25%,transparent) 0,transparent 50%),
-    radial-gradient(circle at 30% 90%, color-mix(in srgb,var(--pink) 25%,transparent) 0,transparent 55%),
-    linear-gradient(180deg,var(--bgA),var(--bgB));
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+    radial-gradient(circle at 20% 10%, #c084fc33, transparent 45%),
+    radial-gradient(circle at 80% 20%, #67e8f933, transparent 50%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  min-height:100vh;
 }
 
-/* ===== SCENE ===== */
-.scene{position:fixed;inset:0;pointer-events:none;z-index:0}
-.star{
-  position:absolute;width:2px;height:2px;border-radius:50%;
-  background:white;opacity:.6;animation:twinkle 6s infinite;
-}
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
-
-.wrap{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:40px 0}
-.container{width:100%;max-width:900px;margin:0 16px;display:flex;flex-direction:column;gap:18px}
-
-/* ===== HERO (POŁĄCZONY) ===== */
-.hero{
-  border-radius:30px;
-  background:var(--card);
-  backdrop-filter:var(--glass);
-  border:1px solid var(--stroke);
-  box-shadow:var(--shadowStrong);
-  padding:20px;
-}
-
-.heroTop{
+/* ===== Layout ===== */
+.wrap{
+  max-width:820px;
+  margin:0 auto;
+  padding:70px 18px 120px;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
+  flex-direction:column;
+  gap:64px;
 }
 
-.logo11{
-  font-size:28px;
-  font-weight:1000;
-  letter-spacing:.35em;
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+}
+.logo{
+  font-size:76px;
+  font-weight:900;
+  letter-spacing:.4em;
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:glow 2.6s ease-in-out infinite alternate;
+  animation:glow 3s ease-in-out infinite alternate;
 }
 @keyframes glow{
-  from{text-shadow:0 0 8px var(--pink)}
-  to{text-shadow:0 0 20px var(--violet),0 0 30px var(--cyan)}
+  from{ text-shadow:0 0 20px var(--pink); }
+  to{ text-shadow:0 0 60px var(--violet),0 0 100px var(--cyan); }
 }
 
-.controls{display:flex;gap:8px}
-.ctrl{
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid var(--stroke);
-  background:rgba(0,0,0,.04);
-  font-weight:900;
-  cursor:pointer;
+.subtitle{
+  margin-top:18px;
+  font-size:18px;
+  color:var(--muted);
 }
 
-.heroMain{
-  margin-top:16px;
-  display:grid;
-  grid-template-columns:280px 1fr 160px;
-  gap:18px;
-  align-items:center;
-}
-
-.avatarRing{
-  width:260px;height:260px;
+/* ===== Avatar ===== */
+.avatar{
+  width:280px;
+  height:280px;
+  margin:48px auto 0;
   border-radius:50%;
-  padding:5px;
+  padding:6px;
   background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 70px var(--violet);
+  box-shadow:0 0 90px var(--violet);
 }
-.avatarRing img{
-  width:100%;height:100%;
+.avatar img{
+  width:100%;
+  height:100%;
   border-radius:inherit;
   object-fit:cover;
 }
 
-.heroText h2{
-  font-size:22px;
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:32px;
+}
+.ctrl{
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:var(--card);
+  box-shadow:var(--shadow);
+  cursor:pointer;
   font-weight:900;
 }
-.heroText p{
-  margin-top:8px;
-  font-size:13.5px;
-  line-height:1.5;
-  color:var(--muted);
-}
 
-/* ===== UNICORN ===== */
-.unicorn{
-  width:150px;
-  animation:float 4.5s ease-in-out infinite;
-}
-@keyframes float{50%{transform:translateY(-12px)}}
-
-/* ===== LINKS ===== */
+/* ===== Links ===== */
 .links{
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
 }
-
 .link{
-  padding:16px;
-  border-radius:22px;
+  padding:26px;
+  border-radius:28px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
   text-decoration:none;
   color:var(--text);
-  transition:.2s ease;
 }
-.link:hover{transform:translateY(-2px)}
-
-.link h3{font-size:15px;font-weight:900}
-.link p{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.45}
-
-/* ===== FOOTER ===== */
-.footer{
-  margin-top:40px;
-  text-align:center;
-  font-size:12px;
+.link h3{
+  font-size:22px;
+  font-weight:900;
+}
+.link p{
+  margin-top:10px;
+  font-size:15px;
   color:var(--muted);
+  line-height:1.5;
 }
 
-/* MOBILE */
-@media(max-width:860px){
-  .heroMain{grid-template-columns:1fr;text-align:center}
-  .avatarRing{margin:0 auto}
-  .links{grid-template-columns:1fr}
+/* ===== LIVE ===== */
+.live{
+  margin-top:100px;
+  text-align:center;
+  font-size:96px;
+  font-weight:900;
+  letter-spacing:.25em;
+  background:linear-gradient(90deg,#ff004c,#ff7a18,#ff004c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:.6}
+  50%{opacity:1}
+}
+
+@media(max-width:700px){
+  .logo{font-size:56px}
+  .avatar{width:220px;height:220px}
+  .live{font-size:64px}
 }
 </style>
 </head>
 
-<body data-theme="light">
-
-<div class="scene" id="scene"></div>
+<body data-theme="dark">
 
 <div class="wrap">
-<div class="container">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="heroTop">
-    <div class="logo11">11</div>
-    <div class="controls">
-      <div class="ctrl" id="themeBtn">🌗</div>
-      <div class="ctrl" id="musicBtn">🎵</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo">11</div>
+    <div class="subtitle" data-i18n="subtitle">
+      natural vibes · real energy · live moments
     </div>
-  </div>
 
-  <div class="heroMain">
-    <div class="avatarRing">
+    <div class="avatar">
       <img src="profile.jpg" alt="profile">
     </div>
 
-    <div class="heroText">
-      <h2>Daniela</h2>
-      <p>
-        natural vibes · real energy · live moments  
-        simple presence, honest connection and everyday life as it happens
-      </p>
+    <div class="controls">
+      <div class="ctrl" id="langBtn">🌍 EN</div>
+      <div class="ctrl" id="themeBtn">🌗</div>
+      <div class="ctrl" id="musicBtn">🎵</div>
     </div>
+  </section>
 
-    <img class="unicorn"
-      src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Unicorn_silhouette.svg"
-      alt="">
-  </div>
-
-  <div class="links">
+  <!-- LINKS -->
+  <section class="links">
     <a class="link" href="https://tiktok.com/@YOUR_TIKTOK">
       <h3>TikTok</h3>
-      <p>short videos, spontaneous lives and raw moments that start everything</p>
+      <p data-i18n="tt">short clips and spontaneous lives</p>
     </a>
+
     <a class="link" href="https://instagram.com/YOUR_INSTAGRAM">
       <h3>Instagram</h3>
-      <p>stories, photos and daily atmosphere between the lives</p>
+      <p data-i18n="ig">daily mood, stories and photos</p>
     </a>
+
     <a class="link" href="https://www.live.me/YOUR_LIVEME">
       <h3>Live.me</h3>
-      <p>longer streams, calm pace and real conversations</p>
+      <p data-i18n="lm">main live space, real conversations</p>
     </a>
+
+    <a class="link" href="https://kick.com/YOUR_KICK">
+      <h3>Kick</h3>
+      <p data-i18n="kick">chill streams and hangouts</p>
+    </a>
+
+    <a class="link" href="https://youtube.com/@YOUR_YOUTUBE">
+      <h3>YouTube</h3>
+      <p data-i18n="yt">highlights and uploads</p>
+    </a>
+
     <a class="link" href="https://discord.gg/YOUR_DISCORD">
       <h3>Discord</h3>
-      <p>community space, updates and closer moments off stream</p>
+      <p data-i18n="dc">community and updates</p>
     </a>
-  </div>
-</section>
+  </section>
 
-<div class="footer">
-  save this page · official links only
-</div>
+  <div class="live">LIVE</div>
 
-<audio id="ambient" loop>
-  <source src="ambient.mp3" type="audio/mpeg">
-</audio>
+  <audio id="ambient" loop>
+    <source src="ambient.mp3" type="audio/mpeg">
+  </audio>
 
-</div>
 </div>
 
 <script>
-/* stars */
-const scene=document.getElementById("scene");
-for(let i=0;i<70;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"%";
-  s.style.top=Math.random()*100+"%";
-  s.style.animationDelay=Math.random()*6+"s";
-  scene.appendChild(s);
-}
-
 /* theme */
 document.getElementById("themeBtn").onclick=()=>{
   document.body.dataset.theme =
-    document.body.dataset.theme==="dark"?"light":"dark";
+    document.body.dataset.theme==="light"?"dark":"light";
 };
 
 /* music */
@@ -269,6 +236,37 @@ let playing=false;
 document.getElementById("musicBtn").onclick=()=>{
   if(!playing){audio.volume=.5;audio.play();playing=true}
   else{audio.pause();playing=false}
+};
+
+/* language */
+const dict={
+  en:{
+    subtitle:"natural vibes · real energy · live moments",
+    tt:"short clips and spontaneous lives",
+    ig:"daily mood, stories and photos",
+    lm:"main live space, real conversations",
+    kick:"chill streams and hangouts",
+    yt:"highlights and uploads",
+    dc:"community and updates"
+  },
+  es:{
+    subtitle:"vibra natural · energía real · momentos en directo",
+    tt:"clips rápidos y directos espontáneos",
+    ig:"historias, fotos y mood diario",
+    lm:"espacio principal de directos",
+    kick:"streams tranquilos y charlas",
+    yt:"highlights y vídeos",
+    dc:"comunidad y avisos"
+  }
+};
+let lang="en";
+const langBtn=document.getElementById("langBtn");
+langBtn.onclick=()=>{
+  lang=lang==="en"?"es":"en";
+  langBtn.textContent="🌍 "+lang.toUpperCase();
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    el.textContent=dict[lang][el.dataset.i18n];
+  });
 };
 </script>
 
