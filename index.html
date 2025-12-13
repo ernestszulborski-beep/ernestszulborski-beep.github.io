@@ -29,25 +29,21 @@
   --stroke:rgba(2,6,23,.10);
   --text:#0b1220;
   --muted:rgba(15,23,42,.62);
-
   --shadow:0 18px 60px rgba(2,6,23,.12);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
 body{
   font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--violet) 20%, transparent) 0, transparent 55%),
-    radial-gradient(circle at 85% 18%, color-mix(in srgb,var(--cyan) 16%, transparent) 0, transparent 60%),
-    radial-gradient(circle at 40% 92%, color-mix(in srgb,var(--pink) 16%, transparent) 0, transparent 62%),
+    radial-gradient(circle at 15% 10%, #c084fc33, transparent 55%),
+    radial-gradient(circle at 85% 18%, #67e8f933, transparent 60%),
     linear-gradient(180deg,var(--bg),var(--bg2));
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+  min-height:100vh;
 }
 
-/* ===== layout ===== */
+/* layout */
 .wrap{
   max-width:820px;
   margin:0 auto;
@@ -57,37 +53,24 @@ body{
   gap:56px;
 }
 
-/* ===== hero ===== */
-.hero{
-  text-align:center;
-}
-
-/* profile is king */
+/* hero */
+.hero{text-align:center}
 .avatar{
   width:320px;height:320px;
   margin:0 auto;
   border-radius:999px;
   padding:7px;
-  background:conic-gradient(from 0deg,var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 110px color-mix(in srgb,var(--violet) 60%, transparent);
+  background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
+  box-shadow:0 0 110px #c084fcaa;
 }
-.avatar img{
-  width:100%;height:100%;
-  border-radius:inherit;
-  object-fit:cover;
-  display:block;
-}
+.avatar img{width:100%;height:100%;border-radius:inherit;object-fit:cover}
 
-/* DANIELA biggest */
 .name{
   margin-top:34px;
   font-size:78px;
   font-weight:1000;
   letter-spacing:.18em;
-  text-transform:uppercase;
 }
-
-/* 11 smaller + clean glow */
 .num{
   margin-top:10px;
   font-size:34px;
@@ -96,35 +79,22 @@ body{
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:numGlow 2.8s ease-in-out infinite alternate;
 }
-@keyframes numGlow{
-  from{ text-shadow:0 0 10px color-mix(in srgb,var(--pink) 55%, transparent); }
-  to  { text-shadow:0 0 26px color-mix(in srgb,var(--violet) 70%, transparent),
-               0 0 40px color-mix(in srgb,var(--cyan) 55%, transparent); }
-}
-
-/* description smaller (as requested) */
 .desc{
   margin-top:18px;
   font-size:14px;
   line-height:1.7;
   color:var(--muted);
 }
-.desc .line{display:block; margin-top:6px}
 
-/* controls minimal */
+/* controls */
 .controls{
   margin-top:22px;
   display:flex;
   justify-content:center;
   gap:12px;
-  flex-wrap:wrap;
 }
 .ctrl{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
   padding:11px 16px;
   border-radius:999px;
   border:1px solid var(--stroke);
@@ -132,42 +102,25 @@ body{
   box-shadow:var(--shadow);
   font-weight:950;
   cursor:pointer;
-  user-select:none;
-  transition:transform .12s ease;
 }
-.ctrl:hover{transform:translateY(-1px)}
-.ctrl small{opacity:.8;font-weight:900}
 
-/* unicorn big but clean */
-.uniWrap{
-  margin-top:28px;
-  display:grid;
-  place-items:center;
-}
+/* unicorn */
+.uniWrap{margin-top:28px;display:grid;place-items:center}
 .uni{
-  width:280px;height:280px;
+  width:280px;
   animation:uFloat 4.6s ease-in-out infinite;
-  filter:drop-shadow(0 26px 40px rgba(0,0,0,.28));
 }
-@keyframes uFloat{
-  0%,100%{transform:translateY(0) rotate(-1deg)}
-  50%{transform:translateY(-16px) rotate(1deg)}
-}
-.uTail{transform-origin:62px 58px; animation:uSwish 1.7s ease-in-out infinite;}
-@keyframes uSwish{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
-.uSpark{animation:uSpark 1.6s ease-in-out infinite;}
-@keyframes uSpark{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes uFloat{50%{transform:translateY(-16px)}}
 
-/* ===== cards ===== */
+/* section */
 .section{
   border-radius:28px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
-  overflow:hidden;
 }
 .sectionHead{
-  padding:16px 16px 10px;
+  padding:16px;
   border-bottom:1px solid var(--stroke);
 }
 .sectionHead h2{
@@ -178,16 +131,15 @@ body{
 }
 .sectionHead p{
   margin-top:8px;
-  color:var(--muted);
   font-size:12.5px;
-  line-height:1.45;
+  color:var(--muted);
 }
 
-/* no gaps ever: auto-fit */
+/* platforms grid – ZERO PUSTYCH MIEJSC */
 .grid{
   padding:14px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:12px;
 }
 
@@ -200,76 +152,37 @@ body{
   background:rgba(255,255,255,.06);
   text-decoration:none;
   color:var(--text);
-  transition:transform .14s ease, border-color .14s ease;
-  min-height:130px;
 }
-[data-theme="light"] .platform{ background:rgba(2,6,23,.03); }
-.platform:hover{
-  transform:translateY(-2px);
-  border-color:color-mix(in srgb,var(--violet) 26%, var(--stroke));
-}
-
 .pIcon{
   width:46px;height:46px;
   border-radius:16px;
-  border:1px solid color-mix(in srgb,var(--stroke) 70%, transparent);
-  display:grid;
-  place-items:center;
-  flex:0 0 auto;
-  background:linear-gradient(135deg,
-    color-mix(in srgb,var(--violet) 14%, transparent),
-    color-mix(in srgb,var(--cyan) 10%, transparent)
-  );
+  display:grid;place-items:center;
+  border:1px solid var(--stroke);
 }
-.pIcon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2}
+.pIcon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2}
 .pIcon .fill{fill:currentColor;stroke:none}
 .pText h3{font-size:15px;font-weight:1000}
-.pText p{
-  margin-top:8px;
-  font-size:12.3px;
-  line-height:1.5;
-  color:var(--muted);
-}
-.go{margin-left:auto;opacity:.7;font-weight:1000}
+.pText p{margin-top:6px;font-size:12.3px;color:var(--muted)}
+.go{margin-left:auto;font-weight:1000;opacity:.7}
 
 /* donate */
-.donateBody{padding:14px 14px 16px}
-.box{
-  border-radius:22px;
-  border:1px solid var(--stroke);
-  background:rgba(255,255,255,.06);
-  padding:14px;
-}
-[data-theme="light"] .box{ background:rgba(2,6,23,.03); }
-.copyRow{margin-top:10px;display:flex;gap:10px;align-items:stretch}
+.donateBody{padding:14px}
+.copyRow{display:flex;gap:10px}
 .val{
-  flex:1;
-  padding:12px 12px;
-  border-radius:16px;
-  border:1px dashed color-mix(in srgb,var(--violet) 28%, var(--stroke));
-  background:rgba(0,0,0,.04);
-  font-size:13px;
-  word-break:break-all;
+  flex:1;padding:12px;border-radius:16px;
+  border:1px dashed var(--stroke);
 }
-[data-theme="light"] .val{background:rgba(2,6,23,.03)}
 .btn{
   padding:12px 14px;
   border-radius:999px;
   border:1px solid var(--stroke);
   background:linear-gradient(135deg,var(--gold),var(--pink));
-  color:#111827;
   font-weight:1000;
   cursor:pointer;
-  white-space:nowrap;
 }
 
-/* ending */
-.ending{
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6;
-}
+/* end */
+.ending{text-align:center;color:var(--muted)}
 .live{
   margin-top:18px;
   font-size:62px;
@@ -278,20 +191,13 @@ body{
   background:linear-gradient(90deg,#ff004c,#ff7a18,#ff004c);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:livePulse 1.6s ease-in-out infinite;
-}
-@keyframes livePulse{
-  0%,100%{opacity:.6;transform:translateY(0)}
-  50%{opacity:1;transform:translateY(-2px)}
 }
 
-/* mobile */
 @media(max-width:720px){
   .avatar{width:250px;height:250px}
   .name{font-size:52px}
   .num{font-size:28px}
-  .uni{width:220px;height:220px}
-  .live{font-size:48px}
+  .uni{width:220px}
 }
 </style>
 </head>
@@ -300,243 +206,159 @@ body{
 
 <div class="wrap">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="avatar">
-      <img src="profile.jpg" alt="DANIELA">
-    </div>
-
-    <div class="name">DANIELA</div>
-    <div class="num">11</div>
-
-    <div class="desc">
-      <span class="line"><b>EN:</b> natural vibes · real energy · live moments</span>
-      <span class="line"><b>ES:</b> vibra natural · energía real · momentos en directo</span>
-    </div>
-
-    <div class="controls">
-      <div class="ctrl" id="themeBtn">🌗 <small id="themeTxt">Dark</small></div>
-      <div class="ctrl" id="musicBtn">🎵 <small id="musicTxt">Off</small></div>
-    </div>
-
-    <!-- BIG animated unicorn (clean) -->
-    <div class="uniWrap" aria-hidden="true">
-      <svg class="uni" viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="uGlow" cx="35%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.92"/>
-            <stop offset="55%" stop-color="#c084fc" stop-opacity="0.32"/>
-            <stop offset="100%" stop-color="#f9a8d4" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="uMane" x1="0" x2="1">
-            <stop offset="0%" stop-color="#f9a8d4"/>
-            <stop offset="50%" stop-color="#c084fc"/>
-            <stop offset="100%" stop-color="#67e8f9"/>
-          </linearGradient>
-          <linearGradient id="uBody" x1="0" x2="1">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-            <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.86"/>
-          </linearGradient>
-        </defs>
-
-        <circle class="uSpark" cx="50" cy="50" r="44" fill="url(#uGlow)"/>
-        <path d="M58 14 L74 30 L56 34 Z" fill="#fde68a" opacity="0.97"/>
-        <path d="M56 26c4-8 11-11 14-6 2 4-2 12-11 15z" fill="#ffffff" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
-        <path d="M24 60c6-20 20-33 40-33 18 0 32 12 34 27 2 15-9 28-27 30-22 2-40-7-47-24z"
-              fill="url(#uBody)" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
-        <path class="uTail"
-              d="M40 30c-12 7-16 18-14 30 2 12 11 22 25 24-16 7-36 0-41-18-5-18 7-36 30-36z"
-              fill="url(#uMane)" opacity="0.98"/>
-        <circle cx="64" cy="54" r="2.4" fill="rgba(2,6,23,0.72)"/>
-        <path class="uSpark" d="M80 42l2.3 4.6 4.6 2.3-4.6 2.3-2.3 4.6-2.3-4.6-4.6-2.3 4.6-2.3z" fill="#ffffff" opacity="0.78"/>
-      </svg>
-    </div>
-  </section>
-
-  <!-- PLATFORMS -->
-  <section class="section">
-    <div class="sectionHead">
-      <h2>Platforms</h2>
-      <p>
-        <b>EN:</b> Tap a platform to follow or join the live. <br>
-        <b>ES:</b> Toca una plataforma para seguir o entrar al directo.
-      </p>
-    </div>
-
-    <div class="grid">
-      <a class="platform" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener">
-        <div class="pIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7" stroke-linecap="round"/>
-            <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>TikTok</h3>
-          <p><b>EN:</b> short clips + lives. <b>ES:</b> clips + directos.</p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <a class="platform" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">
-        <div class="pIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="6" y="6" width="12" height="12" rx="3"/>
-            <circle cx="12" cy="12" r="3"/>
-            <circle cx="16.5" cy="7.5" r="1" class="fill"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Instagram</h3>
-          <p><b>EN:</b> stories + mood. <b>ES:</b> historias + mood.</p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <a class="platform" href="https://www.live.me/YOUR_LIVEME" target="_blank" rel="noopener">
-        <div class="pIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3.5" class="fill"/>
-            <path d="M4.5 12a7.5 7.5 0 0 1 15 0" stroke-linecap="round"/>
-            <path d="M6.8 12a5.2 5.2 0 0 1 10.4 0" stroke-linecap="round" opacity="0.85"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Live.me</h3>
-          <p><b>EN:</b> main live room. <b>ES:</b> sala principal.</p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <a class="platform" href="https://kick.com/YOUR_KICK" target="_blank" rel="noopener">
-        <div class="pIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 6v12" stroke-linecap="round"/>
-            <path d="M17 6l-7 7 7 5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Kick</h3>
-          <p><b>EN:</b> chill sessions. <b>ES:</b> streams tranquilos.</p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-
-      <a class="platform" href="https://discord.gg/YOUR_DISCORD" target="_blank" rel="noopener">
-        <div class="pIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 18c2.2 1.6 7.8 1.6 10 0 1-3 1.4-5.9 1-9-2-1.5-3.7-2.1-5-2.3l-.8 1.4a10 10 0 0 0-3.4 0L8 6.7C6.7 6.9 5 7.5 3 9c-.4 3.1 0 6 1 9 1 .7 2 .9 3 .9z" stroke-linejoin="round"/>
-            <circle cx="9.5" cy="12.2" r="1.2" class="fill"/>
-            <circle cx="14.5" cy="12.2" r="1.2" class="fill"/>
-          </svg>
-        </div>
-        <div class="pText">
-          <h3>Discord</h3>
-          <p><b>EN:</b> community + updates. <b>ES:</b> comunidad + avisos.</p>
-        </div>
-        <div class="go">➜</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- DONATE -->
-  <section class="section">
-    <div class="sectionHead">
-      <h2>Donate</h2>
-      <p>
-        <b>EN:</b> Support the content if you want. Thank you. <br>
-        <b>ES:</b> Si quieres apoyar el contenido, gracias.
-      </p>
-    </div>
-
-    <div class="donateBody">
-      <div class="box">
-        <div class="copyRow">
-          <div class="val" id="donVal">YOUR_PAYMENT_INFO</div>
-          <button class="btn" id="copyBtn">Copy</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENDING -->
-  <div class="ending">
-    <div><b>EN:</b> Save this page — only official links. <b>ES:</b> Guarda esta página — enlaces oficiales.</div>
-    <div class="live">LIVE</div>
+<section class="hero">
+  <div class="avatar"><img src="profile.jpg" alt="DANIELA"></div>
+  <div class="name">DANIELA</div>
+  <div class="num">11</div>
+  <div class="desc">
+    EN · natural vibes · real energy · live moments<br>
+    ES · vibra natural · energía real · momentos en directo
   </div>
 
-  <audio id="ambient" preload="none" loop>
-    <source src="ambient.mp3" type="audio/mpeg">
-  </audio>
+  <div class="controls">
+    <div class="ctrl" id="themeBtn">🌗</div>
+    <div class="ctrl" id="musicBtn">🎵</div>
+  </div>
+
+  <div class="uniWrap">
+    <svg class="uni" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="mane" x1="0" x2="1">
+          <stop offset="0%" stop-color="#f9a8d4"/>
+          <stop offset="50%" stop-color="#c084fc"/>
+          <stop offset="100%" stop-color="#67e8f9"/>
+        </linearGradient>
+      </defs>
+      <path d="M20 60c10-30 40-40 60-20-10 10-10 30-30 30S20 70 20 60z" fill="#fff"/>
+      <path d="M40 30c-20 10-20 40 0 50" fill="url(#mane)"/>
+      <polygon points="60,15 75,30 55,32" fill="#fde68a"/>
+    </svg>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sectionHead">
+    <h2>Platforms</h2>
+    <p>EN choose a platform · ES elige una plataforma</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- TikTok -->
+    <a class="platform" href="https://tiktok.com/@YOUR_TIKTOK">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7"/>
+          <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>TikTok</h3><p>EN clips & lives · ES clips y directos</p></div>
+      <div class="go">➜</div>
+    </a>
+
+    <!-- Instagram -->
+    <a class="platform" href="https://instagram.com/YOUR_INSTAGRAM">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <rect x="6" y="6" width="12" height="12" rx="3"/>
+          <circle cx="12" cy="12" r="3"/>
+          <circle cx="16.5" cy="7.5" r="1" class="fill"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>Instagram</h3><p>EN stories · ES historias</p></div>
+      <div class="go">➜</div>
+    </a>
+
+    <!-- Live.me -->
+    <a class="platform" href="https://www.live.me/YOUR_LIVEME">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.5" class="fill"/>
+          <path d="M4.5 12a7.5 7.5 0 0 1 15 0"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>Live.me</h3><p>EN main live · ES directo principal</p></div>
+      <div class="go">➜</div>
+    </a>
+
+    <!-- Kick -->
+    <a class="platform" href="https://kick.com/YOUR_KICK">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 6v12"/>
+          <path d="M17 6l-7 7 7 5"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>Kick</h3><p>EN chill streams · ES streams tranquilos</p></div>
+      <div class="go">➜</div>
+    </a>
+
+    <!-- Twitch -->
+    <a class="platform" href="https://twitch.tv/YOUR_TWITCH">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 3h16v11l-4 4H8l-4 4z"/>
+          <path d="M10 8v4M14 8v4"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>Twitch</h3><p>EN streams · ES directos</p></div>
+      <div class="go">➜</div>
+    </a>
+
+    <!-- X / Twitter -->
+    <a class="platform" href="https://twitter.com/YOUR_X">
+      <div class="pIcon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4l16 16M20 4L4 20"/>
+        </svg>
+      </div>
+      <div class="pText"><h3>X (Twitter)</h3><p>EN updates · ES actualizaciones</p></div>
+      <div class="go">➜</div>
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="sectionHead">
+    <h2>Donate</h2>
+    <p>EN support · ES apoyo</p>
+  </div>
+  <div class="donateBody">
+    <div class="copyRow">
+      <div class="val" id="donVal">YOUR_PAYMENT_INFO</div>
+      <button class="btn" id="copyBtn">Copy</button>
+    </div>
+  </div>
+</section>
+
+<div class="ending">
+  <div>EN save this page · ES guarda esta página</div>
+  <div class="live">LIVE</div>
+</div>
+
+<audio id="ambient" loop>
+  <source src="ambient.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
 <script>
-(() => {
-  // theme
-  const themeBtn = document.getElementById('themeBtn');
-  const themeTxt = document.getElementById('themeTxt');
-  const savedTheme = localStorage.getItem('theme11');
-  if(savedTheme) document.body.setAttribute('data-theme', savedTheme);
-
-  function syncTheme(){
-    const isLight = document.body.getAttribute('data-theme') === 'light';
-    themeTxt.textContent = isLight ? 'Light' : 'Dark';
-  }
-  syncTheme();
-
-  themeBtn.addEventListener('click', () => {
-    const isLight = document.body.getAttribute('data-theme') === 'light';
-    document.body.setAttribute('data-theme', isLight ? 'dark' : 'light');
-    localStorage.setItem('theme11', isLight ? 'dark' : 'light');
-    syncTheme();
-  });
-
-  // music
-  const audio = document.getElementById('ambient');
-  const musicBtn = document.getElementById('musicBtn');
-  const musicTxt = document.getElementById('musicTxt');
-  let on = false;
-
-  musicBtn.addEventListener('click', async () => {
-    try{
-      if(!on){
-        audio.volume = 0.55;
-        await audio.play();
-        on = true;
-      }else{
-        audio.pause();
-        on = false;
-      }
-      musicTxt.textContent = on ? 'On' : 'Off';
-    }catch(e){
-      on = false;
-      musicTxt.textContent = 'Off';
-      alert("Music not playing. Put 'ambient.mp3' in the same folder as index.html.");
-    }
-  });
-
-  // donate copy (with feedback)
-  const copyBtn = document.getElementById('copyBtn');
-  const donVal = document.getElementById('donVal');
-  copyBtn.addEventListener('click', async () => {
-    const txt = (donVal.innerText || '').trim();
-    if(!txt) return;
-    const old = copyBtn.textContent;
-    try{
-      await navigator.clipboard.writeText(txt);
-    }catch(e){
-      const r = document.createRange();
-      r.selectNode(donVal);
-      const sel = window.getSelection();
-      sel.removeAllRanges(); sel.addRange(r);
-      document.execCommand('copy');
-      sel.removeAllRanges();
-    }
-    copyBtn.textContent = "Copied!";
-    setTimeout(()=>copyBtn.textContent = old, 1100);
-  });
-})();
+document.getElementById("themeBtn").onclick=()=>{
+  document.body.dataset.theme =
+    document.body.dataset.theme==="light"?"dark":"light";
+};
+const audio=document.getElementById("ambient");
+let on=false;
+document.getElementById("musicBtn").onclick=()=>{
+  if(!on){audio.volume=.5;audio.play();on=true}
+  else{audio.pause();on=false}
+};
+document.getElementById("copyBtn").onclick=()=>{
+  navigator.clipboard.writeText(
+    document.getElementById("donVal").innerText
+  );
+};
 </script>
 
 </body>
