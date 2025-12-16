@@ -7,358 +7,743 @@
 
 <style>
 :root{
-  --bg:#07091a;
+  --bg1:#050816;
   --bg2:#0b1630;
-  --card:rgba(255,255,255,.08);
-  --stroke:rgba(255,255,255,.14);
+  --bg3:#160b26;
+
+  --card:rgba(255,255,255,0.12);
+  --stroke:rgba(255,255,255,0.20);
   --text:#f8fafc;
-  --muted:rgba(248,250,252,.68);
+  --muted:rgba(248,250,252,0.76);
 
   --pink:#f9a8d4;
   --violet:#c084fc;
   --cyan:#67e8f9;
+  --mint:#6ee7b7;
   --gold:#fde68a;
 
-  --shadow:0 22px 70px rgba(0,0,0,.40);
+  --glass: blur(18px);
+  --shadow: 0 42px 140px rgba(0,0,0,.68);
+  --shadowSoft: 0 22px 70px rgba(0,0,0,.42);
 }
 
 [data-theme="light"]{
-  --bg:#f8fafc;
-  --bg2:#eef2ff;
-  --card:rgba(255,255,255,.92);
-  --stroke:rgba(2,6,23,.10);
+  --bg1:#f8fafc;
+  --bg2:#e5e7eb;
+  --bg3:#e0f2fe;
+
+  --card:rgba(255,255,255,0.93);
+  --stroke:rgba(2,6,23,0.12);
   --text:#0b1220;
-  --muted:rgba(15,23,42,.62);
-  --shadow:0 18px 60px rgba(2,6,23,.12);
+  --muted:rgba(15,23,42,0.70);
+
+  --shadow: 0 30px 110px rgba(2,6,23,.18);
+  --shadowSoft: 0 18px 55px rgba(2,6,23,.12);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+
 body{
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%, #c084fc33, transparent 55%),
-    radial-gradient(circle at 85% 18%, #67e8f933, transparent 60%),
-    linear-gradient(180deg,var(--bg),var(--bg2));
-  min-height:100vh;
+    radial-gradient(circle at 14% 12%, color-mix(in srgb,var(--violet) 40%, transparent) 0, transparent 48%),
+    radial-gradient(circle at 86% 18%, color-mix(in srgb,var(--cyan) 36%, transparent) 0, transparent 52%),
+    radial-gradient(circle at 32% 92%, color-mix(in srgb,var(--pink) 34%, transparent) 0, transparent 54%),
+    radial-gradient(circle at 80% 88%, color-mix(in srgb,var(--mint) 18%, transparent) 0, transparent 58%),
+    linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
 
-/* layout */
+/* ===== BACKGROUND ===== */
+.scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:rgba(255,255,255,0.92);
+  opacity:.55;
+  filter: drop-shadow(0 0 7px rgba(255,255,255,0.35));
+  animation: twinkle 6.2s ease-in-out infinite;
+}
+@keyframes twinkle{0%,100%{opacity:.18}50%{opacity:1}}
+
+.leaf{
+  position:absolute;
+  width:300px;
+  opacity:.55;
+  will-change:transform;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,0.16));
+}
+[data-theme="dark"] .leaf{opacity:.36}
+
+/* ===== LAYOUT ===== */
 .wrap{
-  max-width:820px;
+  position:relative;
+  z-index:1;
+  max-width:980px;
   margin:0 auto;
-  padding:78px 18px 140px;
+  padding:84px 18px 160px;
   display:flex;
   flex-direction:column;
-  gap:56px;
+  gap:18px;
 }
 
-/* hero */
-.hero{text-align:center}
+/* ===== HERO CARD ===== */
+.hero{
+  border-radius:40px;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadow);
+  backdrop-filter:var(--glass);
+  overflow:hidden;
+  position:relative;
+}
+
+.heroGlow{
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb,var(--violet) 18%, transparent) 0, transparent 62%),
+    radial-gradient(circle at 86% 30%, color-mix(in srgb,var(--cyan) 14%, transparent) 0, transparent 62%),
+    radial-gradient(circle at 28% 90%, color-mix(in srgb,var(--pink) 14%, transparent) 0, transparent 64%);
+  opacity:.95;
+  pointer-events:none;
+}
+
+.heroInner{
+  position:relative;
+  padding:24px 22px 22px;
+  display:grid;
+  grid-template-columns: 360px 1fr 260px;
+  gap:22px;
+  align-items:center;
+}
+
+/* avatar biggest */
 .avatar{
-  width:320px;height:320px;
+  width:340px;height:340px;
+  border-radius:50%;
+  padding:8px;
   margin:0 auto;
-  border-radius:999px;
-  padding:7px;
   background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));
-  box-shadow:0 0 110px #c084fcaa;
+  box-shadow:0 0 160px color-mix(in srgb,var(--violet) 70%, transparent);
 }
-.avatar img{width:100%;height:100%;border-radius:inherit;object-fit:cover}
+.avatar img{
+  width:100%;height:100%;
+  border-radius:inherit;
+  object-fit:cover;
+  display:block;
+  background: radial-gradient(circle at 30% 20%, var(--mint), #22c55e);
+}
 
+/* titles */
+.title{min-width:0}
 .name{
-  margin-top:34px;
-  font-size:78px;
+  font-size:76px;
   font-weight:1000;
   letter-spacing:.18em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .num{
   margin-top:10px;
-  font-size:34px;
+  font-size:38px;
   font-weight:1000;
   letter-spacing:.58em;
   background:linear-gradient(135deg,var(--pink),var(--violet),var(--cyan));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation: numGlow 2.8s ease-in-out infinite alternate;
 }
+@keyframes numGlow{
+  from{ text-shadow:0 0 14px color-mix(in srgb,var(--pink) 55%, transparent); }
+  to  { text-shadow:0 0 34px color-mix(in srgb,var(--violet) 70%, transparent),
+               0 0 54px color-mix(in srgb,var(--cyan) 60%, transparent); }
+}
+
+/* smaller description */
 .desc{
   margin-top:18px;
   font-size:14px;
   line-height:1.7;
   color:var(--muted);
 }
+.desc .line{display:block;margin-top:6px}
 
 /* controls */
 .controls{
-  margin-top:22px;
+  margin-top:18px;
   display:flex;
-  justify-content:center;
   gap:12px;
+  flex-wrap:wrap;
 }
 .ctrl{
-  padding:11px 16px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
   border-radius:999px;
   border:1px solid var(--stroke);
-  background:var(--card);
-  box-shadow:var(--shadow);
-  font-weight:950;
+  background:rgba(0,0,0,0.04);
+  color:var(--text);
   cursor:pointer;
+  font-weight:950;
+  box-shadow:var(--shadowSoft);
+  user-select:none;
+  transition:transform .15s ease;
 }
+[data-theme="dark"] .ctrl{background:rgba(255,255,255,0.06)}
+.ctrl:hover{transform:translateY(-1px)}
+.ctrl small{opacity:.82;font-weight:900}
 
-/* unicorn */
-.uniWrap{margin-top:28px;display:grid;place-items:center}
+/* ===== BIG ANIMATED UNICORN ===== */
+.uniWrap{
+  width:260px;height:260px;
+  margin:0 auto;
+  display:grid;place-items:center;
+  filter: drop-shadow(0 34px 52px rgba(0,0,0,0.38));
+}
 .uni{
-  width:280px;
-  animation:uFloat 4.6s ease-in-out infinite;
+  width:250px;height:250px;
+  animation:uFloat 4.9s ease-in-out infinite;
 }
-@keyframes uFloat{50%{transform:translateY(-16px)}}
+@keyframes uFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-18px) rotate(1deg)}
+}
+.uTail{transform-origin:62px 58px;animation:uSwish 1.6s ease-in-out infinite}
+@keyframes uSwish{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
+.uSpark{animation:uSpark 1.6s ease-in-out infinite}
+@keyframes uSpark{0%,100%{opacity:.35}50%{opacity:1}}
 
-/* section */
+/* ===== SECTION ===== */
 .section{
-  border-radius:28px;
+  border-radius:34px;
   background:var(--card);
   border:1px solid var(--stroke);
   box-shadow:var(--shadow);
+  backdrop-filter:var(--glass);
+  overflow:hidden;
 }
 .sectionHead{
-  padding:16px;
+  padding:18px 18px 12px;
   border-bottom:1px solid var(--stroke);
 }
 .sectionHead h2{
-  font-size:12px;
-  letter-spacing:.14em;
+  font-size:13px;
   font-weight:1000;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 .sectionHead p{
   margin-top:8px;
   font-size:12.5px;
+  line-height:1.45;
   color:var(--muted);
 }
 
-/* platforms grid – ZERO PUSTYCH MIEJSC */
+/* ===== PLATFORM GRID (NO GAPS EVER) ===== */
 .grid{
-  padding:14px;
+  padding:16px 16px 18px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:14px;
 }
 
 .platform{
   display:flex;
   gap:14px;
-  padding:16px 14px;
-  border-radius:22px;
+  padding:18px 16px;
+  border-radius:26px;
   border:1px solid var(--stroke);
-  background:rgba(255,255,255,.06);
+  background:rgba(255,255,255,0.55);
   text-decoration:none;
   color:var(--text);
+  box-shadow:var(--shadowSoft);
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+  min-height:170px;
+  position:relative;
+  overflow:hidden;
 }
-.pIcon{
-  width:46px;height:46px;
-  border-radius:16px;
-  display:grid;place-items:center;
-  border:1px solid var(--stroke);
-}
-.pIcon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2}
-.pIcon .fill{fill:currentColor;stroke:none}
-.pText h3{font-size:15px;font-weight:1000}
-.pText p{margin-top:6px;font-size:12.3px;color:var(--muted)}
-.go{margin-left:auto;font-weight:1000;opacity:.7}
+[data-theme="dark"] .platform{background:rgba(255,255,255,0.08)}
 
-/* donate */
-.donateBody{padding:14px}
-.copyRow{display:flex;gap:10px}
-.val{
-  flex:1;padding:12px;border-radius:16px;
-  border:1px dashed var(--stroke);
+.platform::before{
+  content:"";
+  position:absolute; inset:-1px;
+  background:
+    radial-gradient(circle at 10% 10%, color-mix(in srgb,var(--violet) 18%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 90% 25%, color-mix(in srgb,var(--cyan) 14%, transparent) 0, transparent 58%),
+    radial-gradient(circle at 30% 90%, color-mix(in srgb,var(--pink) 14%, transparent) 0, transparent 60%);
+  opacity:.85;
+  pointer-events:none;
 }
+
+.platform:hover{
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb,var(--violet) 28%, var(--stroke));
+  box-shadow:0 24px 70px rgba(0,0,0,0.22);
+}
+
+.pIcon{
+  width:56px;height:56px;
+  border-radius:20px;
+  border:1px solid color-mix(in srgb,var(--stroke) 70%, transparent);
+  background: linear-gradient(135deg,
+    color-mix(in srgb,var(--violet) 18%, transparent),
+    color-mix(in srgb,var(--cyan) 12%, transparent)
+  );
+  display:grid;place-items:center;
+  flex:0 0 auto;
+  position:relative;
+  z-index:1;
+}
+.pIcon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.2}
+.pIcon .fill{fill:currentColor;stroke:none}
+
+.pText{min-width:0; position:relative; z-index:1;}
+.pText h3{font-size:16px;font-weight:1000;letter-spacing:.02em}
+.pText p{margin-top:9px;font-size:12.7px;line-height:1.5;color:var(--muted)}
+.go{margin-left:auto;font-weight:1000;opacity:.75;font-size:18px;position:relative;z-index:1}
+
+/* icon animations */
+.iconPulse{animation:iconPulse 1.9s ease-in-out infinite}
+@keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.iconWiggle{animation:iconWiggle 2.6s ease-in-out infinite}
+@keyframes iconWiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.iconFloat{animation:iconFloat 2.9s ease-in-out infinite}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* ===== DONATE ===== */
+.donateBody{padding:18px 18px 20px}
+.donateBox{
+  padding:18px;
+  border-radius:26px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,0.55);
+}
+[data-theme="dark"] .donateBox{background:rgba(255,255,255,0.08)}
+
+.copyRow{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  align-items:stretch;
+}
+.donVal{
+  flex:1;
+  padding:14px 14px;
+  border-radius:18px;
+  border:1px dashed color-mix(in srgb,var(--violet) 32%, var(--stroke));
+  background:rgba(0,0,0,0.04);
+  font-size:13px;
+  word-break:break-all;
+}
+[data-theme="dark"] .donVal{background:rgba(255,255,255,0.06)}
 .btn{
-  padding:12px 14px;
+  padding:14px 16px;
   border-radius:999px;
   border:1px solid var(--stroke);
   background:linear-gradient(135deg,var(--gold),var(--pink));
+  color:#111827;
   font-weight:1000;
   cursor:pointer;
+  transition:transform .15s ease;
+  white-space:nowrap;
 }
+.btn:hover{transform:translateY(-1px)}
 
-/* end */
-.ending{text-align:center;color:var(--muted)}
-.live{
-  margin-top:18px;
-  font-size:62px;
+/* ===== ENDING ===== */
+.ending{
+  border-radius:34px;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadow);
+  backdrop-filter:var(--glass);
+  overflow:hidden;
+}
+.endingInner{
+  padding:20px 18px 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+.endingInner b{color:var(--text)}
+.liveBanner{
+  padding:16px 10px 18px;
+  text-align:center;
   font-weight:1000;
   letter-spacing:.28em;
+  font-size:74px;
   background:linear-gradient(90deg,#ff004c,#ff7a18,#ff004c);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:livePulse 1.6s ease-in-out infinite;
+}
+@keyframes livePulse{
+  0%,100%{opacity:.6;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-2px)}
 }
 
-@media(max-width:720px){
-  .avatar{width:250px;height:250px}
-  .name{font-size:52px}
-  .num{font-size:28px}
-  .uni{width:220px}
+/* MOBILE */
+@media (max-width: 920px){
+  .heroInner{grid-template-columns:1fr;text-align:center}
+  .controls{justify-content:center}
+  .uniWrap{width:220px;height:220px}
+  .uni{width:210px;height:210px}
+  .name{font-size:56px}
+  .num{font-size:32px}
+  .grid{grid-template-columns:1fr}
+  .liveBanner{font-size:56px}
+}
+@media (max-width: 520px){
+  .avatar{width:260px;height:260px}
 }
 </style>
 </head>
 
 <body data-theme="dark">
 
-<div class="wrap">
-
-<section class="hero">
-  <div class="avatar"><img src="profile.jpg" alt="DANIELA"></div>
-  <div class="name">DANIELA</div>
-  <div class="num">11</div>
-  <div class="desc">
-    EN · natural vibes · real energy · live moments<br>
-    ES · vibra natural · energía real · momentos en directo
-  </div>
-
-  <div class="controls">
-    <div class="ctrl" id="themeBtn">🌗</div>
-    <div class="ctrl" id="musicBtn">🎵</div>
-  </div>
-
-  <div class="uniWrap">
-    <svg class="uni" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="mane" x1="0" x2="1">
-          <stop offset="0%" stop-color="#f9a8d4"/>
-          <stop offset="50%" stop-color="#c084fc"/>
-          <stop offset="100%" stop-color="#67e8f9"/>
-        </linearGradient>
-      </defs>
-      <path d="M20 60c10-30 40-40 60-20-10 10-10 30-30 30S20 70 20 60z" fill="#fff"/>
-      <path d="M40 30c-20 10-20 40 0 50" fill="url(#mane)"/>
-      <polygon points="60,15 75,30 55,32" fill="#fde68a"/>
-    </svg>
-  </div>
-</section>
-
-<section class="section">
-  <div class="sectionHead">
-    <h2>Platforms</h2>
-    <p>EN choose a platform · ES elige una plataforma</p>
-  </div>
-
-  <div class="grid">
-
-    <!-- TikTok -->
-    <a class="platform" href="https://tiktok.com/@YOUR_TIKTOK">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7"/>
-          <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>TikTok</h3><p>EN clips & lives · ES clips y directos</p></div>
-      <div class="go">➜</div>
-    </a>
-
-    <!-- Instagram -->
-    <a class="platform" href="https://instagram.com/YOUR_INSTAGRAM">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <rect x="6" y="6" width="12" height="12" rx="3"/>
-          <circle cx="12" cy="12" r="3"/>
-          <circle cx="16.5" cy="7.5" r="1" class="fill"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>Instagram</h3><p>EN stories · ES historias</p></div>
-      <div class="go">➜</div>
-    </a>
-
-    <!-- Live.me -->
-    <a class="platform" href="https://www.live.me/YOUR_LIVEME">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.5" class="fill"/>
-          <path d="M4.5 12a7.5 7.5 0 0 1 15 0"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>Live.me</h3><p>EN main live · ES directo principal</p></div>
-      <div class="go">➜</div>
-    </a>
-
-    <!-- Kick -->
-    <a class="platform" href="https://kick.com/YOUR_KICK">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <path d="M7 6v12"/>
-          <path d="M17 6l-7 7 7 5"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>Kick</h3><p>EN chill streams · ES streams tranquilos</p></div>
-      <div class="go">➜</div>
-    </a>
-
-    <!-- Twitch -->
-    <a class="platform" href="https://twitch.tv/YOUR_TWITCH">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 3h16v11l-4 4H8l-4 4z"/>
-          <path d="M10 8v4M14 8v4"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>Twitch</h3><p>EN streams · ES directos</p></div>
-      <div class="go">➜</div>
-    </a>
-
-    <!-- X / Twitter -->
-    <a class="platform" href="https://twitter.com/YOUR_X">
-      <div class="pIcon">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4l16 16M20 4L4 20"/>
-        </svg>
-      </div>
-      <div class="pText"><h3>X (Twitter)</h3><p>EN updates · ES actualizaciones</p></div>
-      <div class="go">➜</div>
-    </a>
-
-  </div>
-</section>
-
-<section class="section">
-  <div class="sectionHead">
-    <h2>Donate</h2>
-    <p>EN support · ES apoyo</p>
-  </div>
-  <div class="donateBody">
-    <div class="copyRow">
-      <div class="val" id="donVal">YOUR_PAYMENT_INFO</div>
-      <button class="btn" id="copyBtn">Copy</button>
-    </div>
-  </div>
-</section>
-
-<div class="ending">
-  <div>EN save this page · ES guarda esta página</div>
-  <div class="live">LIVE</div>
+<div class="scene" id="scene">
+  <!-- Parallax leaves -->
+  <svg class="leaf" data-depth="0.18" style="left:-110px; top:14%;" viewBox="0 0 220 220" aria-hidden="true">
+    <path d="M116 18C78 35 48 76 44 118c-4 43 18 79 55 86 39 7 80-19 98-54 18-35 18-90-81-132z" fill="rgba(34,197,94,0.35)"/>
+    <path d="M70 155c40-8 78-39 98-83" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="leaf" data-depth="0.30" style="right:-130px; top:6%; width:320px;" viewBox="0 0 220 220" aria-hidden="true">
+    <path d="M190 66c-30-34-86-56-126-30-40 26-55 86-25 124 30 38 94 40 132 10 38-30 49-70 19-104z" fill="rgba(110,231,183,0.28)"/>
+    <path d="M70 170c22-52 62-96 122-108" stroke="rgba(2,6,23,0.16)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="leaf" data-depth="0.44" style="left:10%; bottom:-160px; width:360px;" viewBox="0 0 220 220" aria-hidden="true">
+    <path d="M52 192c58 12 120-30 136-82 16-52-12-112-68-116C64-10 10 46 16 106c6 60 36 78 36 86z" fill="rgba(192,132,252,0.18)"/>
+    <path d="M44 168c52-22 92-58 118-122" stroke="rgba(2,6,23,0.14)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>
 </div>
 
-<audio id="ambient" loop>
-  <source src="ambient.mp3" type="audio/mpeg">
-</audio>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="heroGlow"></div>
+    <div class="heroInner">
+
+      <div class="avatar">
+        <img src="profile.jpg" alt="DANIELA">
+      </div>
+
+      <div class="title">
+        <div class="name">DANIELA</div>
+        <div class="num">11</div>
+
+        <div class="desc">
+          <span class="line"><b>EN:</b> natural vibes · real energy · live moments</span>
+          <span class="line"><b>ES:</b> vibra natural · energía real · momentos en directo</span>
+        </div>
+
+        <div class="controls">
+          <div class="ctrl" id="themeBtn">🌗 <small id="themeTxt">Dark</small></div>
+          <div class="ctrl" id="musicBtn">🎵 <small id="musicTxt">Off</small></div>
+        </div>
+      </div>
+
+      <div class="uniWrap" aria-hidden="true">
+        <svg class="uni" viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="uGlow" cx="35%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.92"/>
+              <stop offset="55%" stop-color="#c084fc" stop-opacity="0.32"/>
+              <stop offset="100%" stop-color="#f9a8d4" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="uMane" x1="0" x2="1">
+              <stop offset="0%" stop-color="#f9a8d4"/>
+              <stop offset="50%" stop-color="#c084fc"/>
+              <stop offset="100%" stop-color="#67e8f9"/>
+            </linearGradient>
+            <linearGradient id="uBody" x1="0" x2="1">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.86"/>
+            </linearGradient>
+          </defs>
+
+          <circle class="uSpark" cx="50" cy="50" r="44" fill="url(#uGlow)"/>
+          <path d="M58 14 L74 30 L56 34 Z" fill="#fde68a" opacity="0.97"/>
+          <path d="M58 14 L66 30" stroke="rgba(2,6,23,0.18)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M56 26c4-8 11-11 14-6 2 4-2 12-11 15z" fill="#ffffff" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
+          <path d="M24 60c6-20 20-33 40-33 18 0 32 12 34 27 2 15-9 28-27 30-22 2-40-7-47-24z"
+                fill="url(#uBody)" stroke="rgba(2,6,23,0.14)" stroke-width="2"/>
+          <path class="uTail"
+                d="M40 30c-12 7-16 18-14 30 2 12 11 22 25 24-16 7-36 0-41-18-5-18 7-36 30-36z"
+                fill="url(#uMane)" opacity="0.98"/>
+          <circle cx="64" cy="54" r="2.4" fill="rgba(2,6,23,0.72)"/>
+          <path class="uSpark" d="M80 42l2.3 4.6 4.6 2.3-4.6 2.3-2.3 4.6-2.3-4.6-4.6-2.3 4.6-2.3z" fill="#ffffff" opacity="0.78"/>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PLATFORMS -->
+  <section class="section">
+    <div class="sectionHead">
+      <h2>Platforms</h2>
+      <p><b>EN:</b> Tap a platform to follow / join lives. <b>ES:</b> Toca una plataforma para seguir / entrar a directos.</p>
+    </div>
+
+    <div class="grid">
+
+      <a class="platform" href="https://tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener">
+        <div class="pIcon iconPulse" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 4v10.2a3.8 3.8 0 1 1-3-3.7" stroke-linecap="round"/>
+            <path d="M14 4c1.2 2.7 3.2 4.2 6 4.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>TikTok</h3>
+          <p><b>EN:</b> short clips + lives. <b>ES:</b> clips + directos.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">
+        <div class="pIcon iconWiggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="6" y="6" width="12" height="12" rx="3"/>
+            <circle cx="12" cy="12" r="3"/>
+            <circle cx="16.5" cy="7.5" r="1" class="fill"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>Instagram</h3>
+          <p><b>EN:</b> stories + photos. <b>ES:</b> historias + fotos.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://www.live.me/YOUR_LIVEME" target="_blank" rel="noopener">
+        <div class="pIcon iconFloat" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3.5" class="fill"/>
+            <path d="M4.5 12a7.5 7.5 0 0 1 15 0" stroke-linecap="round"/>
+            <path d="M6.8 12a5.2 5.2 0 0 1 10.4 0" stroke-linecap="round" opacity="0.85"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>Live.me</h3>
+          <p><b>EN:</b> main live space. <b>ES:</b> sala principal.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://kick.com/YOUR_KICK" target="_blank" rel="noopener">
+        <div class="pIcon iconPulse" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 6v12" stroke-linecap="round"/>
+            <path d="M17 6l-7 7 7 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>Kick</h3>
+          <p><b>EN:</b> chill hangouts. <b>ES:</b> streams tranquilos.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://discord.gg/YOUR_DISCORD" target="_blank" rel="noopener">
+        <div class="pIcon iconWiggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 18c2.2 1.6 7.8 1.6 10 0 1-3 1.4-5.9 1-9-2-1.5-3.7-2.1-5-2.3l-.8 1.4a10 10 0 0 0-3.4 0L8 6.7C6.7 6.9 5 7.5 3 9c-.4 3.1 0 6 1 9 1 .7 2 .9 3 .9z" stroke-linejoin="round"/>
+            <circle cx="9.5" cy="12.2" r="1.2" class="fill"/>
+            <circle cx="14.5" cy="12.2" r="1.2" class="fill"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>Discord</h3>
+          <p><b>EN:</b> community + updates. <b>ES:</b> comunidad + avisos.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://twitch.tv/YOUR_TWITCH" target="_blank" rel="noopener">
+        <div class="pIcon iconFloat" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 3h16v11l-4 4H8l-4 4z" stroke-linejoin="round"/>
+            <path d="M10 8v4M14 8v4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>Twitch</h3>
+          <p><b>EN:</b> streams + schedule. <b>ES:</b> directos + horario.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+      <a class="platform" href="https://twitter.com/YOUR_X" target="_blank" rel="noopener">
+        <div class="pIcon iconPulse" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4l16 16" stroke-linecap="round"/>
+            <path d="M20 4L4 20" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="pText">
+          <h3>X (Twitter)</h3>
+          <p><b>EN:</b> updates + links. <b>ES:</b> avisos + enlaces.</p>
+        </div>
+        <div class="go">➜</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section class="section">
+    <div class="sectionHead">
+      <h2>Donate</h2>
+      <p><b>EN:</b> Support if you want — thank you. <b>ES:</b> Si quieres apoyar — gracias.</p>
+    </div>
+
+    <div class="donateBody">
+      <div class="donateBox">
+        <div style="font-weight:1000; letter-spacing:.01em;">
+          <span style="opacity:.9;">EN:</span> Copy and paste in your app.<br>
+          <span style="opacity:.9;">ES:</span> Copia y pega en tu app.
+        </div>
+
+        <div class="copyRow">
+          <div class="donVal" id="donVal">YOUR_PAYMENT_INFO</div>
+          <button class="btn" id="copyBtn">Copy</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENDING -->
+  <section class="ending">
+    <div class="endingInner">
+      <b>EN:</b> Save this page — only official links. <br>
+      <b>ES:</b> Guarda esta página — enlaces oficiales.
+    </div>
+    <div class="liveBanner">LIVE</div>
+  </section>
+
+  <audio id="ambient" preload="none" loop>
+    <source src="ambient.mp3" type="audio/mpeg">
+  </audio>
 
 </div>
 
 <script>
-document.getElementById("themeBtn").onclick=()=>{
-  document.body.dataset.theme =
-    document.body.dataset.theme==="light"?"dark":"light";
-};
-const audio=document.getElementById("ambient");
-let on=false;
-document.getElementById("musicBtn").onclick=()=>{
-  if(!on){audio.volume=.5;audio.play();on=true}
-  else{audio.pause();on=false}
-};
-document.getElementById("copyBtn").onclick=()=>{
-  navigator.clipboard.writeText(
-    document.getElementById("donVal").innerText
-  );
-};
+(() => {
+  // stars
+  const scene = document.getElementById('scene');
+  for (let i = 0; i < 95; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.top  = (Math.random() * 100) + '%';
+    s.style.animationDelay = (Math.random() * 6.2) + 's';
+    s.style.opacity = (0.15 + Math.random() * 0.85).toFixed(2);
+    scene.appendChild(s);
+  }
+
+  // parallax leaves
+  const leaves = Array.from(document.querySelectorAll('.leaf'));
+  let px=0, py=0, tx=0, ty=0;
+
+  function onMove(e){
+    const w = window.innerWidth, h = window.innerHeight;
+    px = ((e.clientX / w) - 0.5) * 2;
+    py = ((e.clientY / h) - 0.5) * 2;
+  }
+  window.addEventListener('mousemove', onMove, {passive:true});
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches && e.touches[0];
+    if(!t) return;
+    onMove({clientX:t.clientX, clientY:t.clientY});
+  }, {passive:true});
+
+  function raf(){
+    tx += (px - tx) * 0.08;
+    ty += (py - ty) * 0.08;
+    const s = (window.scrollY || 0) * 0.06;
+
+    leaves.forEach((el, idx) => {
+      const d = parseFloat(el.dataset.depth || '0.2');
+      const x = (tx * 22 * d) + (idx % 2 ? 14 : -14);
+      const y = (ty * 14 * d) - (s * d);
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${(tx*6*d)}deg)`;
+    });
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // theme + persist
+  const themeBtn = document.getElementById('themeBtn');
+  const themeTxt = document.getElementById('themeTxt');
+  const savedTheme = localStorage.getItem('theme11');
+  if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+
+  function syncTheme(){
+    const isLight = document.body.getAttribute('data-theme') === 'light';
+    themeTxt.textContent = isLight ? 'Light' : 'Dark';
+  }
+  syncTheme();
+
+  themeBtn.addEventListener('click', () => {
+    const isLight = document.body.getAttribute('data-theme') === 'light';
+    document.body.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    localStorage.setItem('theme11', isLight ? 'dark' : 'light');
+    syncTheme();
+  });
+
+  // music
+  const audio = document.getElementById('ambient');
+  const musicBtn = document.getElementById('musicBtn');
+  const musicTxt = document.getElementById('musicTxt');
+  let on = false;
+
+  musicBtn.addEventListener('click', async () => {
+    try{
+      if(!on){
+        audio.volume = 0.55;
+        await audio.play();
+        on = true;
+      } else {
+        audio.pause();
+        on = false;
+      }
+      musicTxt.textContent = on ? 'On' : 'Off';
+    }catch(e){
+      on = false;
+      musicTxt.textContent = 'Off';
+      alert("Music not playing. Make sure 'ambient.mp3' is in the same folder as index.html.");
+    }
+  });
+
+  // donate copy with feedback
+  const copyBtn = document.getElementById('copyBtn');
+  const donVal  = document.getElementById('donVal');
+  copyBtn.addEventListener('click', async () => {
+    const txt = (donVal.innerText || '').trim();
+    if(!txt) return;
+    const old = copyBtn.textContent;
+
+    try{
+      await navigator.clipboard.writeText(txt);
+    }catch(e){
+      const r = document.createRange();
+      r.selectNode(donVal);
+      const sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(r);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+    }
+    copyBtn.textContent = "Copied!";
+    setTimeout(()=>copyBtn.textContent = old, 1200);
+  });
+})();
 </script>
 
 </body>
